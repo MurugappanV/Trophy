@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="51px" height="51px" viewBox="0 0 51 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 41</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="34.0758482%" y1="0%" x2="64.6409587%" y2="93.5477442%" id="linearGradient-1">
+            <stop stop-color="#FF744E" offset="0%"></stop>
+            <stop stop-color="#FF476C" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-41" transform="translate(-1.000000, -1.000000)" fill-rule="nonzero">
+            <g id="Group-39" fill="url(#linearGradient-1)">
+                <path d="M26.278824,1.118052 C40.174888,1.118052 51.440012,12.382604 51.440012,26.279136 C51.440012,40.175564 40.174888,51.440168 26.278824,51.440168 C12.38276,51.440168 1.117532,40.175564 1.117532,26.279136 C1.117532,12.382604 12.38276,1.118052 26.278824,1.118052 Z" id="circle"></path>
+            </g>
+            <polygon id="Path-2" fill="#FFFFFF" points="23 19 33 26.1439244 23 33.2104222"></polygon>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="51px" height="51px" viewBox="0 0 51 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 39</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="34.0758482%" y1="0%" x2="64.6409587%" y2="93.5477442%" id="linearGradient-1">
+            <stop stop-color="#FF744E" offset="0%"></stop>
+            <stop stop-color="#FF476C" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="UI-KIT" transform="translate(-565.000000, -4719.000000)" fill-rule="nonzero">
+            <g id="Group-29" transform="translate(515.000000, 4718.000000)">
+                <g id="Group-39" transform="translate(49.000000, 0.000000)">
+                    <path d="M26.278824,1.118052 C40.174888,1.118052 51.440012,12.382604 51.440012,26.279136 C51.440012,40.175564 40.174888,51.440168 26.278824,51.440168 C12.38276,51.440168 1.117532,40.175564 1.117532,26.279136 C1.117532,12.382604 12.38276,1.118052 26.278824,1.118052 Z" id="circle" fill="url(#linearGradient-1)"></path>
+                    <g id="Group-40" transform="translate(22.000000, 19.000000)" fill="#FFFFFF">
+                        <rect id="Rectangle-5" x="0" y="0.677419355" width="3" height="13.6451613" rx="1.5"></rect>
+                        <rect id="Rectangle-5" x="5" y="0.677419355" width="3" height="13.6451613" rx="1.5"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

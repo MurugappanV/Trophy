@@ -1,15 +1,14 @@
-import { Dimensions } from "react-native";
 import { ScalePerctFullWidth } from "./Scale";
 
-// device sizes
-const FULL_DEVICE_HEIGHT = Dimensions.get("window").height;
-const FULL_DEVICE_WIDTH = Dimensions.get("window").width;
-
 // text sizes
-const SMALL_TEXT_SIZE = 13;
-const MEDIUM_TEXT_SIZE = 15;
+const VVV_SMALL_TEXT_SIZE = 8;
+const VV_SMALL_TEXT_SIZE = 10;
+const V_SMALL_TEXT_SIZE = 11;
+const SMALL_TEXT_SIZE = 12;
+const MEDIUM_TEXT_SIZE = 14;
+const EXTRA_MEDIUM_TEXT_SIZE = 15;
 const LARGE_TEXT_SIZE = 20;
-const EXTRA_LARGE_TEXT_SIZE = 30;
+const EXTRA_LARGE_TEXT_SIZE = 22;
 
 // border radius
 const SMOOTH_CORNER = 3;
@@ -20,13 +19,14 @@ const LARGE_RADIUS = 20;
 const DEFAULT_PADDING = ScalePerctFullWidth(4);
 
 const Metrics = {
-	FULL_DEVICE_HEIGHT,
-	FULL_DEVICE_WIDTH,
-
 	SMALL_TEXT_SIZE,
 	MEDIUM_TEXT_SIZE,
 	LARGE_TEXT_SIZE,
 	EXTRA_LARGE_TEXT_SIZE,
+	VVV_SMALL_TEXT_SIZE,
+	VV_SMALL_TEXT_SIZE,
+	V_SMALL_TEXT_SIZE,
+	EXTRA_MEDIUM_TEXT_SIZE,
 
 	SMOOTH_CORNER,
 	SMALL_RADIUS,
