@@ -1,13 +1,9 @@
+import * as SvgButtons from "./Buttons";
+import * as SvgBlackIcons from "./IconBlack";
+import * as SvgWhiteIcons from "./IconWhite";
 
-
-const Images = {
-	logoImg: require("./logo.png"),
-	backImg: require("./back.png"),
-	dotImg: require("./dot.png"),
-	logoutImg: require("./logout.png"),
-	tickImg: require("./tick.png"),
-	untickImg: require("./unTick.png"),
-	stautusArrowImg: require("./statusArrow.png"),
+export const Images = {
+	SvgButtons,
+	SvgBlackIcons,
+	SvgWhiteIcons,
 };
-
-export default Images;
