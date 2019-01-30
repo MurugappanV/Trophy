@@ -1,10 +1,3 @@
-/**
- * Loading component with large spinner and title
- * Author : Murugappan V
- * Date   : 9 Sep 2018
- * @flow
- */
-
 import React from "react";
 import { StyleSheet, ActivityIndicator, View, Text, StatusBar } from "react-native";
 import { Colors, ScalePerctFullHeight, ScalePerctFullWidth } from "../../asset";

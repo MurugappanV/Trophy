@@ -3,6 +3,7 @@ package com.robosoft.trophy;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import io.realm.react.RealmReactPackage;
 import com.facebook.react.ReactNativeHost;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
             new SvgPackage(),
             new RealmReactPackage(),
             new RNGestureHandlerPackage(),

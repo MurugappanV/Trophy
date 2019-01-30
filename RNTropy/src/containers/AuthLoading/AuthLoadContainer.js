@@ -4,9 +4,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SvgUri from "react-native-svg-uri";
 import Svg, { Circle, Rect } from "react-native-svg";
+// import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "../../asset/fonts/icons";
 import { Actions } from "../../redux";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
-import { LoadingComp } from "../../components";
+import { LoadingComp, PagerHeader } from "../../components";
 // const small = require("./small.svg") as string ;
 // var fs = require("fs");
 
@@ -68,20 +70,14 @@ class AuthLoadContainer extends PureComponent<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
-				<LoadingComp title="Authenticating..." />
-				<SvgUri width="200" height="200" svgXmlData={small} />
-				<Svg height="50%" width="50%" viewBox="0 0 100 100">
-					<Circle cx="50" cy="50" r="45" stroke="blue" strokeWidth="2.5" fill="green" />
-					<Rect
-						x="15"
-						y="15"
-						width="70"
-						height="70"
-						stroke="red"
-						strokeWidth="2"
-						fill="yellow"
-					/>
-				</Svg>
+				<PagerHeader
+					page={1}
+					totalPage={2}
+					onAction={() => {}}
+					onBack={() => {}}
+					actionLabel={"Skip"}
+					style={styles.header}
+				/>
 			</View>
 		);
 	}
@@ -102,12 +98,14 @@ export default connect(
 )(AuthLoadContainer);
 
 const styles = StyleSheet.create({
+	header: {
+		alignSelf: "flex-start",
+	},
 	container: {
 		flexDirection: "column",
-		justifyContent: "center",
 		alignItems: "center",
 		alignContent: "center",
-		backgroundColor: Colors.bgPrimaryDark,
+		backgroundColor: Colors.bgSecondaryLight,
 		width: ScalePerctFullWidth(100),
 		height: ScalePerctFullHeight(100),
 	},

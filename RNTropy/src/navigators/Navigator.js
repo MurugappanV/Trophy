@@ -2,11 +2,15 @@ import React, { PureComponent } from "react";
 import {
 	createSwitchNavigator,
 	createBottomTabNavigator,
+	createMaterialTopTabNavigator,
 	createDrawerNavigator,
 	createStackNavigator,
 	createAppContainer,
 } from "react-navigation";
 import { AuthLoading } from "../containers";
+import TabBarNavigator from "./TabBarNavigator";
+import { Colors, ScalePerctFullWidth, Metrics } from "../asset";
+import { PagerHeader } from "../components";
 
 const AuthStack = createStackNavigator(
 	{
@@ -24,9 +28,49 @@ const AuthStack = createStackNavigator(
 	},
 );
 
+const HomeMenuNavigator = createMaterialTopTabNavigator(
+	{
+		MyTrove: { screen: AuthLoading },
+		Economic: { screen: AuthLoading },
+		Tech: { screen: AuthLoading },
+		Politics: { screen: AuthLoading },
+	},
+	{
+		tabBarPosition: "top",
+		swipeEnabled: true,
+		tabBarOptions: {
+			activeTintColor: Colors.bodyPrimaryVarient,
+			inactiveTintColor: Colors.bodySecondaryDark,
+			style: {
+				backgroundColor: Colors.bgPrimaryLight,
+				height: 50,
+				width: ScalePerctFullWidth(100),
+			},
+			labelStyle: {
+				fontSize: Metrics.MEDIUM_TEXT_SIZE,
+			},
+			scrollEnabled: true,
+			upperCaseLabel: false,
+			initialLayout: {
+				height: 50,
+				width: ScalePerctFullWidth(100),
+			},
+			indicatorStyle: {
+				backgroundColor: Colors.bodyPrimaryVarient,
+				width: ScalePerctFullWidth(20),
+				marginLeft: ScalePerctFullWidth(5),
+				height: 1.5,
+			},
+			tabStyle: {
+				width: ScalePerctFullWidth(30),
+			},
+		},
+	},
+);
+
 const ArticleStack = createStackNavigator(
 	{
-		ListArticleScreen: { screen: AuthLoading },
+		ListArticleScreen: { screen: HomeMenuNavigator },
 		AuthorArticleScreen: { screen: AuthLoading },
 	},
 	{
@@ -48,7 +92,7 @@ const PodcastStack = createStackNavigator(
 	},
 );
 
-const HomeTab = createBottomTabNavigator(
+const HomeTab = createMaterialTopTabNavigator(
 	{
 		HomeTabScreen: { screen: ArticleStack },
 		VideoTabScreen: { screen: AuthLoading },
@@ -56,11 +100,19 @@ const HomeTab = createBottomTabNavigator(
 		MagazineTabScreen: { screen: AuthLoading },
 	},
 	{
-		// tabBarComponent: TXTabBar,
+		tabBarComponent: TabBarNavigator,
+		swipeEnabled: true,
 		tabBarPosition: "bottom",
+		tabBarOptions: {
+			activeTintColor: Colors.bodyPrimaryVarient,
+			inactiveTintColor: Colors.bodySecondaryDark,
+		},
 	},
 );
 
+HomeTab.navigationOptions = ({ navigation }) => ({
+	header: () => <PagerHeader />,
+});
 const HomeStack = createStackNavigator(
 	{
 		TabHomeScreen: { screen: HomeTab },
@@ -103,7 +155,7 @@ const NavContainer = createAppContainer(
 			AuthNavigation: AuthStack,
 		},
 		{
-			initialRouteName: "AuthNavigation",
+			initialRouteName: "HomeNavigation",
 		},
 	),
 );
