@@ -2,6 +2,8 @@ const EXCEPTION = "EXCEPTION";
 const CLEAR_EXCEPTION_MSG = "CLEAR_EXCEPTION_MSG";
 const SET_USER_ID = "SET_USER_ID";
 const CLEAR_USER_ID = "CLEAR_USER_ID";
+const SET_MENU_TOPIC = "SET_MENU_TOPIC";
+const CLEAR_MENU_TOPIC = "CLEAR_MENU_TOPIC";
 
 const Types = {
 	exception: {
@@ -12,6 +14,10 @@ const Types = {
 		SET_USER_ID,
 		CLEAR_USER_ID,
 	},
+	topic: {
+		SET_MENU_TOPIC,
+		CLEAR_MENU_TOPIC,
+	}
 };
 
 export default Types;

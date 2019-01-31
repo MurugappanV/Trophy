@@ -12,6 +12,7 @@ Assets needed
     music disk icon
     live play icon
     gallery icon
+    button without shadow
 
 Linux system android gradlew permission
     chmod 755 android/gradlew

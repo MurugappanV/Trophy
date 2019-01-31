@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { verticalScale, moderateScale } from "../utilities/Scale";
 import { THEME } from "../utilities/Colors";
+import SvgUri from "react-native-svg-uri";
 
 export default class Header extends PureComponent {
 	render() {
-		const { openDrawer } = this.props;
 		return (
 			<View style={style.header}>
 				<View style={style.textContainer}>
@@ -28,6 +28,8 @@ const style = StyleSheet.create({
 		width: "100%",
 		alignItems: "center",
 		justifyContent: "center",
+		borderBottomWidth: 2,
+		borderColor: THEME.header,
 	},
 	iconContainer: {
 		flex: 2,

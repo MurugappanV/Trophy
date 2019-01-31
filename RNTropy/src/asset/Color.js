@@ -1,10 +1,12 @@
 // const ORANGE = "rgb(255, 116, 78)";
 // const RED = "rgb(255, 71, 108)";
 const WHITE = "rgb(255, 255, 255)"; // text, bg
-const TRANSPARENT = "rgba(0, 0, 0, 0)";
+const TRANSPARENT = "rgba(0, 0, 0, 0.3)";
 const BLACK = "rgb(0,0,0)"; // text , bg
 const GREY = "rgb(216,216,216)"; // line
 const BLACK2 = "rgb(18,29,55)"; // text , curosel-dot
+const BLACK3 = "rgb(29,29,29)"; //background
+const BLACK3 = "rgb(49,49,50)"; //article heading
 const GREY2 = "rgb(112,113,114)"; // text
 const PINK = "rgb(255,51,102)"; // text , line, border
 const GREY3 = "rgb(133,136,139)"; // text
@@ -17,6 +19,8 @@ const GREY8 = "rgb(51,51,51)"; // bg
 const DARK_BLUE = "rgb(18,29,55)"; // bg
 const GREY9 = "rgb(240,242,244)"; // line
 const RED = "rgb(255,0,0)"; // text
+const LIGHTBLACK = "#1d1d1d";
+
 
 const Colors = {
 	bgPrimaryDark: BLACK,
@@ -28,6 +32,7 @@ const Colors = {
 	bgTransparent: TRANSPARENT,
 	bgPrimaryVarient: PINK,
 	bgSecondaryVarient: DARK_BLUE,
+	bgPrimaryBlack: BLACK3,
 
 	bodyPrimaryDark: BLACK,
 	bodyPrimaryLight: WHITE,
@@ -41,6 +46,10 @@ const Colors = {
 
 	linePrimary: GREY,
 	lineSecondary: GREY9,
+
+	//BACKGROUND
+	bgLightBlack: LIGHTBLACK,
+	textHeading: BLACK3
 };
 
 export default Colors;

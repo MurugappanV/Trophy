@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Image, Dimensions, StyleSheet } from "react-native";
-import Header from "../components/Header";
+import { Header } from "../../components";
+import { ScalePerctFullWidth } from "../../asset";
 //import EStyleSheet from "react-native-extended-stylesheet";
 
 class Profile extends Component {
@@ -25,14 +26,14 @@ class Profile extends Component {
 	}
 }
 
-let { height, width } = Dimensions.get("window");
+// let { height, width } = Dimensions.get("window");
 
-const imageWidth = width * 0.3;
-const imageHeight = width * 0.3;
-const imageRadius = imageWidth * 0.5;
+// const imageWidth = width * 0.3;
+// const imageHeight = width * 0.3;
+// const imageRadius = imageWidth * 0.5;
 
-const cameraIcon = width * 0.3;
-const camRadius = cameraIcon * 0.5;
+// const cameraIcon = width * 0.3;
+// const camRadius = cameraIcon * 0.5;
 
 const styles = StyleSheet.create({
 	container: {
@@ -40,9 +41,9 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	image: {
-		height: imageHeight,
-		width: imageWidth,
-		borderRadius: imageRadius,
+		height: ScalePerctFullWidth(30),
+		width: ScalePerctFullWidth(30),
+		borderRadius: ScalePerctFullWidth(15),
 	},
 });
 

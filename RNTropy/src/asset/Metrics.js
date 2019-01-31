@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import { ScalePerctFullWidth } from "./Scale";
+import { ScalePerctFullWidth, ScalePerctFullHeight } from "./Scale";
 // text sizes
 const VVV_SMALL_TEXT_SIZE = 8;
 const VV_SMALL_TEXT_SIZE = 10;
@@ -14,14 +14,19 @@ const EXTRA_LARGE_TEXT_SIZE = 22;
 const SMOOTH_CORNER = 3;
 const SMALL_RADIUS = 5;
 const MEDIUM_RADIUS = 10;
-const LARGE_RADIUS = 20;
+const LARGE_RADIUS = 25;
 
 const LINE_WIDTH = 0.5;
 
-const HEADER_HEIGHT = Platform.OS === "android" && Platform.Version < 21 ? 46 : 60;
+const HEADER_HEIGHT_PERT = ScalePerctFullHeight(9)
+const HEADER_HEIGHT = Platform.OS === "android" && Platform.Version < 21 ? (HEADER_HEIGHT_PERT - 24) : HEADER_HEIGHT_PERT;
 const STATUS_BAR_HEIGHT = Platform.OS === "android" && Platform.Version < 21 ? 0 : 24;
 
 const DEFAULT_PADDING = ScalePerctFullWidth(4);
+
+// line height
+const LARGE_LINE_HEIGHT = 23;
+const EXTRA_LARGE_LINE_HEIGHT = 30;
 
 const Metrics = {
 	SMALL_TEXT_SIZE,
@@ -44,6 +49,8 @@ const Metrics = {
 
 	HEADER_HEIGHT,
 	STATUS_BAR_HEIGHT,
+	EXTRA_LARGE_LINE_HEIGHT,
+	LARGE_LINE_HEIGHT
 };
 
 export default Metrics;

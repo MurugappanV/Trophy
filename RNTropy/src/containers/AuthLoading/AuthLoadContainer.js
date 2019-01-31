@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, WebView } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SvgUri from "react-native-svg-uri";
@@ -27,26 +27,12 @@ import { LoadingComp, PagerHeader } from "../../components";
 // 	console.log(err);
 // });
 const small = `<?xml version="1.0" encoding="UTF-8"?>
-<svg width="244px" height="120px" viewBox="0 0 244 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs>
-        <linearGradient x1="11.8326869%" y1="0%" x2="86.8295126%" y2="100%" id="linearGradient-1">
-            <stop stop-color="#FF744E" offset="0%"></stop>
-            <stop stop-color="#FF476C" offset="100%"></stop>
-        </linearGradient>
-        <path d="M25,-3.55271368e-15 L151,-3.55271368e-15 C164.807119,-6.08904025e-15 176,11.1928813 176,25 L176,25 C176,38.8071187 164.807119,50 151,50 L25,50 C11.1928813,50 1.69088438e-15,38.8071187 0,25 L3.55271368e-15,25 C1.8618293e-15,11.1928813 11.1928813,-1.01638711e-15 25,-3.55271368e-15 Z" id="path-2"></path>
-        <filter x="-39.8%" y="-70.0%" width="179.5%" height="380.0%" filterUnits="objectBoundingBox" id="filter-3">
-            <feOffset dx="0" dy="35" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-            <feGaussianBlur stdDeviation="17.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.15 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
-        </filter>
-    </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.99">
-        <g id="UI-KIT" transform="translate(-34.000000, -4831.000000)">
-            <g id="Group" transform="translate(68.000000, 4831.000000)">
-                <g id="Rectangle">
-                    <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
-                    <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
-                </g>
+<svg width="18px" height="14px" viewBox="0 0 18 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="UI-KIT" transform="translate(-1526.000000, -5181.000000)" stroke="#FFFFFF" stroke-width="1.5">
+            <g id="arrow-left" transform="translate(1527.000000, 5182.000000)">
+                <path d="M16,6 L0,6" id="Shape"></path>
+                <polyline id="Shape" points="6 12 0 6 6 0"></polyline>
             </g>
         </g>
     </g>
@@ -70,6 +56,8 @@ class AuthLoadContainer extends PureComponent<Props> {
 	render() {
 		return (
 			<View style={styles.container}>
+				{/* <LoadingComp title="Authenticating..." /> */}
+				{/* <SvgUri width="200" height="200" svgXmlData={small} />
 				<PagerHeader
 					page={1}
 					totalPage={2}
@@ -77,6 +65,10 @@ class AuthLoadContainer extends PureComponent<Props> {
 					onBack={() => {}}
 					actionLabel={"Skip"}
 					style={styles.header}
+				/> */}
+				<WebView
+					source={{ uri: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/501298839' }}
+					style={{ height: 300, width: ScalePerctFullWidth(100) }}
 				/>
 			</View>
 		);

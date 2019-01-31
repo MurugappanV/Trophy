@@ -7,19 +7,29 @@ import {
 	createStackNavigator,
 	createAppContainer,
 } from "react-navigation";
-import { AuthLoading } from "../containers";
+import {
+	AuthLoading,
+	FirstAuthScreen,
+	Login,
+	SignUpAuthScreen,
+	ForgotAuthScreen,
+	MessageAuthScreen,
+	Profile,
+} from "../containers";
 import TabBarNavigator from "./TabBarNavigator";
 import { Colors, ScalePerctFullWidth, Metrics } from "../asset";
-import { PagerHeader } from "../components";
+import { PagerHeader, ProfileHeader } from "../components";
+import HomeMenuNavigator from "./HomeMenuNavigator"
 
 const AuthStack = createStackNavigator(
 	{
-		FirstAuthScreen: { screen: AuthLoading },
-		LoginAuthScreen: { screen: AuthLoading },
-		SignUpAuthScreen: { screen: AuthLoading },
-		ForgotAuthScreen: { screen: AuthLoading },
+		FirstAuthScreen: { screen: FirstAuthScreen },
+		LoginAuthScreen: { screen: Login },
+		SignUpAuthScreen: { screen: SignUpAuthScreen },
+		ForgotAuthScreen: { screen: ForgotAuthScreen },
 		BrandsTopicsAuthScreen: { screen: AuthLoading },
 		SuccessAuthScreen: { screen: AuthLoading },
+		MessageAuthScreen: { screen: MessageAuthScreen },
 	},
 	{
 		defaultNavigationOptions: () => ({
@@ -28,45 +38,45 @@ const AuthStack = createStackNavigator(
 	},
 );
 
-const HomeMenuNavigator = createMaterialTopTabNavigator(
-	{
-		MyTrove: { screen: AuthLoading },
-		Economic: { screen: AuthLoading },
-		Tech: { screen: AuthLoading },
-		Politics: { screen: AuthLoading },
-	},
-	{
-		tabBarPosition: "top",
-		swipeEnabled: true,
-		tabBarOptions: {
-			activeTintColor: Colors.bodyPrimaryVarient,
-			inactiveTintColor: Colors.bodySecondaryDark,
-			style: {
-				backgroundColor: Colors.bgPrimaryLight,
-				height: 50,
-				width: ScalePerctFullWidth(100),
-			},
-			labelStyle: {
-				fontSize: Metrics.MEDIUM_TEXT_SIZE,
-			},
-			scrollEnabled: true,
-			upperCaseLabel: false,
-			initialLayout: {
-				height: 50,
-				width: ScalePerctFullWidth(100),
-			},
-			indicatorStyle: {
-				backgroundColor: Colors.bodyPrimaryVarient,
-				width: ScalePerctFullWidth(20),
-				marginLeft: ScalePerctFullWidth(5),
-				height: 1.5,
-			},
-			tabStyle: {
-				width: ScalePerctFullWidth(30),
-			},
-		},
-	},
-);
+// const HomeMenuNavigator = createMaterialTopTabNavigator(
+// 	{
+// 		MyTrove: { screen: AuthLoading },
+// 		Economic: { screen: AuthLoading },
+// 		Tech: { screen: AuthLoading },
+// 		Politics: { screen: AuthLoading },
+// 	},
+// 	{
+// 		tabBarPosition: "top",
+// 		swipeEnabled: true,
+// 		tabBarOptions: {
+// 			activeTintColor: Colors.bodyPrimaryVarient,
+// 			inactiveTintColor: Colors.bodySecondaryDark,
+// 			style: {
+// 				backgroundColor: Colors.bgPrimaryLight,
+// 				height: 50,
+// 				width: ScalePerctFullWidth(100),
+// 			},
+// 			labelStyle: {
+// 				fontSize: Metrics.MEDIUM_TEXT_SIZE,
+// 			},
+// 			scrollEnabled: true,
+// 			upperCaseLabel: false,
+// 			initialLayout: {
+// 				height: 50,
+// 				width: ScalePerctFullWidth(100),
+// 			},
+// 			indicatorStyle: {
+// 				backgroundColor: Colors.bodyPrimaryVarient,
+// 				width: ScalePerctFullWidth(20),
+// 				marginLeft: ScalePerctFullWidth(5),
+// 				height: 1.5,
+// 			},
+// 			tabStyle: {
+// 				width: ScalePerctFullWidth(30),
+// 			},
+// 		},
+// 	},
+// );
 
 const ArticleStack = createStackNavigator(
 	{
@@ -111,7 +121,7 @@ const HomeTab = createMaterialTopTabNavigator(
 );
 
 HomeTab.navigationOptions = ({ navigation }) => ({
-	header: () => <PagerHeader />,
+	header: () => <ProfileHeader title={"T R O V E"} />,
 });
 const HomeStack = createStackNavigator(
 	{
@@ -136,7 +146,7 @@ const HomeDrawer = createDrawerNavigator(
 		HistoryDrawerScreen: { screen: AuthLoading }, // 1
 		BookmarkDrawerScreen: { screen: AuthLoading }, // 2
 		CustomizeInterestDrawerScreen: { screen: AuthLoading },
-		ProfileDrawerScreen: { screen: AuthLoading },
+		ProfileDrawerScreen: { screen: Profile },
 		SettingsDrawerScreen: { screen: AuthLoading },
 		HelpDrawerScreen: { screen: AuthLoading },
 		TosDrawerScreen: { screen: AuthLoading },
@@ -155,7 +165,7 @@ const NavContainer = createAppContainer(
 			AuthNavigation: AuthStack,
 		},
 		{
-			initialRouteName: "HomeNavigation",
+			initialRouteName: "AuthLoading",
 		},
 	),
 );
