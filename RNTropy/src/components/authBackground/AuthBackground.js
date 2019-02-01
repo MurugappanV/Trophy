@@ -6,6 +6,7 @@ import {
 	ImageBackground,
 	StatusBar,
 } from "react-native";
+
 const image = require("../../asset/Images/login.png");
 
 type Props = {

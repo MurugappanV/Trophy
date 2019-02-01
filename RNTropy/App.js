@@ -9,10 +9,7 @@
 import React, { PureComponent } from "react";
 import SplashScreen from "react-native-splash-screen";
 import { Provider } from "react-redux";
-
-import { Navigator, Store } from "./src";
-// import Profile from "./src/screens/Profile";
-import { ArticleView } from "./src/containers/Article";
+import { Store, Navigator } from "./src";
 
 type Props = {};
 

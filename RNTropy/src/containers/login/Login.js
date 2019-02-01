@@ -1,21 +1,20 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Text } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import SvgUri from "react-native-svg-uri";
-import Svg, { Circle, Rect } from "react-native-svg";
 import { Actions } from "../../redux";
-import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Strings, Metrics } from "../../asset";
-import { Button, TextInput, AuthBackground } from "../../components";
+import LoginUI from "./LoginUI";
+import LoginTabletUI from "./LoginTabletUI";
+import { Metrics } from "../../asset";
 
 type Props = {
 	navigation: any,
+	setUserIdAction: Function,
 };
 
 class Login extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { email: "", Password: "" };
+		this.state = {};
 	}
 
 	handleSignUp = () => {
@@ -29,90 +28,51 @@ class Login extends PureComponent<Props> {
 	};
 
 	handleLogin = () => {
-		alert("Login");
+		this.onSuccess();
 	};
 
-	handleForm = () => (
-		<View>
-			<TextInput
-				label={Strings.authentication.EMAIL}
-				reference={(component: any) => {
-					this.email = component;
-				}}
-				onSubmitEditing={() => this.password.focus()}
-				returnKeyType="next"
-				keyboardType="email-address"
-				onChangeText={text => this.setState({ email: text })}
+	onSuccess = () => {
+		const { setUserIdAction, navigation } = this.props;
+		const userId = 123;
+		setUserIdAction(userId);
+		navigation.navigate("TopicsAuthScreen");
+	};
+
+	onFailure = () => {};
+
+	onError = () => {};
+
+	renderItem = () => {
+		return Metrics.isTablet ? (
+			<LoginTabletUI
+				handleSignUp={this.handleSignUp}
+				handleForgotPassword={this.handleForgotPassword}
+				handleLogin={this.handleLogin}
 			/>
-			<TextInput
-				label={Strings.authentication.PASSWORD}
-				secureTextEntry
-				reference={(component: any) => {
-					this.password = component;
-				}}
-				onChangeText={text => this.setState({ Password: text })}
-				buttonLabel="HELP"
-				onPress={this.handleForgotPassword}
-				onSubmitEditing={this.handleLogin}
+		) : (
+			<LoginUI
+				handleSignUp={this.handleSignUp}
+				handleForgotPassword={this.handleForgotPassword}
+				handleLogin={this.handleLogin}
 			/>
-			<Button
-				title={Strings.authentication.LOGIN}
-				buttonStyle={{
-					marginTop: ScalePerctFullHeight(8),
-					marginBottom: ScalePerctFullHeight(4),
-				}}
-				onPress={this.handleLogin}
-			/>
-		</View>
-	);
+		);
+	};
 
 	render() {
-		return (
-			<AuthBackground>
-				<View
-					style={{
-						flex: 1,
-						margin: 100,
-						alignItems: "center",
-						paddingTop: ScalePerctFullHeight(1),
-					}}
-				>
-					<Text>LOGO</Text>
-				</View>
-				{this.handleForm()}
-				<Text style={styles.createAccountText} onPress={this.handleSignUp}>
-					{Strings.authentication.CREATE_AN_ACCOUNT}
-				</Text>
-			</AuthBackground>
-		);
+		return this.renderItem();
 	}
 }
 
-function mapStateToProps() {
+function mapStateToProps(state) {
 	// state
 	return {};
 }
 
 function mapDispatchToProps(dispatch) {
-	return {};
+	return bindActionCreators(Actions, dispatch);
 }
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps,
 )(Login);
-
-const styles = StyleSheet.create({
-	container: {
-		width: "100%",
-		height: "100%",
-		alignItems: "center",
-		flex: 1,
-	},
-	createAccountText: {
-		fontSize: Metrics.SMALL_TEXT_SIZE,
-		letterSpacing: 0.3,
-		marginBottom: ScalePerctFullHeight(8),
-		color: Colors.bgPrimaryLight,
-	},
-});

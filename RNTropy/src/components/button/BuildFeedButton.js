@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
-import { Colors } from "../../asset";
+import { Colors, Metrics } from "../../asset";
 
 export default class BuildFeedButton extends Component {
 	constructor() {
@@ -19,15 +19,15 @@ export default class BuildFeedButton extends Component {
 	}
 }
 
-const styles = StyleSheet.create({
+const tabStyles = StyleSheet.create({
 	container: {
 		//position: "absolute",
-		height: ScalePerctFullHeight(8),
-		width: ScalePerctFullWidth(46),
+		height: ScalePerctFullHeight(6),
+		width: ScalePerctFullWidth(25),
 		justifyContent: "center",
 		alignItems: "center",
 		backgroundColor: "red",
-		borderRadius: 25,
+		borderRadius: ScalePerctFullWidth(23),
 	},
 	text: {
 		color: Colors.bgPrimaryLight,
@@ -41,3 +41,28 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 	},
 });
+
+const normalStyles = StyleSheet.create({
+	container: {
+		//position: "absolute",
+		height: ScalePerctFullHeight(8),
+		width: ScalePerctFullWidth(46),
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "red",
+		borderRadius: ScalePerctFullWidth(23),
+	},
+	text: {
+		color: Colors.bgPrimaryLight,
+		fontSize: 12,
+		fontWeight: "bold",
+	},
+	linearGradient: {
+		flex: 1,
+		paddingLeft: 15,
+		paddingRight: 15,
+		borderRadius: 5,
+	},
+});
+
+const styles = Metrics.isTablet ? tabStyles : normalStyles;

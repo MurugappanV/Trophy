@@ -67,7 +67,10 @@ class AuthLoadContainer extends PureComponent<Props> {
 					style={styles.header}
 				/> */}
 				<WebView
-					source={{ uri: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/501298839' }}
+					source={{
+						uri:
+							"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/501298839",
+					}}
 					style={{ height: 300, width: ScalePerctFullWidth(100) }}
 				/>
 			</View>

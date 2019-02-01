@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import createReactClass from "create-react-class";
-import { scale, moderateScale } from "../utilities/Scale";
 
 import {
 	StyleSheet,
@@ -16,6 +15,7 @@ import {
 	ViewPropTypes,
 	TouchableOpacity,
 } from "react-native";
+import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Strings, Metrics } from "../asset";
 
 var textPropTypes = Text.propTypes || ViewPropTypes;
 var textInputPropTypes = TextInput.propTypes || textPropTypes;
@@ -218,9 +218,9 @@ var styles = StyleSheet.create({
 	buttonLabel: {
 		color: "white",
 		fontFamily: "Lato-Regular",
-		fontSize: moderateScale(11),
+		fontSize: 11,
 		letterSpacing: 0,
-		paddingBottom: scale(10),
+		paddingBottom: ScalePerctFullHeight(2),
 	},
 	label: labelStyleObj,
 });

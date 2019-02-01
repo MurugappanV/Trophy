@@ -1,10 +1,10 @@
 export { AuthLoading } from "./AuthLoading";
-export { FirstAuthScreen } from "./firstAuthScreen";
-export { Login } from "./login";
-export { SignUpAuthScreen } from "./signUpAuthScreen";
+export { FirstAuthScreen } from "./FirstAuthScreen";
+export { Login } from "./Login";
+export { SignUpAuthScreen } from "./SignUpAuthScreen";
 export { Profile } from "./Profile";
-export { Topics } from "./Topics";
-export { ForgotAuthScreen } from "./forgotAuthScreen";
-export { MessageAuthScreen } from "./messageAuthScreen";
+export { ForgotAuthScreen } from "./ForgotAuthScreen";
+export { MessageAuthScreen } from "./MessageAuthScreen";
 export { Author } from "./Author";
-export { ArticleList } from "./ArticleList";
+export { Topics } from "./TopicsAndBrands";
+export { Brands } from "./TopicsAndBrands";

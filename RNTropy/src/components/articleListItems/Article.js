@@ -25,7 +25,7 @@ renderItem = (type: string) => {
 	} else if (type == "title") {
 		return <ArticleListTitleImage />;
 	} else if (type == "titleImage") {
-		return <ArticleListTitleImage imageUrl={require("../../asset/Images/article.png")} />;
+		return <ArticleListTitleImage imageUrl={require("../../asset/Images/logo.png")} />;
 	} else if (type == "footer") {
 		return <ArticleListFooter />;
 	} else if (type == "description") {

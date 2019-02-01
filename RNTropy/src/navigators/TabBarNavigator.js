@@ -43,7 +43,7 @@ export default class TabBarNavigator extends PureComponent<Props> {
 		return (
 			<View style={[styles.container, style]}>
 				{tabBarButtons}
-				<TouchableOpacity onPress={() => {}} style={styles.tabBarButton} key="berguer">
+				<TouchableOpacity onPress={() => { }} style={styles.tabBarButton} key="berguer">
 					<Icon name="filledBookmark" size={20} color={inactiveTintColor} />
 				</TouchableOpacity>
 			</View>

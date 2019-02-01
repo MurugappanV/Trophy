@@ -15,6 +15,8 @@ import {
 	ForgotAuthScreen,
 	MessageAuthScreen,
 	Profile,
+	Topics,
+	Brands,
 } from "../containers";
 import TabBarNavigator from "./TabBarNavigator";
 import { Colors, ScalePerctFullWidth, Metrics } from "../asset";
@@ -27,7 +29,8 @@ const AuthStack = createStackNavigator(
 		LoginAuthScreen: { screen: Login },
 		SignUpAuthScreen: { screen: SignUpAuthScreen },
 		ForgotAuthScreen: { screen: ForgotAuthScreen },
-		BrandsTopicsAuthScreen: { screen: AuthLoading },
+		TopicsAuthScreen: { screen: Topics },
+		BrandsAuthScreen: { screen: Brands },
 		SuccessAuthScreen: { screen: AuthLoading },
 		MessageAuthScreen: { screen: MessageAuthScreen },
 	},
@@ -165,7 +168,7 @@ const NavContainer = createAppContainer(
 			AuthNavigation: AuthStack,
 		},
 		{
-			initialRouteName: "HomeNavigation",
+			initialRouteName: "AuthNavigation",
 		},
 	),
 );

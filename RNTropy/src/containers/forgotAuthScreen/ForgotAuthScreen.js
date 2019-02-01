@@ -24,12 +24,20 @@ class ForgotAuthScreen extends PureComponent<Props> {
 	};
 
 	handleLoginEvent = () => {
+		this.onSuccess();
+	};
+
+	onSuccess = () => {
 		const { navigation } = this.props;
 		navigation.navigate("MessageAuthScreen");
 	};
 
+	onFaliure = () => {};
+
+	onError = () => {};
+
 	renderForm = () => (
-		<View>
+		<View style={styles.formStyle}>
 			<TextInput
 				label={Strings.authentication.EMAIL}
 				reference={(component: any) => {
@@ -40,15 +48,18 @@ class ForgotAuthScreen extends PureComponent<Props> {
 				keyboardType="email-address"
 				onChangeText={text => this.setState({ email: text })}
 			/>
-			<Button
-				title={Strings.authentication.SUBMIT}
-				buttonStyle={{
-					marginTop: ScalePerctFullHeight(8),
-					marginBottom: ScalePerctFullHeight(4),
-				}}
-				onPress={this.handleLoginEvent}
-			/>
 		</View>
+	);
+
+	renderButton = () => (
+		<Button
+			title={Strings.authentication.SUBMIT}
+			buttonStyle={{
+				marginTop: ScalePerctFullHeight(8),
+				marginBottom: ScalePerctFullHeight(4),
+			}}
+			onPress={this.handleLoginEvent}
+		/>
 	);
 
 	render() {
@@ -56,6 +67,7 @@ class ForgotAuthScreen extends PureComponent<Props> {
 			<AuthBackground>
 				<View style={{ flex: 1, margin: 100 }} />
 				{this.renderForm()}
+				{this.renderButton()}
 				<Text style={styles.createAccountText} onPress={this.handleSignUp}>
 					{Strings.authentication.CREATE_AN_ACCOUNT}
 				</Text>
@@ -78,7 +90,7 @@ export default connect(
 	mapDispatchToProps,
 )(ForgotAuthScreen);
 
-const styles = StyleSheet.create({
+const mobileStyles = StyleSheet.create({
 	container: {
 		width: "100%",
 		height: "100%",
@@ -91,4 +103,29 @@ const styles = StyleSheet.create({
 		marginBottom: ScalePerctFullHeight(8),
 		color: Colors.bgPrimaryLight,
 	},
+	formStyle: {
+		alignSelf: "stretch",
+		paddingHorizontal: ScalePerctFullWidth(9),
+	},
 });
+
+const tabStyles = StyleSheet.create({
+	container: {
+		width: "100%",
+		height: "100%",
+		alignItems: "center",
+		flex: 1,
+	},
+	createAccountText: {
+		fontSize: Metrics.SMALL_TEXT_SIZE,
+		letterSpacing: 0.3,
+		marginBottom: 150,
+		color: Colors.bgPrimaryLight,
+	},
+	formStyle: {
+		alignSelf: "stretch",
+		paddingHorizontal: 352,
+	},
+});
+
+let styles = Metrics.isTablet ? tabStyles : mobileStyles;

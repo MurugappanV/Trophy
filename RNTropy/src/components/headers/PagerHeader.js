@@ -18,8 +18,8 @@ const renderBackbtn = (onBack: Function) => {
 			<Icon name="filledBookmark" size={24} color="#bf1313" />
 		</TouchableOpacity>
 	) : (
-		<View style={styles.emptyView} />
-	);
+			<View style={styles.emptyView} />
+		);
 };
 
 const renderActionbtn = (onAction: Function, actionLabel: string) => {
@@ -28,8 +28,8 @@ const renderActionbtn = (onAction: Function, actionLabel: string) => {
 			<Text style={styles.actionText}>{actionLabel}</Text>
 		</TouchableOpacity>
 	) : (
-		<View style={styles.emptyView} />
-	);
+			<View style={styles.emptyView} />
+		);
 };
 
 const renderTitle = (page: number, totalPage: number) => {

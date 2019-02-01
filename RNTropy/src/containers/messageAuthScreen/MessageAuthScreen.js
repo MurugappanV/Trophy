@@ -2,8 +2,6 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import SvgUri from "react-native-svg-uri";
-import Svg, { Circle, Rect } from "react-native-svg";
 import { Actions } from "../../redux";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Metrics, Strings } from "../../asset";
 import { LoadingComp, Button } from "../../components";

@@ -4,6 +4,7 @@ const SET_USER_ID = "SET_USER_ID";
 const CLEAR_USER_ID = "CLEAR_USER_ID";
 const SET_MENU_TOPIC = "SET_MENU_TOPIC";
 const CLEAR_MENU_TOPIC = "CLEAR_MENU_TOPIC";
+const SET_ALL_TOPICS = "SET_ALL_TOPICS";
 
 const Types = {
 	exception: {
@@ -17,7 +18,8 @@ const Types = {
 	topic: {
 		SET_MENU_TOPIC,
 		CLEAR_MENU_TOPIC,
-	}
+		SET_ALL_TOPICS,
+	},
 };
 
 export default Types;

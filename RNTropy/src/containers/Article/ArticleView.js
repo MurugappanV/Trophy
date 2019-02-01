@@ -6,7 +6,7 @@ import {
 	Text,
 	ImageBackground,
 	StatusBar,
-	TouchableWithoutFeedback,
+	TouchableOpacity,
 	Keyboard,
 	KeyboardAvoidingView,
 } from "react-native";
@@ -26,17 +26,93 @@ type Props = {
 	navigation: any,
 };
 
+const theme = {
+	"1": {
+		bgColor: Colors.bgPrimaryLight,
+		fontColor: Colors.bodyTertiaryDark,
+	},
+	"2": {
+		bgColor: Colors.bgSecondaryLight,
+		fontColor: Colors.bodyTertiaryDark,
+	},
+	"3": {
+		bgColor: Colors.bgPrimaryDark,
+		fontColor: Colors.bgPrimaryLight,
+	},
+	"4": {
+		bgColor: Colors.bgTertiaryDark,
+		fontColor: Colors.bgPrimaryLight,
+	},
+	"5": {
+		bgColor: Colors.bgSecondaryDark,
+		fontColor: Colors.bgPrimaryLight,
+	},
+};
+
+const font = {
+	small: "small",
+	large: "large",
+};
+
 class ArticleView extends PureComponent<Props> {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			isOpen: false,
+			themeId: "1",
+			size: "small",
+		};
+	}
+
+	toggleFooter = () => {
+		this.setState({
+			isOpen: !this.state.isOpen,
+		});
+	};
+
+	closeFooter = () => {
+		this.setState({
+			isOpen: false,
+		});
+	};
+
+	selectTheme = (themeId: number) => {
+		this.setState({
+			themeId: themeId,
+		});
+	};
+
+	selectFont = (size: string) => {
+		this.setState({
+			size: size,
+		});
+	};
 
 	render() {
+		const { isOpen, themeId, size } = this.state;
 		return (
-            <ScrollView style={styles.container} contentContainerStyle={styles.containerStyle}>
-				<ArticleContent/>
-				{/* <ArticleFooter/> */}
-            </ScrollView>
+			<View style={styles.container}>
+				<ScrollView style={styles.container} contentContainerStyle={styles.containerStyle}>
+					<ArticleContent dynamicColor={theme[themeId]} font={font[size]} />
+				</ScrollView>
+				{isOpen && (
+					<TouchableOpacity
+						style={styles.absoluteContainer}
+						onPress={() => this.closeFooter()}
+					/>
+				)}
+				<ArticleFooter
+					isOpen={isOpen}
+					themeId={themeId}
+					selectTheme={this.selectTheme}
+					toggleFooter={this.toggleFooter}
+					dynamicColor={theme[themeId]}
+					selectFont={this.selectFont}
+				/>
+			</View>
 		);
-    }
-    
+	}
 }
 
 function mapStateToProps() {
@@ -55,13 +131,19 @@ export default connect(
 
 const styles = StyleSheet.create({
 	container: {
-		width: "100%",
-		height: "100%",
+		width: ScalePerctFullWidth(100),
 		flex: 1,
+	},
+	absoluteContainer: {
+		width: ScalePerctFullWidth(100),
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		position: "absolute",
 	},
 	containerStyle: {
 		alignItems: "center",
-
 	},
 	createAccountText: {
 		fontSize: Metrics.SMALL_TEXT_SIZE,

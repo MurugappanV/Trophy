@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const PRODUCTION = "http://murugappan.pythonanywhere.com/";
-const PATH = "api/v1/seller/";
-const BASE_URL = PRODUCTION + PATH;
+// const PRODUCTION = "http://murugappan.pythonanywhere.com/";
+// const PATH = "api/v1/seller/";
+
+const BASE_URL = "http://trove-drupal.itp.com/";
 export const BaseAxiosInstance = axios.create({
 	baseURL: BASE_URL,
 	timeout: 600000,

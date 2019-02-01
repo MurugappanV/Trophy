@@ -24,9 +24,9 @@ export default function ArticleListBigImage(props: Props) {
 					styles.image,
 					padded
 						? {
-								borderRadius: Metrics.SMALL_RADIUS,
-								width: ScalePerctFullWidth(100) - Metrics.DEFAULT_PADDING * 2,
-						  }
+							borderRadius: Metrics.SMALL_RADIUS,
+							width: ScalePerctFullWidth(100) - Metrics.DEFAULT_PADDING * 2,
+						}
 						: { width: ScalePerctFullWidth(100) },
 				])}
 			/>
@@ -35,7 +35,7 @@ export default function ArticleListBigImage(props: Props) {
 }
 
 ArticleListBigImage.defaultProps = {
-	imageUrl: require("../../asset/Images/article.png"),
+	imageUrl: require("../../asset/Images/logo.png"),
 	padded: false,
 };
 
