@@ -11,8 +11,8 @@ import SplashScreen from "react-native-splash-screen";
 import { Provider } from "react-redux";
 
 import { Navigator, Store } from "./src";
-import Profile from "./src/screens/Profile";
-import {ArticleView} from "./src/containers/Article"
+// import Profile from "./src/screens/Profile";
+import { ArticleView } from "./src/containers/Article";
 
 type Props = {};
 
@@ -24,7 +24,7 @@ export default class App extends PureComponent<Props> {
 	render() {
 		return (
 			<Provider store={Store}>
-			<ArticleView />
+				<Navigator />
 			</Provider>
 		);
 	}

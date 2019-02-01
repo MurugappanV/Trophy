@@ -47,7 +47,7 @@ export default function PagerHeader(props: Props) {
 	const { style, page, totalPage, onAction, onBack, actionLabel } = props;
 	return (
 		<View style={StyleSheet.flatten([styles.container, style])}>
-			<StatusBar translucent barStyle="light-content" />
+			<StatusBar backgroundColor="transparent" translucent barStyle="light-content" />
 			<View style={[styles.headerContainer]}>
 				{renderBackbtn(onBack)}
 				{renderTitle(page, totalPage)}

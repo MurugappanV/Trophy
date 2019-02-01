@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { NavigationRoute } from "react-navigation";
 import Icon from "../asset/fonts/icons";
-import { Colors } from "../asset";
+import { Metrics, Colors } from "../asset";
 
 type Props = {
 	activeTintColor: string,
@@ -57,6 +57,8 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.bgPrimaryLight,
 		flexDirection: "row",
 		alignItems: "stretch",
+		borderTopWidth: Metrics.LINE_WIDTH,
+		borderColor: Colors.linePrimary,
 	},
 	tabBarButton: {
 		flex: 1,

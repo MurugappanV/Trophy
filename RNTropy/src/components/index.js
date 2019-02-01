@@ -8,3 +8,4 @@ export { default as Header } from "./Header";
 export { BuildFeedButton } from "./button";
 export { AuthBackground } from "./authBackground";
 export { AuthorInfo } from "./AuthorInfo";
+export { Article } from "./articleListItems";

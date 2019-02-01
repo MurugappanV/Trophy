@@ -4,13 +4,13 @@ import Icon from "../../asset/fonts/icons";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Metrics } from "../../asset";
 
 type Props = {
-	page?: number,
-	totalPage?: number,
 	onBack?: Function,
 	onAction?: Function,
-	actionLabel?: string,
 	imageUrl?: string,
+	title?: string,
 	style?: number | Object | Array<number>,
+	statusTheme?: string,
+	isBottomBorder?: booleam,
 };
 
 const renderBackbtn = (onBack: Function) => {
@@ -19,8 +19,8 @@ const renderBackbtn = (onBack: Function) => {
 			<Icon name="filledBookmark" size={24} color="#bf1313" />
 		</TouchableOpacity>
 	) : (
-			<View style={styles.emptyView} />
-		);
+		<View style={styles.emptyView} />
+	);
 };
 
 const renderActionbtn = (onAction: Function, imageUrl: string) => {
@@ -45,11 +45,21 @@ const renderTitle = (title: string) => {
 };
 
 export default function PagerHeader(props: Props) {
-	const { style, page, totalPage, onAction, onBack, actionLabel, imageUrl, title } = props;
-	console.log("called");
+	const { style, onAction, onBack, imageUrl, title, statusTheme, isBottomBorder } = props;
+	console.log("called", statusTheme);
 	return (
-		<View style={StyleSheet.flatten([styles.container, style])}>
-			<StatusBar translucent barStyle="light-content" />
+		<View
+			style={StyleSheet.flatten([
+				styles.container,
+				{ borderBottomWidth: isBottomBorder ? Metrics.LINE_WIDTH : 0 },
+				style,
+			])}
+		>
+			<StatusBar
+				translucent
+				backgroundColor="transparent"
+				barStyle={statusTheme == "dark" ? "dark-content" : "light-content"}
+			/>
 			<View style={[styles.headerContainer]}>
 				{renderBackbtn(onBack)}
 				{renderTitle(title)}
@@ -63,11 +73,10 @@ PagerHeader.defaultProps = {
 	style: undefined,
 	onBack: undefined,
 	onAction: undefined,
-	actionLabel: "Action",
-	page: 1,
-	totalPage: 2,
 	imageUrl: "https://facebook.github.io/react-native/docs/assets/favicon.png",
 	title: "",
+	statusTheme: "dark",
+	isBottomBorder: true,
 };
 
 const styles = StyleSheet.create({
@@ -78,7 +87,6 @@ const styles = StyleSheet.create({
 		alignContent: "center",
 		width: ScalePerctFullWidth(100),
 		height: Metrics.HEADER_HEIGHT,
-		borderBottomWidth: Metrics.LINE_WIDTH,
 		borderColor: Colors.linePrimary,
 		backgroundColor: Colors.bgPrimaryLight,
 		paddingHorizontal: 8,

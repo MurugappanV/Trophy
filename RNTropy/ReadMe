@@ -13,6 +13,7 @@ Assets needed
     live play icon
     gallery icon
     button without shadow
+    placeholder images (profile, topics, articles, etc..,)
 
 Linux system android gradlew permission
     chmod 755 android/gradlew

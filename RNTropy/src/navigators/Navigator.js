@@ -19,7 +19,7 @@ import {
 import TabBarNavigator from "./TabBarNavigator";
 import { Colors, ScalePerctFullWidth, Metrics } from "../asset";
 import { PagerHeader, ProfileHeader } from "../components";
-import HomeMenuNavigator from "./HomeMenuNavigator"
+import HomeMenuNavigator from "./HomeMenuNavigator";
 
 const AuthStack = createStackNavigator(
 	{
@@ -121,7 +121,7 @@ const HomeTab = createMaterialTopTabNavigator(
 );
 
 HomeTab.navigationOptions = ({ navigation }) => ({
-	header: () => <ProfileHeader title={"T R O V E"} />,
+	header: () => <ProfileHeader title={"T R O V E"} isBottomBorder={false} />,
 });
 const HomeStack = createStackNavigator(
 	{
@@ -165,7 +165,7 @@ const NavContainer = createAppContainer(
 			AuthNavigation: AuthStack,
 		},
 		{
-			initialRouteName: "AuthLoading",
+			initialRouteName: "HomeNavigation",
 		},
 	),
 );
