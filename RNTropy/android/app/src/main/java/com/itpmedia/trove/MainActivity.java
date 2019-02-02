@@ -1,4 +1,4 @@
-package com.robosoft.trophy;
+package com.itpmedia.trove;
 
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen;

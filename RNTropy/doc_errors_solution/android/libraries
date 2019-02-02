@@ -1,0 +1,16 @@
+react-native-video
+    error on : compilation
+    error message : :app:transformClassesWithDexBuilderForDebug FAILED
+    solution : 
+        ExoPlayer 2.9.0 Java 1.8 requirement
+        ExoPlayer 2.9.0 uses some Java 1.8 features, so you may need to enable support for Java 1.8 in your app/build.gradle file. If you get an error, compiling with ExoPlayer like: Default interface methods are only supported starting with Android N (--min-api 24)
+
+        Add the following to your app/build.gradle file:
+
+        android {
+            ... // Various other settings go here
+            compileOptions {
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+        } 
+

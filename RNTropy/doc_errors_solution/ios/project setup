@@ -1,0 +1,49 @@
+Build Error System specific
+    error on : trying to build in new system
+    error message : 'config.h' file not found
+    solution 1 : yarn --check-files 
+    solution 2 : 
+        rm -rf node_modules/ && yarn cache clean && yarn install
+        node_modules/react-native/scripts/ios-install-third-party.sh
+        cd node_modules/react-native/third-party/glog-0.3.4
+        ./configure
+        make
+        make install
+    solution 3 :
+        1:
+
+        File -> Project/Workspace settings
+        Build System: dropdown -> change to Legacy Build system
+
+        2: Follow this to manually install third party scripts for RN:
+
+        Clean RN cache
+
+        $ rm -rf ~/.rncache
+
+        Re-install the deps
+
+        $ cd your_project_path
+        $ rm -rf node_modules/ && npm install
+
+        Then install the third-party
+
+        $ cd node_modules/react-native/scripts
+        $ ./ios-install-third-party.sh
+
+        Run the commands below if glog installation failed.
+
+        $ cd ../third-party/glog-0.3.x
+        $ ./configure
+    
+
+
+ios needed softwares
+    xcode 9+ (xcode app name should not contain space)
+    command line tools
+    homebrew
+        yarn
+        wget
+        watchman
+    node
+        react-native cli

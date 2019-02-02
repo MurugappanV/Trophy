@@ -1,4 +1,4 @@
-package com.robosoft.trophy;
+package com.itpmedia.trove;
 
 import android.app.Application;
 
