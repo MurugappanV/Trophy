@@ -3517,6 +3517,10 @@ jsx-ast-utils@^2.0.1:
   dependencies:
     array-includes "^3.0.3"
 
+keymirror@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
+
 kind-of@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-1.1.0.tgz#140a3d2d41a36d2efcfa9377b62c24f8495a5c44"
@@ -4679,7 +4683,6 @@ react-lifecycles-compat@^3.0.4:
 react-native-device-info@^0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.26.1.tgz#5e23d46a17232f0e1b3db33973b1715b670fd575"
-  integrity sha512-775TMZcJAybqtjHDTqkkIoRs9HH5szzyDaHqI5ipPmLfKD48nI1QfkcpfwDmjXIEtU33gXWnXr+Hdj4dMnNHtw==
 
 react-native-gesture-handler@^1.0.0, react-native-gesture-handler@^1.0.12:
   version "1.0.12"
@@ -4702,7 +4705,6 @@ react-native-safe-area-view@^0.11.0:
 react-native-splash-screen@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.1.1.tgz#1a4e46c9fdce53ff52af2a2cb4181788c4e30b30"
-  integrity sha512-PU2YocOSGbLjL9Vgcq/cwMNuHHKNjjuPpa1IPMuWo+6EB/fSZ5VOmxSa7+eucQe3631s3NhGuk3eHKahU03a4Q==
 
 react-native-svg-uri@^1.2.3:
   version "1.2.3"
@@ -4729,6 +4731,14 @@ react-native-vector-icons@^6.2.0:
     lodash "^4.0.0"
     prop-types "^15.6.2"
     yargs "^8.0.2"
+
+react-native-video@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-4.3.1.tgz#dd5cd7feeba1068dffb36ca0406214fe6ffc01aa"
+  dependencies:
+    keymirror "^0.1.1"
+    prop-types "^15.5.10"
+    shaka-player "^2.4.4"
 
 react-native@0.57.8:
   version "0.57.8"
@@ -5274,6 +5284,10 @@ setimmediate@^1.0.5:
 setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
+
+shaka-player@^2.4.4:
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/shaka-player/-/shaka-player-2.4.6.tgz#2a373cfa7f2867d7ba78a53fcdb25fa19cdaf5c0"
 
 shebang-command@^1.2.0:
   version "1.2.0"

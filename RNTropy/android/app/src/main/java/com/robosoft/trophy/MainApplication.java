@@ -3,6 +3,7 @@ package com.robosoft.trophy;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new RNDeviceInfo(),
           new MainReactPackage(),
+            new ReactVideoPackage(),
             new VectorIconsPackage(),
             new SvgPackage(),
             new RealmReactPackage(),
