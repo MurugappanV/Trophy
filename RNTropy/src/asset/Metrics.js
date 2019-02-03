@@ -24,13 +24,13 @@ const LINE_WIDTH = 1;
 
 const HEADER_HEIGHT_PERT = 65;
 const HEADER_HEIGHT =
-	Platform.OS === "android" && Platform.Version < 21
+	(Platform.OS === "android" && Platform.Version < 21)
 		? HEADER_HEIGHT_PERT - 24
 		: HEADER_HEIGHT_PERT;
 const STATUS_BAR_HEIGHT = Platform.OS === "android" && Platform.Version < 21 ? 0 : 24;
 
 const DEFAULT_PADDING = ScalePerctFullWidth(4);
-
+const DEFAULT_LIST_PADDING = ScalePerctFullWidth(3);
 // line height
 const SMALL_LINE_HEIGHT = 18;
 const LARGE_LINE_HEIGHT = 23;
@@ -53,6 +53,7 @@ const Metrics = {
 	LARGE_RADIUS,
 
 	DEFAULT_PADDING,
+	DEFAULT_LIST_PADDING,
 
 	LINE_WIDTH,
 

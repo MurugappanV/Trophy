@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { Colors, Metrics, ScalePerctFullWidth } from "../../asset";
+import { getImageHeight } from "../../utilities";
 
 type Props = {
 	imageUrl?: string,
@@ -8,26 +9,29 @@ type Props = {
 };
 
 export default function ArticleListBigImage(props: Props) {
-	const { imageUrl, padded } = props;
+	const { imageUrl, padded, height } = props;
+	console.log("height", height)
+	console.log("width", ScalePerctFullWidth(100))
 	return (
 		<View
 			style={[
 				styles.container,
 				padded
-					? { padding: Metrics.DEFAULT_PADDING }
-					: { paddingVertical: Metrics.DEFAULT_PADDING },
+					? { padding: Metrics.DEFAULT_LIST_PADDING }
+					: { paddingTop: Metrics.DEFAULT_LIST_PADDING },
 			]}
 		>
 			<Image
-				source={imageUrl}
+				source={{ uri: imageUrl }}
 				style={StyleSheet.flatten([
 					styles.image,
 					padded
 						? {
 							borderRadius: Metrics.SMALL_RADIUS,
-							width: ScalePerctFullWidth(100) - Metrics.DEFAULT_PADDING * 2,
+							width: ScalePerctFullWidth(100) - Metrics.DEFAULT_LIST_PADDING * 2,
 						}
 						: { width: ScalePerctFullWidth(100) },
+					{ height: height }
 				])}
 			/>
 		</View>
@@ -35,7 +39,7 @@ export default function ArticleListBigImage(props: Props) {
 }
 
 ArticleListBigImage.defaultProps = {
-	imageUrl: require("../../asset/Images/logo.png"),
+	imageUrl: "https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg",
 	padded: false,
 };
 
@@ -46,6 +50,6 @@ const styles = StyleSheet.create({
 		width: ScalePerctFullWidth(100),
 	},
 	image: {
-		width: ScalePerctFullWidth(100),
+		width: ScalePerctFullWidth(100)
 	},
 });

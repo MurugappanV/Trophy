@@ -3,21 +3,21 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import { Colors, Metrics, ScalePerctFullWidth } from "../../asset";
 
 type Props = {
-	heading?: string,
+	title?: string,
 	imageUrl?: string,
 	isCenter?: boolean,
 };
 
 renderImage = image => {
-	return <Image source={image} style={StyleSheet.flatten([styles.imageOne])} />;
+	return <Image source={{ uri: image }} style={StyleSheet.flatten([styles.imageOne])} />;
 };
 
 export default function ArticleListTitleImage(props: Props) {
-	const { heading, imageUrl, isCenter } = props;
+	const { title, imageUrl, isCenter } = props;
 	return (
 		<View style={styles.container}>
 			<Text style={[styles.titleText, isCenter ? { textAlign: "center" } : {}]}>
-				{heading}
+				{title}
 			</Text>
 			{imageUrl && renderImage(imageUrl)}
 		</View>
@@ -25,7 +25,7 @@ export default function ArticleListTitleImage(props: Props) {
 }
 
 ArticleListTitleImage.defaultProps = {
-	heading: "Fashion Designer Alexis Mabille’s Paris Villa",
+	title: "Fashion Designer Alexis Mabille’s Paris Villa",
 	imageUrl: undefined,
 	isCenter: false,
 };
@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		width: ScalePerctFullWidth(100),
 		flexDirection: "row",
-		padding: Metrics.DEFAULT_PADDING,
+		padding: Metrics.DEFAULT_LIST_PADDING,
+		paddingBottom: 0,
 	},
 	titleText: {
 		color: Colors.textHeading,
@@ -47,6 +48,6 @@ const styles = StyleSheet.create({
 		width: ScalePerctFullWidth(25),
 		height: ScalePerctFullWidth(15),
 		borderRadius: Metrics.SMALL_RADIUS,
-		paddingLeft: Metrics.DEFAULT_PADDING,
+		paddingLeft: Metrics.DEFAULT_LIST_PADDING,
 	},
 });

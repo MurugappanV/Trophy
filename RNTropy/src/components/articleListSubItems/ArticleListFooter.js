@@ -1,39 +1,47 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Colors, Metrics, ScalePerctFullWidth } from "../../asset";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Colors, Metrics, ScalePerctFullWidth, Images } from "../../asset";
 import Icon from "../../asset/fonts/icons";
 
 type Props = {
 	time?: string,
-	isFollow?: boolean,
 	isCenter: boolean,
+	isBookMarked: boolean,
+	onShare: Function,
+	onBookMarkToggle: Function
 };
 
 export default function ArticleListFooter(props: Props) {
-	const { time, isCenter } = props;
+	const { time, isCenter, isBookMarked, onShare, onBookMarkToggle } = props;
 	return (
 		<View style={styles.container}>
 			{!isCenter && <Text style={styles.hours}>{time}</Text>}
-			<Icon
-				style={styles.icon}
-				name="filledBookmark"
-				size={20}
-				color={Colors.bodySecondaryLight}
-			/>
-			<Icon
-				style={styles.icon}
-				name="filledBookmark"
-				size={20}
-				color={Colors.bodySecondaryLight}
-			/>
+			<TouchableOpacity onPress={onShare}>
+				<Icon
+					style={styles.icon}
+					name={Images.share}
+					size={16}
+					color={Colors.bodySecondaryLight}
+				/>
+			</TouchableOpacity>
+			<TouchableOpacity onPress={onBookMarkToggle}>
+				<Icon
+					style={styles.icon}
+					name={isBookMarked ? Images.selectedBookmark : Images.selectedBookmark}
+					size={16}
+					color={isBookMarked ? Colors.bodyPrimaryDark : Colors.bodySecondaryLight}
+				/>
+			</TouchableOpacity>
 		</View>
 	);
 }
 
 ArticleListFooter.defaultProps = {
 	time: "3 hours ago",
-	isFollow: true,
 	isCenter: false,
+	isBookMarked: false,
+	onShare: () => { },
+	onBookMarkToggle: () => { }
 };
 
 const styles = StyleSheet.create({
@@ -43,7 +51,8 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		flexDirection: "row",
 		justifyContent: "center",
-		padding: Metrics.DEFAULT_PADDING,
+		alignItems: "center",
+		padding: Metrics.DEFAULT_LIST_PADDING,
 		width: ScalePerctFullWidth(100),
 	},
 	hours: {
@@ -56,5 +65,5 @@ const styles = StyleSheet.create({
 		lineHeight: Metrics.LARGE_LINE_HEIGHT,
 		flex: 1,
 	},
-	icon: { paddingHorizontal: Metrics.DEFAULT_PADDING },
+	icon: { paddingHorizontal: Metrics.DEFAULT_LIST_PADDING },
 });

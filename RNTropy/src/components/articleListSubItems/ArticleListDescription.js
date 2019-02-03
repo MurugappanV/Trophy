@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		width: ScalePerctFullWidth(100),
 		flexDirection: "row",
-		padding: Metrics.DEFAULT_PADDING,
+		padding: Metrics.DEFAULT_LIST_PADDING,
+		paddingBottom: 0
 	},
 	descriptionText: {
 		color: Colors.textHeading,

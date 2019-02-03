@@ -19,8 +19,8 @@ const renderBackbtn = (onBack: Function) => {
 			<Icon name="filledBookmark" size={24} color="#bf1313" />
 		</TouchableOpacity>
 	) : (
-		<View style={styles.emptyView} />
-	);
+			<View style={styles.emptyView} />
+		);
 };
 
 const renderActionbtn = (onAction: Function, imageUrl: string) => {
@@ -49,7 +49,7 @@ export default function PagerHeader(props: Props) {
 	console.log("called");
 	return (
 		<View style={StyleSheet.flatten([styles.container, style])}>
-			<StatusBar backgroundColor="transparent" translucent barStyle="light-content" />
+			<StatusBar backgroundColor="transparent" translucent barStyle="dark-content" />
 			<View style={[styles.headerContainer]}>
 				{renderBackbtn(onBack)}
 				{renderTitle(title)}

@@ -26,13 +26,14 @@ export default class TabBarNavigator extends PureComponent<Props> {
 		const { activeTintColor, inactiveTintColor, navigation } = this.props;
 		const currentIndex = navigation.state.index;
 		const color = currentIndex === idx ? activeTintColor : inactiveTintColor;
+		const iconMap = NavigationIconMap.get(route.routeName);
 		return (
 			<TouchableOpacity
 				onPress={() => this.onTabPress(currentIndex, idx, navigation, route)}
 				style={styles.tabBarButton}
 				key={route.routeName}
 			>
-				<Icon name={NavigationIconMap.get(route.routeName)} size={20} color={color} />
+				<Icon name={iconMap.icon} size={iconMap.size} color={color} />
 			</TouchableOpacity>
 		);
 	}
@@ -43,8 +44,8 @@ export default class TabBarNavigator extends PureComponent<Props> {
 		return (
 			<View style={[styles.container, style]}>
 				{tabBarButtons}
-				<TouchableOpacity onPress={() => {}} style={styles.tabBarButton} key="berguer">
-					<Icon name={Images.menu} size={20} color={inactiveTintColor} />
+				<TouchableOpacity onPress={() => { navigation.toggleDrawer() }} style={styles.tabBarButton} key="berguer">
+					<Icon name={Images.menu} size={18} color={inactiveTintColor} />
 				</TouchableOpacity>
 			</View>
 		);
@@ -57,11 +58,11 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.bgPrimaryLight,
 		flexDirection: "row",
 		alignItems: "stretch",
+		justifyContent: "space-evenly",
 		borderTopWidth: Metrics.LINE_WIDTH,
 		borderColor: Colors.linePrimary,
 	},
 	tabBarButton: {
-		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
 	},

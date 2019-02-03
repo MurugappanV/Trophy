@@ -31,8 +31,9 @@ const styles = StyleSheet.create({
 		borderBottomColor: Colors.bgPrimaryLight,
 		borderBottomWidth: 1,
 		flexDirection: "row",
-		padding: Metrics.DEFAULT_PADDING,
+		padding: Metrics.DEFAULT_LIST_PADDING,
 		width: ScalePerctFullWidth(100),
+		paddingBottom: 0
 	},
 	imageContainer: {
 		flex: 1,
@@ -42,6 +43,6 @@ const styles = StyleSheet.create({
 	},
 	followImage: {
 		height: ScalePerctFullWidth(8),
-		paddingLeft: Metrics.DEFAULT_PADDING,
+		paddingLeft: Metrics.DEFAULT_LIST_PADDING,
 	},
 });

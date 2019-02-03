@@ -1,1 +1,1 @@
-export {getImageHeight} from './ImageCalc'
+export { getImageDisplayHeight, getImageHeight } from './ImageCalc'

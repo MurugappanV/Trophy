@@ -180,7 +180,7 @@ const NavContainer = createAppContainer(
 			NewUserNavigation: NewUserStack,
 		},
 		{
-			initialRouteName: "AuthNavigation",
+			initialRouteName: "HomeNavigation",
 		},
 	),
 );
