@@ -1,9 +1,18 @@
-import * as SvgButtons from "./Buttons";
-import * as SvgBlackIcons from "./IconBlack";
-import * as SvgWhiteIcons from "./IconWhite";
-
 export const Images = {
-	SvgButtons,
-	SvgBlackIcons,
-	SvgWhiteIcons,
+	play: "playCircle",
+	heart: "smallHeart",
+	share: "share",
+	search: "search",
+	grid: "grid",
+	selectedBookmark: "filledBookmark",
+	edit: "edit",
+	menu: "bergur",
+	home: "home",
+	back: "arrowLeft",
+	podcast: "headphones",
+	twitter: "twitter",
+	facebook: "facebook",
+	aA: "aA",
+	book: "book",
+	googlePlus: "googlePlus",
 };

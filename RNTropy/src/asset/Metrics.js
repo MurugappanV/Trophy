@@ -20,7 +20,7 @@ const SMALL_RADIUS = 5;
 const MEDIUM_RADIUS = 10;
 const LARGE_RADIUS = 25;
 
-const LINE_WIDTH = 0.5;
+const LINE_WIDTH = 1;
 
 const HEADER_HEIGHT_PERT = ScalePerctFullHeight(9);
 const HEADER_HEIGHT =
