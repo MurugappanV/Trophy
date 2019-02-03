@@ -16,8 +16,9 @@ class Topics extends Component {
 	}
 
 	onSelected = (topics: array) => {
-		const { setMenuTopicsAction } = this.props;
+		const { setMenuTopicsAction, navigation } = this.props;
 		setMenuTopicsAction(topics);
+		navigation.navigate("BrandsAuthScreen");
 	};
 
 	render() {

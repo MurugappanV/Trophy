@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { NavigationRoute } from "react-navigation";
 import Icon from "../asset/fonts/icons";
-import { Metrics, Colors } from "../asset";
+import { Metrics, Colors, NavigationIconMap, Images } from "../asset";
 
 type Props = {
 	activeTintColor: string,
@@ -32,7 +32,7 @@ export default class TabBarNavigator extends PureComponent<Props> {
 				style={styles.tabBarButton}
 				key={route.routeName}
 			>
-				<Icon name="filledBookmark" size={20} color={color} />
+				<Icon name={NavigationIconMap.get(route.routeName)} size={20} color={color} />
 			</TouchableOpacity>
 		);
 	}
@@ -43,8 +43,8 @@ export default class TabBarNavigator extends PureComponent<Props> {
 		return (
 			<View style={[styles.container, style]}>
 				{tabBarButtons}
-				<TouchableOpacity onPress={() => { }} style={styles.tabBarButton} key="berguer">
-					<Icon name="filledBookmark" size={20} color={inactiveTintColor} />
+				<TouchableOpacity onPress={() => {}} style={styles.tabBarButton} key="berguer">
+					<Icon name={Images.menu} size={20} color={inactiveTintColor} />
 				</TouchableOpacity>
 			</View>
 		);

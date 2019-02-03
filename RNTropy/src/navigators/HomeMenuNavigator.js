@@ -10,14 +10,14 @@ class HomeMenuNav extends PureComponent<Props> {
 	tabs(categories) {
 		const routes = {};
 		categories.forEach(category => {
-			routes[category] = this.tab(category);
+			routes[category.name] = this.tab(category);
 		});
 		return routes;
 	}
 
 	tab(category) {
 		// const screen = this.getTabForCategory(category);
-		const screen = category == "Economics" ? AuthLoading : ArticleList;
+		const screen = category.name == "Economics" ? AuthLoading : ArticleList;
 		return {
 			screen: screen,
 		};

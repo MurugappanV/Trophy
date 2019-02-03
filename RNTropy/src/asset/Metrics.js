@@ -22,7 +22,7 @@ const LARGE_RADIUS = 25;
 
 const LINE_WIDTH = 1;
 
-const HEADER_HEIGHT_PERT = ScalePerctFullHeight(9);
+const HEADER_HEIGHT_PERT = 65;
 const HEADER_HEIGHT =
 	Platform.OS === "android" && Platform.Version < 21
 		? HEADER_HEIGHT_PERT - 24

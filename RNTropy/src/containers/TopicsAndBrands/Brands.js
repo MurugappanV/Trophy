@@ -41,7 +41,7 @@ class Brands extends Component {
 		// 			"http://trove-drupal.itp.com/sites/default/files/2019-01/Arabian%20business.png",
 		// 	},
 		// ];
-		let { topics, selectedList } = this.props;
+		let { topics, selectedList, navigation } = this.props;
 		console.log("Setelcted Topics: ", this.props);
 		return (
 			<FollowList
@@ -49,6 +49,7 @@ class Brands extends Component {
 				data={topics}
 				onSelected={this.onSelected}
 				selectedList={selectedList}
+				navigation={navigation}
 			/>
 		); // passs method
 	}

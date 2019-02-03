@@ -26,3 +26,28 @@ Feature clarification
 Using SVG icons - https://medium.com/bam-tech/add-custom-icons-to-your-react-native-application-f039c244386c
 
 rename ios project & other things - https://stackoverflow.com/questions/33370175/how-do-i-completely-rename-an-xcode-project-i-e-inclusive-of-folders
+
+change all svg to icon 
+we will be removing svg & svguri on next merge to development
+
+assets/font in project root folder are deleted & added inside src folder
+
+I changed the Metrics.LINE_WIDTH 0.5 to 1 , hope it wont affect other UI 
+
+check image full size display
+
+logout feature
+login video 
+missing icons
+    unselected heart
+    unselected bookmark
+design - back button in topics page
+
+
+Srikara
+    In JSX try to use && or || instead of Conditional(?) operator
+    Flatlist scroll bar should come at the right most of the screen
+    check 4 topics selected (bcoz - "My trove" will be added as default)
+
+Srikara & sharanya
+    change navigator name for topics and brands

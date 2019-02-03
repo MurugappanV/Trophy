@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, StatusBar, TouchableOpacity } from "react-native";
 import Icon from "../../asset/fonts/icons";
-import { Colors, ScalePerctFullWidth, Metrics } from "../../asset";
+import { Colors, ScalePerctFullWidth, Metrics, Images } from "../../asset";
 
 type Props = {
 	page?: number,
@@ -15,11 +15,11 @@ type Props = {
 const renderBackbtn = (onBack: Function) => {
 	return onBack ? (
 		<TouchableOpacity onPress={onBack} style={styles.buttonContainer}>
-			<Icon name="filledBookmark" size={24} color="#bf1313" />
+			<Icon name={Images.back} size={14} color={Colors.bgPrimaryLight} />
 		</TouchableOpacity>
 	) : (
-			<View style={styles.emptyView} />
-		);
+		<View style={styles.emptyView} />
+	);
 };
 
 const renderActionbtn = (onAction: Function, actionLabel: string) => {
@@ -28,8 +28,8 @@ const renderActionbtn = (onAction: Function, actionLabel: string) => {
 			<Text style={styles.actionText}>{actionLabel}</Text>
 		</TouchableOpacity>
 	) : (
-			<View style={styles.emptyView} />
-		);
+		<View style={styles.emptyView} />
+	);
 };
 
 const renderTitle = (page: number, totalPage: number) => {
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 		height: Metrics.HEADER_HEIGHT,
 		borderBottomWidth: Metrics.LINE_WIDTH,
 		borderColor: Colors.linePrimary,
-		backgroundColor: Colors.bodySecondaryDark,
+		backgroundColor: Colors.bgLightBlack,
 		paddingHorizontal: 8,
 	},
 	headerContainer: {

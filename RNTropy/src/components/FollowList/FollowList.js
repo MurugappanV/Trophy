@@ -58,7 +58,7 @@ class FollowList extends PureComponent {
 	};
 
 	render() {
-		const { data } = this.props;
+		const { data, navigation } = this.props;
 		const { onSelected, topic } = this.props;
 		const { followTrack } = this.state;
 		const noOfColumn = Metrics.isTablet ? 4 : 2;
@@ -87,9 +87,16 @@ class FollowList extends PureComponent {
 							</Text>
 						</View>
 					) : topic ? (
-						<PagerHeader onBack={() => {}} />
+						<PagerHeader />
 					) : (
-						<PagerHeader onAction={() => {}} onBack={() => {}} />
+						<PagerHeader
+							onAction={() => {
+								navigation.navigate("HomeNavigation");
+							}}
+							onBack={() => {
+								navigation.goBack();
+							}}
+						/>
 					)}
 				</View>
 

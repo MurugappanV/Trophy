@@ -1,11 +1,17 @@
 import Types from "../Types";
 import createReducer from "./CreateReducer";
 
-const initialTopicMenu = [];
+const initialTopicMenu = [
+	{
+		name: "My trove",
+		tid: "0",
+		field_image: "",
+	},
+];
 
 export const menuTopics = createReducer(initialTopicMenu, {
 	[Types.topic.SET_MENU_TOPIC](state, action) {
-		return action.data.topics;
+		return initialTopicMenu.concat(action.data.topics);
 	},
 	[Types.topic.CLEAR_MENU_TOPIC]() {
 		return initialTopicMenu;

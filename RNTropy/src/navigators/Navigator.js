@@ -29,10 +29,20 @@ const AuthStack = createStackNavigator(
 		LoginAuthScreen: { screen: Login },
 		SignUpAuthScreen: { screen: SignUpAuthScreen },
 		ForgotAuthScreen: { screen: ForgotAuthScreen },
-		TopicsAuthScreen: { screen: Topics },
-		BrandsAuthScreen: { screen: Brands },
 		SuccessAuthScreen: { screen: AuthLoading },
 		MessageAuthScreen: { screen: MessageAuthScreen },
+	},
+	{
+		defaultNavigationOptions: () => ({
+			header: null,
+		}),
+	},
+);
+
+const NewUserStack = createStackNavigator(
+	{
+		TopicsAuthScreen: { screen: Topics },
+		BrandsAuthScreen: { screen: Brands },
 	},
 	{
 		defaultNavigationOptions: () => ({
@@ -157,6 +167,7 @@ const HomeDrawer = createDrawerNavigator(
 	{
 		// tabBarComponent: TXTabBar,
 		drawerPosition: "right",
+		drawerType: "slide",
 	},
 );
 
@@ -166,6 +177,7 @@ const NavContainer = createAppContainer(
 			AuthLoading,
 			HomeNavigation: HomeDrawer,
 			AuthNavigation: AuthStack,
+			NewUserNavigation: NewUserStack,
 		},
 		{
 			initialRouteName: "AuthNavigation",
