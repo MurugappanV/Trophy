@@ -12,17 +12,25 @@ export default function ArticleListLogo(props: Props) {
 	return (
 		<View style={styles.container}>
 			<View style={styles.imageContainer}>
-				<Image source={imageUrl} style={StyleSheet.flatten([styles.imageOne])} />
+				<Image
+					source={{ uri: imageUrl }}
+					resizeMode={"contain"}
+					style={StyleSheet.flatten([styles.imageOne])}
+				/>
 			</View>
 			{isFollow && (
-				<Image source={imageUrl} style={StyleSheet.flatten([styles.followImage])} />
+				<Image
+					source={{ uri: imageUrl }}
+					resizeMode={"contain"}
+					style={StyleSheet.flatten([styles.followImage])}
+				/>
 			)}
 		</View>
 	);
 }
 
 ArticleListLogo.defaultProps = {
-	imageUrl: require("../../asset/Images/articleLogo.png"),
+	imageUrl: null,
 	isFollow: true,
 };
 
@@ -33,16 +41,18 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		padding: Metrics.DEFAULT_LIST_PADDING,
 		width: ScalePerctFullWidth(100),
-		paddingBottom: 0
+		paddingBottom: 0,
 	},
 	imageContainer: {
 		flex: 1,
 	},
 	imageOne: {
 		height: ScalePerctFullWidth(8),
+		width: ScalePerctFullWidth(40),
 	},
 	followImage: {
 		height: ScalePerctFullWidth(8),
+		width: ScalePerctFullWidth(40),
 		paddingLeft: Metrics.DEFAULT_LIST_PADDING,
 	},
 });

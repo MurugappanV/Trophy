@@ -7,22 +7,24 @@ import ArticleListUI from "./ArticleListUI";
 import { Colors, ScalePerctFullWidth, Metrics } from "../../asset";
 
 class ArticleListContainer extends PureComponent<Props> {
-
-    render() {
-        return (<ArticleListUI />);
-    }
+	onItemPress = () => {
+		const { screenProps } = this.props;
+		screenProps.navigation.navigate("ArticleDisplayHomeScreen");
+	};
+	render() {
+		return <ArticleListUI {...this.props} onItemPress={this.onItemPress} />;
+	}
 }
 
 function mapStateToProps(state: any) {
-    return {
-    };
+	return {};
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(Actions, dispatch);
+	return bindActionCreators(Actions, dispatch);
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
+	mapStateToProps,
+	mapDispatchToProps,
 )(ArticleListContainer);

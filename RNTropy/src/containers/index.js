@@ -9,3 +9,4 @@ export { Author } from "./Author";
 export { Topics } from "./TopicsAndBrands";
 export { Brands } from "./TopicsAndBrands";
 export { ArticleList } from "./ArticleList";
+export { ArticleView } from "./Article";

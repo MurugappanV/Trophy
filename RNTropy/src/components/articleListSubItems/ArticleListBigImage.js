@@ -10,8 +10,6 @@ type Props = {
 
 export default function ArticleListBigImage(props: Props) {
 	const { imageUrl, padded, height } = props;
-	console.log("height", height)
-	console.log("width", ScalePerctFullWidth(100))
 	return (
 		<View
 			style={[
@@ -27,11 +25,11 @@ export default function ArticleListBigImage(props: Props) {
 					styles.image,
 					padded
 						? {
-							borderRadius: Metrics.SMALL_RADIUS,
-							width: ScalePerctFullWidth(100) - Metrics.DEFAULT_LIST_PADDING * 2,
-						}
+								borderRadius: Metrics.SMALL_RADIUS,
+								width: ScalePerctFullWidth(100) - Metrics.DEFAULT_LIST_PADDING * 2,
+						  }
 						: { width: ScalePerctFullWidth(100) },
-					{ height: height }
+					{ height: height },
 				])}
 			/>
 		</View>
@@ -50,6 +48,6 @@ const styles = StyleSheet.create({
 		width: ScalePerctFullWidth(100),
 	},
 	image: {
-		width: ScalePerctFullWidth(100)
+		width: ScalePerctFullWidth(100),
 	},
 });

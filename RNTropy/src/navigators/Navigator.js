@@ -17,6 +17,7 @@ import {
 	Profile,
 	Topics,
 	Brands,
+	ArticleView,
 } from "../containers";
 import TabBarNavigator from "./TabBarNavigator";
 import { Colors, ScalePerctFullWidth, Metrics } from "../asset";
@@ -139,7 +140,7 @@ HomeTab.navigationOptions = ({ navigation }) => ({
 const HomeStack = createStackNavigator(
 	{
 		TabHomeScreen: { screen: HomeTab },
-		ArticleDisplayHomeScreen: { screen: AuthLoading },
+		ArticleDisplayHomeScreen: { screen: ArticleView },
 		PlayPodcastHomeScreen: { screen: AuthLoading },
 		PlayVideoHomeScreen: { screen: AuthLoading },
 		VideoCommentsHomeScreen: { screen: AuthLoading },

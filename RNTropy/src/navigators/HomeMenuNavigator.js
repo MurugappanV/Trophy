@@ -28,7 +28,7 @@ class HomeMenuNav extends PureComponent<Props> {
 	// }
 
 	render() {
-		const { menuTopics } = this.props;
+		const { menuTopics, navigation } = this.props;
 		const HomeMenuNavigator = createAppContainer(
 			createMaterialTopTabNavigator(this.tabs(menuTopics), {
 				tabBarPosition: "top",
@@ -63,7 +63,7 @@ class HomeMenuNav extends PureComponent<Props> {
 			}),
 		);
 
-		return <HomeMenuNavigator />;
+		return <HomeMenuNavigator screenProps={{ navigation: navigation }} />;
 	}
 }
 

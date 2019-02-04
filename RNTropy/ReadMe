@@ -40,10 +40,8 @@ logout feature
 design - back button in topics page
 
 
-Srikara
     In JSX try to use && or || instead of Conditional(?) operator
     Flatlist scroll bar should come at the right most of the screen
     check 4 topics selected (bcoz - "My trove" will be added as default)
 
-Srikara & sharanya
     change navigator name for topics and brands
