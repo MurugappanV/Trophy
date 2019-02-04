@@ -1,9 +1,9 @@
 import Types from "../Types";
 import createReducer from "./CreateReducer";
 
-export const userId = createReducer(null, {
-	[Types.user.SET_USER_ID](state, action) {
-		return action.userId;
+export const user = createReducer(null, {
+	[Types.user.SET_USER](state, action) {
+		return action.user;
 	},
 	[Types.user.CLEAR_USER_ID]() {
 		return null;

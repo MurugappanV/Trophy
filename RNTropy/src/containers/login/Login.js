@@ -4,17 +4,21 @@ import { bindActionCreators } from "redux";
 import { Actions } from "../../redux";
 import LoginUI from "./LoginUI";
 import LoginTabletUI from "./LoginTabletUI";
-import { Metrics } from "../../asset";
+import { Metrics, emailValidator, Strings } from "../../asset";
+import { LoginApi } from "../../service";
+import { AlertComp } from "../../components";
 
 type Props = {
 	navigation: any,
-	setUserIdAction: Function,
+	setUserAction: Function,
 };
 
 class Login extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			showLoader: false,
+		};
 	}
 
 	handleSignUp = () => {
@@ -27,20 +31,46 @@ class Login extends PureComponent<Props> {
 		navigation.navigate("ForgotAuthScreen");
 	};
 
-	handleLogin = () => {
-		this.onSuccess();
+	handleLogin = (email, password) => {
+		if (!email || !password) {
+			AlertComp(Strings.authentication.ALERT, "Enter the required fields");
+		} else if (!emailValidator(email)) {
+			AlertComp(Strings.authentication.ALERT, Strings.authentication.ENTER_VALID_EMAIL);
+		} else {
+			this.setState({ showLoader: true });
+			LoginApi(email, password, this.onSuccess, this.onFailure, this.onError);
+		}
 	};
 
-	onSuccess = () => {
-		const { setUserIdAction, navigation } = this.props;
-		const userId = 123;
-		setUserIdAction(userId);
+	onSuccess = (data: Object) => {
+		const { setUserAction } = this.props;
+		this.setState({ showLoader: false });
+		console.log("success");
+		alert("logged in");
+		setUserAction(data);
 		navigation.navigate("TopicsAuthScreen");
 	};
 
-	onFailure = () => {};
+	onFailure = (response: Object) => {
+		const { navigation } = this.props;
+		this.setState({ showLoader: false });
+		if (response.error_code !== "101") {
+			alert(response.message);
+		} else {
+			navigation.navigate("MessageAuthScreen", {
+				message: response.message,
+				resend: true,
+				id: response.id,
+			});
+			console.log("fail", response.message);
+		}
+	};
 
-	onError = () => {};
+	onError = (error: any) => {
+		this.setState({ showLoader: false });
+		console.log("error", error);
+		AlertComp(Strings.authentication.ALERT, error.toString());
+	};
 
 	renderItem = () => {
 		return Metrics.isTablet ? (
@@ -48,12 +78,14 @@ class Login extends PureComponent<Props> {
 				handleSignUp={this.handleSignUp}
 				handleForgotPassword={this.handleForgotPassword}
 				handleLogin={this.handleLogin}
+				showLoader={this.state.showLoader}
 			/>
 		) : (
 			<LoginUI
 				handleSignUp={this.handleSignUp}
 				handleForgotPassword={this.handleForgotPassword}
 				handleLogin={this.handleLogin}
+				showLoader={this.state.showLoader}
 			/>
 		);
 	};
@@ -65,7 +97,9 @@ class Login extends PureComponent<Props> {
 
 function mapStateToProps(state) {
 	// state
-	return {};
+	return {
+		user: state.User,
+	};
 }
 
 function mapDispatchToProps(dispatch) {

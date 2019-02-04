@@ -14,6 +14,7 @@ import { TextInput, Button, AuthBackground } from "../../components";
 type Props = {
 	handleReturnToSignIn: Function,
 	handleSignUp: Function,
+	showLoader: boolean,
 };
 
 const small = `<?xml version="1.0" encoding="UTF-8"?>
@@ -31,7 +32,7 @@ const small = `<?xml version="1.0" encoding="UTF-8"?>
 export default class SignUpUI extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { form: { email: "", password: "", name: "" }, checked: false };
+		this.state = { email: "", password: "", name: "", checked: false };
 	}
 
 	handleCheckbox = () => {
@@ -39,8 +40,10 @@ export default class SignUpUI extends PureComponent<Props> {
 	};
 
 	renderButton = () => {
-		const { handleSignUp } = this.props;
-		const { checked } = this.state;
+		const { handleSignUp, showLoader } = this.props;
+		const { checked, name, email, password } = this.state;
+		let deviceId = null;
+		deviceId = Metrics.isTablet ? "Tablet" : "Mobile";
 		return (
 			<Button
 				title={Strings.authentication.SIGN_UP}
@@ -48,7 +51,8 @@ export default class SignUpUI extends PureComponent<Props> {
 					marginTop: ScalePerctFullHeight(4),
 					marginBottom: ScalePerctFullHeight(4),
 				}}
-				onPress={() => handleSignUp(checked)}
+				showLoader={showLoader}
+				onPress={() => handleSignUp(name, email, password, deviceId, checked)}
 			/>
 		);
 	};
@@ -81,7 +85,7 @@ export default class SignUpUI extends PureComponent<Props> {
 					reference={(component: any) => {
 						this.password = component;
 					}}
-					onChangeText={text => this.setState({ Password: text })}
+					onChangeText={text => this.setState({ password: text })}
 					onSubmitEditing={() => Keyboard.dismiss()}
 				/>
 			</View>
@@ -201,13 +205,13 @@ const tabStyles = StyleSheet.create({
 	returnToSignIn: {
 		fontSize: Metrics.MEDIUM_TEXT_SIZE,
 		letterSpacing: 0,
-		marginBottom: 150,
+		marginBottom: ScalePerctFullHeight(10),
 		color: Colors.bgPrimaryLight,
 		fontFamily: "AkzidenzGrotesk-Roman",
 	},
 	viewStyle: {
 		flexDirection: "row",
-		marginTop: 10,
+		marginTop: ScalePerctFullHeight(0.7),
 		alignSelf: "flex-start",
 	},
 	text: {
@@ -230,7 +234,7 @@ const tabStyles = StyleSheet.create({
 	textContainer: {
 		flexDirection: "column",
 		flex: 1,
-		marginLeft: 12,
+		marginLeft: ScalePerctFullWidth(1.2),
 	},
 	formStyle: {
 		alignSelf: "stretch",
@@ -239,7 +243,7 @@ const tabStyles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	paddingHorizontal: {
-		paddingHorizontal: 352,
+		paddingHorizontal: ScalePerctFullWidth(35),
 	},
 });
 

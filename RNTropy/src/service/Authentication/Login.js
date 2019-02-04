@@ -1,15 +1,19 @@
-import { BaseAxiosInstance } from "../axios";
+import { ItpAxiosInstance } from "../axios";
 
-const LoginApi = (userName, password, onSuccess, onFailure, onError) => {
-	const url = "login";
+const LoginApi = (email, password, onSuccess, onFailure, onError) => {
+	const url = "ws/sign-in";
 	// login='robodiego'
 	// password='Buddy6jar!'
-	BaseAxiosInstance.post(url, { name: userName, password })
+	ItpAxiosInstance.post(url, {
+		email,
+		pass: password,
+	})
 		.then((response: any) => {
-			if (response.data.status === 1) {
-				onSuccess(response.data.data.token, response.data.data.user_id);
-			} else {
-				onFailure(response.data.message);
+			console.log("login response", response, email, password);
+			if (response.data.status === "Success") {
+				onSuccess(response.data);
+			} else if (response.data.status === "Failed") {
+				onFailure(response.data);
 			}
 		})
 		.catch((error: any) => {

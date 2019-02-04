@@ -7,16 +7,19 @@ type Props = {
 	handleLogin: Function,
 	handleForgotPassword: Function,
 	handleSignUp: Function,
+	showLoader: boolean,
 };
 
 export default class LoginUI extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { email: "", Password: "" };
+		this.state = { email: "", password: "" };
 	}
 
 	handleForm = () => {
 		const { handleLogin, handleForgotPassword } = this.props;
+		const { email, password } = this.state;
+
 		return (
 			<View style={styles.formStyle}>
 				<TextInput
@@ -35,17 +38,18 @@ export default class LoginUI extends PureComponent<Props> {
 					reference={(component: any) => {
 						this.password = component;
 					}}
-					onChangeText={text => this.setState({ Password: text })}
+					onChangeText={text => this.setState({ password: text })}
 					buttonLabel="HELP"
 					onPress={handleForgotPassword}
-					onSubmitEditing={handleLogin}
+					onSubmitEditing={() => handleLogin(email, password)}
 				/>
 			</View>
 		);
 	};
 
 	renderButton = () => {
-		const { handleLogin } = this.props;
+		const { handleLogin, showLoader } = this.props;
+		const { email, password } = this.state;
 		return (
 			<Button
 				title={Strings.authentication.LOGIN}
@@ -53,7 +57,8 @@ export default class LoginUI extends PureComponent<Props> {
 					marginTop: ScalePerctFullHeight(8),
 					marginBottom: ScalePerctFullHeight(4),
 				}}
-				onPress={handleLogin}
+				showLoader={showLoader}
+				onPress={() => handleLogin(email, password)}
 			/>
 		);
 	};

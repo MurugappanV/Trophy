@@ -20,16 +20,19 @@ type Props = {
 	handleLogin: Function,
 	handleForgotPassword: Function,
 	handleSignUp: Function,
+	showLoader: boolean,
 };
 
 export default class LoginTabletUI extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { email: "", Password: "" };
+		this.state = { email: "", password: "" };
 	}
 
 	handleForm = () => {
 		const { handleLogin, handleForgotPassword } = this.props;
+		const { email, password } = this.state;
+
 		return (
 			<View style={styles.formStyle}>
 				<TextInput
@@ -51,19 +54,22 @@ export default class LoginTabletUI extends PureComponent<Props> {
 					onChangeText={text => this.setState({ Password: text })}
 					buttonLabel="HELP"
 					onPress={handleForgotPassword}
-					onSubmitEditing={handleLogin}
+					onSubmitEditing={() => handleLogin(email, password)}
 				/>
 			</View>
 		);
 	};
 
 	renderButton = () => {
-		const { handleLogin } = this.props;
+		const { handleLogin, showLoader } = this.props;
+		const { email, password } = this.state;
+
 		return (
 			<Button
 				title={Strings.authentication.LOGIN}
 				buttonStyle={styles.buttonStyle}
-				onPress={handleLogin}
+				showLoader={showLoader}
+				onPress={() => handleLogin(email, password)}
 			/>
 		);
 	};

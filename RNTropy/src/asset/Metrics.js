@@ -1,8 +1,9 @@
 import { Platform } from "react-native";
-const isTablet = DeviceInfo.isTablet();
-console.log("is tablet - ", isTablet);
 import DeviceInfo from "react-native-device-info";
 import { ScalePerctFullWidth, ScalePerctFullHeight } from "./Scale";
+
+const isTablet = DeviceInfo.isTablet();
+
 // text sizes
 const VVVV_SMALL_TEXT_SIZE = 8;
 const VVV_SMALL_TEXT_SIZE = 9;

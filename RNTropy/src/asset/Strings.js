@@ -15,8 +15,14 @@ const BY_CLICKING_ON = "By clicking on ";
 const TERMS_AND_CONDITION = "Terms and Condition";
 const SUBMIT = "Submit";
 const MESSAGE_TITLE = "Message sent";
-const MESSAGE_DESCRIPTION = "Message sent to mail click the link to login Message sent to ";
+const MESSAGE_DESCRIPTION = "Activation link sent to mail. Click the link to login  ";
 const OK = "OK";
+const CLICK_HERE = " Click here";
+const TO_RESEND_MAIL = "to resend mail.";
+const ALERT = "Alert";
+const ENTER_VALID_EMAIL = "Enter valid Email";
+const ENTER_VALID_PASSWORD = "Enter valid password";
+const AGREE_TERMS_AND_CONDITION = "Please agree Terms and Condition to proceed";
 
 export const Strings = {
 	authentication: {
@@ -39,5 +45,11 @@ export const Strings = {
 		MESSAGE_TITLE,
 		MESSAGE_DESCRIPTION,
 		OK,
+		CLICK_HERE,
+		TO_RESEND_MAIL,
+		ALERT,
+		ENTER_VALID_EMAIL,
+		ENTER_VALID_PASSWORD,
+		AGREE_TERMS_AND_CONDITION,
 	},
 };

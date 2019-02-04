@@ -1,6 +1,6 @@
 const EXCEPTION = "EXCEPTION";
 const CLEAR_EXCEPTION_MSG = "CLEAR_EXCEPTION_MSG";
-const SET_USER_ID = "SET_USER_ID";
+const SET_USER = "SET_USER";
 const CLEAR_USER_ID = "CLEAR_USER_ID";
 const SET_MENU_TOPIC = "SET_MENU_TOPIC";
 const CLEAR_MENU_TOPIC = "CLEAR_MENU_TOPIC";
@@ -12,7 +12,7 @@ const Types = {
 		CLEAR_EXCEPTION_MSG,
 	},
 	user: {
-		SET_USER_ID,
+		SET_USER,
 		CLEAR_USER_ID,
 	},
 	topic: {

@@ -4,6 +4,8 @@ import { bindActionCreators } from "redux";
 import { Actions } from "../../redux";
 import SignUpUI from "./SignUpUI";
 import { AlertComp } from "../../components";
+import { SignUpApi } from "../../service";
+import { emailValidator, Strings } from "../../asset";
 
 type Props = {
 	navigation: any,
@@ -12,7 +14,9 @@ type Props = {
 class SignUpAuthScreen extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			showLoader: false,
+		};
 	}
 
 	handleReturnToSignIn = () => {
@@ -20,13 +24,34 @@ class SignUpAuthScreen extends PureComponent<Props> {
 		navigation.navigate("LoginAuthScreen");
 	};
 
-	handleSignUp = (checked: boolean) => {
-		const { navigation } = this.props;
-		if (checked) {
-			navigation.navigate("MessageAuthScreen");
+	handleSignUp = (name, email, password, deviceId, checked: boolean) => {
+		if (!name || !email || !password) {
+			AlertComp(Strings.authentication.ALERT, "Enter the required fields");
+		} else if (!emailValidator(email)) {
+			AlertComp(Strings.authentication.ALERT, Strings.authentication.ENTER_VALID_EMAIL);
+		} else if (checked) {
+			this.setState({ showLoader: true });
+			SignUpApi(name, email, password, deviceId, this.onSuccess, this.onFailure);
 		} else {
-			AlertComp((title = "Alert"), (msg = "Please agree Terms and Condition to proceed"));
+			AlertComp(
+				Strings.authentication.ALERT,
+				Strings.authentication.AGREE_TERMS_AND_CONDITION,
+			);
 		}
+	};
+
+	onSuccess = (message: "string") => {
+		const { navigation } = this.props;
+		this.setState({ showLoader: false });
+		navigation.navigate("MessageAuthScreen", {
+			message,
+		});
+	};
+
+	onFailure = (message: "string") => {
+		const { navigation } = this.props;
+		this.setState({ showLoader: false });
+		navigation.navigate("MessageAuthScreen", { message });
 	};
 
 	render() {
@@ -34,14 +59,17 @@ class SignUpAuthScreen extends PureComponent<Props> {
 			<SignUpUI
 				handleReturnToSignIn={this.handleReturnToSignIn}
 				handleSignUp={this.handleSignUp}
+				showLoader={this.state.showLoader}
 			/>
 		);
 	}
 }
 
-function mapStateToProps() {
+function mapStateToProps(state) {
 	// state
-	return {};
+	return {
+		user: state.User,
+	};
 }
 
 function mapDispatchToProps(dispatch) {

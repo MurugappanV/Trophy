@@ -1,20 +1,31 @@
-import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import React, { PureComponent } from "react";
+import { TouchableOpacity, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Metrics, Colors } from "../../asset";
 
 type Props = {
 	title: string,
 	onPress: Function,
 	buttonStyle: Object,
+	showLoader: boolean,
 };
 
-export default function Button(props: Props) {
-	const { onPress, title = "click here", buttonStyle } = props;
-	return (
-		<TouchableOpacity onPress={onPress} style={[styles.container, buttonStyle && buttonStyle]}>
-			<Text style={styles.text}>{title}</Text>
-		</TouchableOpacity>
-	);
+export default class Button extends PureComponent<Props> {
+	render() {
+		const { onPress, title = "click here", buttonStyle, showLoader } = this.props;
+
+		return (
+			<TouchableOpacity
+				onPress={!showLoader ? onPress : null}
+				style={[styles.container, buttonStyle && buttonStyle]}
+			>
+				{!showLoader ? (
+					<Text style={styles.text}>{title}</Text>
+				) : (
+					<ActivityIndicator animating={showLoader} size="small" color="white" />
+				)}
+			</TouchableOpacity>
+		);
+	}
 }
 
 const styles = StyleSheet.create({

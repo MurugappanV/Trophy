@@ -24,9 +24,11 @@ import { Colors, ScalePerctFullWidth, Metrics } from "../asset";
 import { PagerHeader, ProfileHeader } from "../components";
 import HomeMenuNavigator from "./HomeMenuNavigator";
 
+let LoginScreen = Metrics.isTablet ? Login : FirstAuthScreen;
+
 const AuthStack = createStackNavigator(
 	{
-		FirstAuthScreen: { screen: FirstAuthScreen },
+		FirstAuthScreen: { screen: LoginScreen },
 		LoginAuthScreen: { screen: Login },
 		SignUpAuthScreen: { screen: SignUpAuthScreen },
 		ForgotAuthScreen: { screen: ForgotAuthScreen },
@@ -181,7 +183,7 @@ const NavContainer = createAppContainer(
 			NewUserNavigation: NewUserStack,
 		},
 		{
-			initialRouteName: "HomeNavigation",
+			initialRouteName: "AuthNavigation",
 		},
 	),
 );

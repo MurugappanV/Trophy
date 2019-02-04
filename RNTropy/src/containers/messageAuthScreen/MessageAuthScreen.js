@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Actions } from "../../redux";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Metrics, Strings } from "../../asset";
-import { LoadingComp, Button } from "../../components";
+import { Button, AlertComp } from "../../components";
+import { ResendApi } from "../../service";
 
 type Props = {
 	navigation: any,
@@ -18,16 +19,39 @@ class MessageAuthScreen extends PureComponent<Props> {
 
 	handleLogin = () => {
 		const { navigation } = this.props;
+
 		navigation.navigate("LoginAuthScreen");
 	};
 
+	handleResend = () => {
+		const { navigation } = this.props;
+		const id = navigation.getParam("id");
+		ResendApi(id);
+		AlertComp(Strings.authentication.ALERT, Strings.authentication.MESSAGE_DESCRIPTION);
+	};
+
 	render() {
+		const { navigation } = this.props;
+		const message = navigation.getParam("message");
+		const resend = navigation.getParam("resend");
+
 		return (
 			<View style={styles.container}>
 				<Text style={styles.image}>Image</Text>
 				<Text style={styles.title}>{Strings.authentication.MESSAGE_TITLE}</Text>
 				<Text style={styles.description}>
-					{Strings.authentication.MESSAGE_DESCRIPTION}
+					{!resend ? (
+						message
+					) : (
+						<Text>
+							{message}
+							{`\n`}
+							<Text onPress={() => this.handleResend()} style={styles.touchableText}>
+								{Strings.authentication.CLICK_HERE}{" "}
+							</Text>
+							<Text>{Strings.authentication.TO_RESEND_MAIL}</Text>
+						</Text>
+					)}
 				</Text>
 				<Button
 					title={Strings.authentication.OK}
@@ -82,5 +106,8 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		marginLeft: ScalePerctFullWidth(13),
 		marginRight: ScalePerctFullWidth(13),
+	},
+	touchableText: {
+		textDecorationLine: "underline",
 	},
 });

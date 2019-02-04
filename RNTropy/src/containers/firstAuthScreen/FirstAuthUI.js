@@ -3,6 +3,7 @@ import { View, StyleSheet, ImageBackground, StatusBar, Text } from "react-native
 import SvgUri from "react-native-svg-uri";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Strings, Metrics } from "../../asset";
 import { AuthBackground, Button, Separator } from "../../components";
+import Video from 'react-native-video';
 
 const image = require("../../asset/Images/login.png");
 
@@ -60,7 +61,7 @@ type Props = {
 export default function FirstAuthScreenUI(props: Props) {
 	const { handleSignUp, handleLoginEvent } = props;
 	return (
-		<ImageBackground source={image} style={styles.container}>
+		<View style={styles.container}>
 			<StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
 			{renderButton(handleLoginEvent)}
 			<Text style={styles.createAccountText} onPress={handleSignUp}>
@@ -68,7 +69,18 @@ export default function FirstAuthScreenUI(props: Props) {
 			</Text>
 			{renderSeparator()}
 			{renderSocialLogin()}
-		</ImageBackground>
+			<Video source={require("../../asset/Videos/login.mp4")}   // Can be a URL or a local file.
+				ref={(ref) => {
+					this.player = ref
+				}}                                      // Store reference
+				onBuffer={() => { }}                // Callback when remote video is buffering
+				onError={() => { }}               // Callback when video cannot be loaded
+				style={styles.backgroundVideo}
+				repeat={true}
+				muted={true}
+				resizeMode={"cover"}
+			/>
+		</View>
 	);
 }
 
@@ -112,5 +124,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: "row",
 		justifyContent: "space-around",
+	},
+	backgroundVideo: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		bottom: 0,
+		right: 0,
+		zIndex: -1
 	},
 });

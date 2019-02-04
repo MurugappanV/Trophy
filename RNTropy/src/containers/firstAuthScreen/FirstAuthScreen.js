@@ -15,10 +15,6 @@ class FirstAuthScreen extends PureComponent<Props> {
 		this.state = {};
 	}
 
-	componentDidMount() {
-		SplashScreen.hide();
-	}
-
 	handleLoginEvent = () => {
 		const { navigation } = this.props;
 		navigation.navigate("LoginAuthScreen");
