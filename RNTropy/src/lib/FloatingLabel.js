@@ -220,7 +220,9 @@ var styles = StyleSheet.create({
 		fontFamily: "Lato-Regular",
 		fontSize: 11,
 		letterSpacing: 0,
-		paddingBottom: ScalePerctFullHeight(2),
+		//marginBottom: ScalePerctFullHeight(0.73),
+		flex: 0.5,
+		alignItems: "center",
 	},
 	label: labelStyleObj,
 });

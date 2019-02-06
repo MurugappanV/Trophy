@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 
-export function setUserIdStorage(userId: string) {
+export function setCurrentUserIdStorage(userId: number) {
 	if (userId == null) {
 		AsyncStorage.removeItem("userId");
 	} else {
@@ -8,6 +8,6 @@ export function setUserIdStorage(userId: string) {
 	}
 }
 
-export function getUserIdStorage() {
+export function getCurrentUserIdStorage() {
 	return AsyncStorage.getItem("userId");
 }

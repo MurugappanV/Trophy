@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, KeyboardAvoidingView } from "react-native";
 import SvgUri from "react-native-svg-uri";
 import { Colors, ScalePerctFullHeight, ScalePerctFullWidth, Strings, Metrics } from "../../asset";
-import { Button, TextInput, AuthBackground, Separator } from "../../components";
+import { Button, TextInput, AuthBackground, Separator, TextButton } from "../../components";
 
 const small = `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="18px" height="14px" viewBox="0 0 18 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -34,7 +34,7 @@ export default class LoginTabletUI extends PureComponent<Props> {
 		const { email, password } = this.state;
 
 		return (
-			<View style={styles.formStyle}>
+			<View>
 				<TextInput
 					label={Strings.authentication.EMAIL}
 					reference={(component: any) => {
@@ -51,7 +51,7 @@ export default class LoginTabletUI extends PureComponent<Props> {
 					reference={(component: any) => {
 						this.password = component;
 					}}
-					onChangeText={text => this.setState({ Password: text })}
+					onChangeText={text => this.setState({ password: text })}
 					buttonLabel="HELP"
 					onPress={handleForgotPassword}
 					onSubmitEditing={() => handleLogin(email, password)}
@@ -102,18 +102,24 @@ export default class LoginTabletUI extends PureComponent<Props> {
 				<View
 					style={{
 						flex: 1,
-						margin: 100,
+						margin: ScalePerctFullHeight(20),
 						alignItems: "center",
-						paddingTop: ScalePerctFullHeight(1),
+						//paddingTop: ScalePerctFullHeight(1),
 					}}
 				>
 					<Text>LOGO</Text>
 				</View>
-				{this.handleForm()}
+				<KeyboardAvoidingView behaviour="padding" style={styles.formStyle}>
+					{this.handleForm()}
+				</KeyboardAvoidingView>
+
 				{this.renderButton()}
-				<Text style={styles.createAccountText} onPress={handleSignUp}>
-					{Strings.authentication.CREATE_AN_ACCOUNT}
-				</Text>
+				<TextButton
+					textStyle={styles.createAccountText}
+					onPress={handleSignUp}
+					title={Strings.authentication.CREATE_AN_ACCOUNT}
+				/>
+
 				{this.renderSeparator()}
 				{this.renderSocialLogin()}
 			</AuthBackground>
@@ -131,16 +137,16 @@ const styles = StyleSheet.create({
 	createAccountText: {
 		fontSize: Metrics.SMALL_TEXT_SIZE,
 		letterSpacing: 0.3,
-		marginBottom: 47,
+		marginBottom: ScalePerctFullHeight(3.4),
 		color: Colors.bgPrimaryLight,
 	},
 	formStyle: {
 		alignSelf: "stretch",
-		paddingHorizontal: 352,
+		paddingHorizontal: ScalePerctFullWidth(34.3),
 	},
 	buttonStyle: {
-		marginTop: 91,
-		marginBottom: 27,
+		marginTop: ScalePerctFullHeight(6.6),
+		marginBottom: ScalePerctFullHeight(1.9),
 	},
 	separator: {
 		borderBottomColor: Colors.bgPrimaryLight,
@@ -157,17 +163,18 @@ const styles = StyleSheet.create({
 	},
 	separatorContainer: {
 		flexDirection: "row",
-		margin: ScalePerctFullWidth(8),
+		marginHorizontal: ScalePerctFullWidth(34.3),
 		letterSpacing: 0,
 	},
 	socialLoginText: {
 		fontSize: Metrics.V_SMALL_TEXT_SIZE,
 		letterSpacing: 0.23,
-		marginBottom: ScalePerctFullWidth(6),
+		marginTop: ScalePerctFullHeight(1.9),
+		marginBottom: ScalePerctFullHeight(5.2),
 		color: Colors.bgPrimaryLight,
 	},
 	iconContainer: {
-		flex: 1,
+		marginBottom: ScalePerctFullHeight(10),
 		flexDirection: "row",
 		justifyContent: "space-around",
 	},

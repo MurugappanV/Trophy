@@ -1,2 +1,6 @@
 export { StartUp } from "./StartUp";
-export { SignUpApi, LoginApi, ResendApi } from "./Authentication";
+export { StartBrandsService } from "./BrandService";
+export { SignUpApi, LoginApi, ResendApi, ResetPasswordApi } from "./Authentication";
+export { BrandsPreferenceAPI } from "./Brands";
+export { TopicsPreferenceAPI } from "./Topics";
+export { MyTroveApi } from "./Articles";

@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import {
 	createSwitchNavigator,
-	createBottomTabNavigator,
 	createMaterialTopTabNavigator,
 	createDrawerNavigator,
 	createStackNavigator,
@@ -20,11 +19,11 @@ import {
 	ArticleView,
 } from "../containers";
 import TabBarNavigator from "./TabBarNavigator";
-import { Colors, ScalePerctFullWidth, Metrics } from "../asset";
-import { PagerHeader, ProfileHeader } from "../components";
+import { Colors, Metrics } from "../asset";
+import { ProfileHeader } from "../components";
 import HomeMenuNavigator from "./HomeMenuNavigator";
 
-let LoginScreen = Metrics.isTablet ? Login : FirstAuthScreen;
+const LoginScreen = Metrics.isTablet ? Login : FirstAuthScreen;
 
 const AuthStack = createStackNavigator(
 	{
@@ -137,7 +136,9 @@ const HomeTab = createMaterialTopTabNavigator(
 );
 
 HomeTab.navigationOptions = ({ navigation }) => ({
-	header: () => <ProfileHeader title={"T R O V E"} isBottomBorder={false} />,
+	header: () => (
+		<ProfileHeader navigation={navigation} title="T R O V E" isBottomBorder={false} />
+	),
 });
 const HomeStack = createStackNavigator(
 	{

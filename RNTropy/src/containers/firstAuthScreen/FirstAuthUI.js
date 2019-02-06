@@ -1,9 +1,17 @@
 import React from "react";
 import { View, StyleSheet, ImageBackground, StatusBar, Text } from "react-native";
+import Video from "react-native-video";
 import SvgUri from "react-native-svg-uri";
-import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Strings, Metrics } from "../../asset";
-import { AuthBackground, Button, Separator } from "../../components";
-import Video from 'react-native-video';
+import {
+	Colors,
+	ScalePerctFullWidth,
+	ScalePerctFullHeight,
+	Strings,
+	Metrics,
+	Images,
+} from "../../asset";
+import { AuthBackground, Button, Separator, TextButton } from "../../components";
+import Icon from "../../asset/fonts/icons";
 
 const image = require("../../asset/Images/login.png");
 
@@ -46,9 +54,24 @@ const renderSocialLogin = () => (
 			{Strings.authentication.LOGIN_WITH_SOME_SOCIAL_NETWORKS}
 		</Text>
 		<View style={styles.iconContainer}>
-			<SvgUri width="10" height="10" svgXmlData={small} />
-			<SvgUri width="10" height="10" svgXmlData={small} />
-			<SvgUri width="10" height="10" svgXmlData={small} />
+			<Icon
+				style={styles.icon}
+				name={Images.twitter}
+				size={16}
+				color={Colors.bodyPrimaryLight}
+			/>
+			<Icon
+				style={styles.icon}
+				name={Images.facebook}
+				size={16}
+				color={Colors.bodyPrimaryLight}
+			/>
+			<Icon
+				style={styles.icon}
+				name={Images.googlePlus}
+				size={16}
+				color={Colors.bodyPrimaryLight}
+			/>
 		</View>
 	</View>
 );
@@ -64,21 +87,27 @@ export default function FirstAuthScreenUI(props: Props) {
 		<View style={styles.container}>
 			<StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
 			{renderButton(handleLoginEvent)}
-			<Text style={styles.createAccountText} onPress={handleSignUp}>
+			{/* <Text style={styles.createAccountText} onPress={handleSignUp}>
 				{Strings.authentication.CREATE_AN_ACCOUNT}
-			</Text>
+			</Text> */}
+			<TextButton
+				textStyle={styles.createAccountText}
+				onPress={handleSignUp}
+				title={Strings.authentication.CREATE_AN_ACCOUNT}
+			/>
 			{renderSeparator()}
 			{renderSocialLogin()}
-			<Video source={require("../../asset/Videos/login.mp4")}   // Can be a URL or a local file.
-				ref={(ref) => {
-					this.player = ref
-				}}                                      // Store reference
-				onBuffer={() => { }}                // Callback when remote video is buffering
-				onError={() => { }}               // Callback when video cannot be loaded
+			<Video
+				source={require("../../asset/Videos/login.mp4")} // Can be a URL or a local file.
+				ref={ref => {
+					this.player = ref;
+				}} // Store reference
+				onBuffer={() => {}} // Callback when remote video is buffering
+				onError={() => {}} // Callback when video cannot be loaded
 				style={styles.backgroundVideo}
-				repeat={true}
-				muted={true}
-				resizeMode={"cover"}
+				repeat
+				muted
+				resizeMode="cover"
 			/>
 		</View>
 	);
@@ -126,11 +155,12 @@ const styles = StyleSheet.create({
 		justifyContent: "space-around",
 	},
 	backgroundVideo: {
-		position: 'absolute',
+		position: "absolute",
 		top: 0,
 		left: 0,
 		bottom: 0,
 		right: 0,
-		zIndex: -1
+		zIndex: -1,
 	},
+	icon: { paddingHorizontal: Metrics.DEFAULT_LIST_PADDING },
 });

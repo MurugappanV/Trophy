@@ -52,7 +52,7 @@ const tabStyles = StyleSheet.create({
 	labelInput: {
 		color: Colors.bgPrimaryLight,
 		fontFamily: "Lato-Regular",
-		marginBottom: 10,
+		marginBottom: ScalePerctFullHeight(0.73),
 		letterSpacing: 0,
 	},
 	formContainer: {
@@ -62,7 +62,7 @@ const tabStyles = StyleSheet.create({
 		borderBottomWidth: (StyleSheet.hairlineWidth = 0.5),
 		alignSelf: "stretch",
 		borderColor: Colors.bgPrimaryLight,
-		marginBottom: 30,
+		marginBottom: ScalePerctFullHeight(2.1),
 	},
 	input: {
 		borderWidth: 0,

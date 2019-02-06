@@ -16,7 +16,7 @@ import SvgUri from "react-native-svg-uri";
 import Svg, { Circle, Rect } from "react-native-svg";
 import { Actions } from "../../redux";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Strings, Metrics } from "../../asset";
-import { Button, TextInput, TextButton } from "../../components";
+import { Button, TextInput } from "../../components";
 import ArticleContent from "./ArticleContent";
 import ArticleFooter from "./ArticleFooter";
 

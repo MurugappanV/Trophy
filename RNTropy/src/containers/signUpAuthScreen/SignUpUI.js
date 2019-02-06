@@ -6,10 +6,12 @@ import {
 	TouchableOpacity,
 	Keyboard,
 	KeyboardAvoidingView,
+	ScrollView,
 } from "react-native";
 import SvgUri from "react-native-svg-uri";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Strings, Metrics } from "../../asset";
-import { TextInput, Button, AuthBackground } from "../../components";
+import { TextInput, Button, AuthBackground, TextButton } from "../../components";
 
 type Props = {
 	handleReturnToSignIn: Function,
@@ -33,6 +35,14 @@ export default class SignUpUI extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
 		this.state = { email: "", password: "", name: "", checked: false };
+	}
+
+	static getDerivedStateFromProps(props, preState) {
+		if (props.clear) {
+			props.onClear();
+			return { email: "", password: "", name: "", checked: false };
+		}
+		return null;
 	}
 
 	handleCheckbox = () => {
@@ -67,6 +77,7 @@ export default class SignUpUI extends PureComponent<Props> {
 					}}
 					onSubmitEditing={() => this.email.focus()}
 					returnKeyType="next"
+					value={this.state.name}
 					onChangeText={text => this.setState({ name: text })}
 				/>
 				<TextInput
@@ -77,6 +88,7 @@ export default class SignUpUI extends PureComponent<Props> {
 					onSubmitEditing={() => this.password.focus()}
 					returnKeyType="next"
 					keyboardType="email-address"
+					value={this.state.email}
 					onChangeText={text => this.setState({ email: text })}
 				/>
 				<TextInput
@@ -85,6 +97,7 @@ export default class SignUpUI extends PureComponent<Props> {
 					reference={(component: any) => {
 						this.password = component;
 					}}
+					value={this.state.password}
 					onChangeText={text => this.setState({ password: text })}
 					onSubmitEditing={() => Keyboard.dismiss()}
 				/>
@@ -131,31 +144,39 @@ export default class SignUpUI extends PureComponent<Props> {
 		const { handleReturnToSignIn } = this.props;
 		return (
 			<AuthBackground>
-				<View
-					style={{
-						flex: 1,
-						margin: 60,
-						alignItems: "center",
-						paddingTop: ScalePerctFullHeight(1),
-					}}
-				>
-					<Text>LOGO</Text>
-				</View>
-				<View style={styleUI.paddingHorizontal}>
-					{this.renderForm()}
-					{this.renderPolicyText()}
-				</View>
-				{this.renderButton()}
-
-				<Text style={styleUI.returnToSignIn} onPress={handleReturnToSignIn}>
-					{Strings.authentication.RETURN_TO_SIGN_IN}
-				</Text>
+				<KeyboardAwareScrollView>
+					<View
+						style={{
+							width: ScalePerctFullWidth(100),
+							height: ScalePerctFullHeight(100),
+						}}
+					>
+						<View style={styleUI.logoContainer}>
+							<Text>LOGO</Text>
+						</View>
+						<View style={styleUI.paddingHorizontal}>
+							{this.renderForm()}
+							{this.renderPolicyText()}
+							{this.renderButton()}
+							<TextButton
+								textStyle={styleUI.returnToSignIn}
+								onPress={handleReturnToSignIn}
+								title={Strings.authentication.RETURN_TO_SIGN_IN}
+							/>
+						</View>
+					</View>
+				</KeyboardAwareScrollView>
 			</AuthBackground>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
+	logoContainer: {
+		flex: 1,
+		margin: ScalePerctFullHeight(10),
+		alignItems: "center",
+	},
 	returnToSignIn: {
 		fontSize: Metrics.SMALL_TEXT_SIZE,
 		letterSpacing: 0.3,
@@ -198,10 +219,16 @@ const styles = StyleSheet.create({
 	},
 	paddingHorizontal: {
 		paddingHorizontal: ScalePerctFullWidth(9),
+		alignItems: "center",
 	},
 });
 
 const tabStyles = StyleSheet.create({
+	logoContainer: {
+		flex: 1,
+		margin: ScalePerctFullHeight(20),
+		alignItems: "center",
+	},
 	returnToSignIn: {
 		fontSize: Metrics.MEDIUM_TEXT_SIZE,
 		letterSpacing: 0,
@@ -244,6 +271,7 @@ const tabStyles = StyleSheet.create({
 	},
 	paddingHorizontal: {
 		paddingHorizontal: ScalePerctFullWidth(35),
+		alignItems: "center",
 	},
 });
 

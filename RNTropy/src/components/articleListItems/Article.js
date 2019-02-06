@@ -34,7 +34,7 @@ type Props = {
 export default class ArticleListItem extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { loading: false, height: 400 };
+		this.state = { height: 400 };
 	}
 
 	componentDidMount() {
@@ -43,59 +43,75 @@ export default class ArticleListItem extends PureComponent<Props> {
 		// }
 	}
 
-	renderItem = (type: string, data: any, height: number) => {
-		if (type == "logo") {
-			return <ArticleListLogo imageUrl={data.logoUrl} isFollow={data.isFollow} />;
-		} else if (type == "bigImage") {
+	renderItem = (type: string, data: any, settings: any, height: number) => {
+		if (type === "logo") {
+			return (
+				<ArticleListLogo
+					imageUrl={
+						data.brand_logo && data.brand_logo.length > 0 ? data.brand_logo : undefined
+					}
+					isFollow={settings.isFollow}
+				/>
+			);
+		}
+		if (type === "bigImage") {
 			return (
 				<ArticleListBigImage
 					height={height}
-					imageUrl={data.bigImageUrl}
-					padded={data.isPadded}
+					imageUrl={data.image}
+					padded={settings.isPadded}
+					isNotopMargin={settings.isNoTopMargin}
 				/>
 			);
-		} else if (type == "title") {
+		}
+		if (type === "title") {
 			return (
 				<ArticleListTitleImage
-					isCenter={data.isCenter}
+					isCenter={settings.isCenter}
+					isTitleImage={settings.isTitleImage}
 					title={data.title}
-					imageUrl={data.titleImageUrl}
+					imageUrl={data.image_crop}
 				/>
 			);
-		} else if (type == "footer") {
+		}
+		if (type === "footer") {
 			return (
 				<ArticleListFooter
-					isCenter={data.isCenter}
+					isCenter={settings.isCenter}
 					time={data.time}
 					isBookMarked={data.isBookMarked}
 				/>
 			);
-		} else if (type == "description") {
+		}
+		if (type === "description") {
 			return (
-				<ArticleListDescription description={data.description} isCenter={data.isCenter} />
+				<ArticleListDescription
+					description={data.description}
+					isCenter={settings.isCenter}
+				/>
 			);
 		}
 		return null;
 	};
 
-	renderArticle = (order: array, data: any, height) => {
+	renderArticle = (order: any, data: any, settings: any, height: number) => {
 		// console.log("jsx ", order.map(item => renderItem(item, data, height)));
 		// return order.map(item => this.renderItem(item, data, height));
 		return (
 			<FlatList
 				data={order}
 				keyExtractor={(x, i) => i.toString()}
-				renderItem={({ item }) => this.renderItem(item, data, height)}
+				renderItem={({ item }) => this.renderItem(item, data, settings, height)}
 			/>
 		);
 	};
 
 	render() {
-		const { order, data, onPress } = this.props;
-		const { loading, height } = this.state;
+		const { order, data, settings, onPress } = this.props;
+		const { height } = this.state;
 		return (
 			<TouchableOpacity onPress={() => onPress()} style={styles.container}>
-				{this.renderArticle(order, data, height)}
+				{this.renderArticle(order, data, settings, height)}
 				<View style={styles.lineSeperator} />
 			</TouchableOpacity>
 		);

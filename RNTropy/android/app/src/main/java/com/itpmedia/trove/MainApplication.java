@@ -14,6 +14,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.imagepicker.ImagePickerPackage; 
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +37,8 @@ public class MainApplication extends Application implements ReactApplication {
             new SvgPackage(),
             new RealmReactPackage(),
             new RNGestureHandlerPackage(),
-            new SplashScreenReactPackage() 
+            new SplashScreenReactPackage(),
+            new ImagePickerPackage()
       );
     }
 

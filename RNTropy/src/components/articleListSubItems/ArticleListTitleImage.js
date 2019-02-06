@@ -6,20 +6,21 @@ type Props = {
 	title?: string,
 	imageUrl?: string,
 	isCenter?: boolean,
+	isTitleImage?: boolean,
 };
 
-renderImage = image => {
+const renderImage = (image: string) => {
 	return <Image source={{ uri: image }} style={StyleSheet.flatten([styles.imageOne])} />;
 };
 
 export default function ArticleListTitleImage(props: Props) {
-	const { title, imageUrl, isCenter } = props;
+	const { title, imageUrl, isTitleImage, isCenter } = props;
 	return (
 		<View style={styles.container}>
 			<Text style={[styles.titleText, isCenter ? { textAlign: "center" } : {}]}>
 				{title}
 			</Text>
-			{imageUrl && renderImage(imageUrl)}
+			{isTitleImage && renderImage(imageUrl)}
 		</View>
 	);
 }
@@ -28,6 +29,7 @@ ArticleListTitleImage.defaultProps = {
 	title: "Fashion Designer Alexis Mabille’s Paris Villa",
 	imageUrl: undefined,
 	isCenter: false,
+	isTitleImage: false,
 };
 
 const styles = StyleSheet.create({
@@ -48,6 +50,8 @@ const styles = StyleSheet.create({
 		width: ScalePerctFullWidth(25),
 		height: ScalePerctFullWidth(15),
 		borderRadius: Metrics.SMALL_RADIUS,
-		paddingLeft: Metrics.DEFAULT_LIST_PADDING,
+		marginLeft: Metrics.DEFAULT_LIST_PADDING,
+		marginTop: 4,
+		backgroundColor: "black",
 	},
 });

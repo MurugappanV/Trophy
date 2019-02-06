@@ -1,25 +1,27 @@
-import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { Colors } from "../../asset";
+import React, { PureComponent } from "react";
+import { TouchableOpacity, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { ScalePerctFullHeight, ScalePerctFullWidth, Metrics, Colors } from "../../asset";
 
 type Props = {
-	label: string,
+	title: string,
 	onPress: Function,
-	style: Object,
-	textStyle: Object,
+	buttonStyle: Object,
+	showLoader: boolean,
 };
 
-export default function TextButton(props: Props) {
-	const { onPress, label, style, textStyle } = props;
-	return (
-		<TouchableOpacity onPress={onPress} style={style}>
-			<Text style={[styles.text, textStyle && textStyle]}>{label}</Text>
-		</TouchableOpacity>
-	);
+export default class TextButton extends PureComponent<Props> {
+	render() {
+		const { onPress, title = "click here", touchableStyle, textStyle } = this.props;
+
+		return (
+			<TouchableOpacity
+				onPress={onPress}
+				style={touchableStyle}
+			>
+
+				<Text style={textStyle}>{title}</Text>
+			</TouchableOpacity>
+		);
+	}
 }
 
-const styles = StyleSheet.create({
-	text: {
-		color: Colors.bgPrimaryLight,
-	},
-});

@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Colors, ScalePerctFullHeight, ScalePerctFullWidth, Strings, Metrics } from "../../asset";
-import { Button, TextInput, AuthBackground } from "../../components";
+import { Button, TextInput, AuthBackground, TextButton } from "../../components";
 
 type Props = {
 	handleLogin: Function,
@@ -58,7 +59,7 @@ export default class LoginUI extends PureComponent<Props> {
 					marginBottom: ScalePerctFullHeight(4),
 				}}
 				showLoader={showLoader}
-				onPress={() => handleLogin(email, password)}
+				onPress={() => handleLogin(email, password, this.clearText)}
 			/>
 		);
 	};
@@ -67,21 +68,27 @@ export default class LoginUI extends PureComponent<Props> {
 		const { handleSignUp } = this.props;
 		return (
 			<AuthBackground>
-				<View
-					style={{
-						flex: 1,
-						margin: 100,
-						alignItems: "center",
-						paddingTop: ScalePerctFullHeight(1),
-					}}
-				>
-					<Text>LOGO</Text>
-				</View>
-				{this.handleForm()}
-				{this.renderButton()}
-				<Text style={styles.createAccountText} onPress={handleSignUp}>
-					{Strings.authentication.CREATE_AN_ACCOUNT}
-				</Text>
+				<KeyboardAwareScrollView>
+					<View
+						style={{
+							width: ScalePerctFullWidth(100),
+							height: ScalePerctFullHeight(100),
+							alignItems: "center",
+						}}
+					>
+						<View style={styles.logoContainer}>
+							<Text>LOGO</Text>
+						</View>
+						{this.handleForm()}
+
+						{this.renderButton()}
+						<TextButton
+							textStyle={styles.createAccountText}
+							onPress={handleSignUp}
+							title={Strings.authentication.CREATE_AN_ACCOUNT}
+						/>
+					</View>
+				</KeyboardAwareScrollView>
 			</AuthBackground>
 		);
 	}
@@ -93,6 +100,11 @@ const styles = StyleSheet.create({
 		height: "100%",
 		alignItems: "center",
 		flex: 1,
+	},
+	logoContainer: {
+		flex: 1,
+		margin: ScalePerctFullHeight(10),
+		alignItems: "center",
 	},
 	createAccountText: {
 		fontSize: Metrics.SMALL_TEXT_SIZE,

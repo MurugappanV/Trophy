@@ -6,7 +6,7 @@ const TopicApi = (onSuccess, onFailure, onError) => {
 		.then((response: any) => {
 			if (response) {
 				// null or empty
-				console.log("Got response:", response);
+				console.log("Got Topic response:", response);
 				onSuccess(response.data);
 			} else {
 				onFailure("Can't fetch topics");

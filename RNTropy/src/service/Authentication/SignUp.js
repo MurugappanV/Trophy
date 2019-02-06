@@ -6,8 +6,8 @@ import { ItpAxiosInstance } from "../axios";
 function SignUpApi(name, email, password, deviceId, onSuccess, onFailure, onError) {
 	const url = "ws/create-user";
 	return ItpAxiosInstance.post(url, {
-		name: name,
-		email: email,
+		name,
+		email,
 		pass: password,
 		device_id: deviceId,
 	})
@@ -19,7 +19,7 @@ function SignUpApi(name, email, password, deviceId, onSuccess, onFailure, onErro
 			}
 		})
 		.catch((error: any) => {
-			console.log("error", error);
+			onError(error);
 		});
 }
 

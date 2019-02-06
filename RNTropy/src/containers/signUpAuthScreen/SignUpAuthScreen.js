@@ -16,8 +16,13 @@ class SignUpAuthScreen extends PureComponent<Props> {
 		super(props);
 		this.state = {
 			showLoader: false,
+			clear: false,
 		};
 	}
+
+	onClear = () => {
+		this.setState({ clear: false });
+	};
 
 	handleReturnToSignIn = () => {
 		const { navigation } = this.props;
@@ -31,7 +36,15 @@ class SignUpAuthScreen extends PureComponent<Props> {
 			AlertComp(Strings.authentication.ALERT, Strings.authentication.ENTER_VALID_EMAIL);
 		} else if (checked) {
 			this.setState({ showLoader: true });
-			SignUpApi(name, email, password, deviceId, this.onSuccess, this.onFailure);
+			SignUpApi(
+				name,
+				email,
+				password,
+				deviceId,
+				this.onSuccess,
+				this.onFailure,
+				this.onError,
+			);
 		} else {
 			AlertComp(
 				Strings.authentication.ALERT,
@@ -42,7 +55,7 @@ class SignUpAuthScreen extends PureComponent<Props> {
 
 	onSuccess = (message: "string") => {
 		const { navigation } = this.props;
-		this.setState({ showLoader: false });
+		this.setState({ showLoader: false, clear: true });
 		navigation.navigate("MessageAuthScreen", {
 			message,
 		});
@@ -50,8 +63,13 @@ class SignUpAuthScreen extends PureComponent<Props> {
 
 	onFailure = (message: "string") => {
 		const { navigation } = this.props;
-		this.setState({ showLoader: false });
+		this.setState({ showLoader: false, clear: true });
 		navigation.navigate("MessageAuthScreen", { message });
+	};
+
+	onError = (error: any) => {
+		this.setState({ showLoader: false });
+		AlertComp(Strings.authentication.ALERT, error.toString());
 	};
 
 	render() {
@@ -60,6 +78,8 @@ class SignUpAuthScreen extends PureComponent<Props> {
 				handleReturnToSignIn={this.handleReturnToSignIn}
 				handleSignUp={this.handleSignUp}
 				showLoader={this.state.showLoader}
+				clear={this.state.clear}
+				onClear={this.onClear}
 			/>
 		);
 	}

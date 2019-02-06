@@ -4,25 +4,45 @@ import { bindActionCreators } from "redux";
 import { Actions } from "../redux";
 import { Store } from "../../src";
 
-export const StartUp = props => {
-	console.log("props", props);
-	TopicApi(response => onSuccuss(response, props), onFailure, onError);
-};
+export class StartUp {
+	constructor(props) {
+		TopicApi(response => this.onSuccess(response, props), this.onFailure, this.onError);
+	}
 
-onSuccuss = (response, props) => {
-	console.log("succ", response);
-	props.setAllTopics(response);
-};
+	onSuccess = (response, props) => {
+		console.log("On success: ", response);
+		props.setAllTopics(response);
+	};
 
-onFailure = message => {
-	console.log("message", message);
-	console.log(message);
-};
+	onFailure = (message: string) => {
+		console.log("On Failure message", message);
+		console.log(message);
+	};
 
-onError = message => {
-	console.log("err", message);
-	console.log(message);
-};
+	onError = (message: string) => {
+		console.log("error", message);
+		console.log(message);
+	};
+}
+// export const StartUp = props => {
+// 	console.log(" Topics props", props);
+// 	TopicApi(response => onSuccess(response, props), onFailure, onError);
+// };
+
+// onSuccess = (response, props) => {
+// 	console.log("On success: ", response);
+// 	props.setAllTopics(response);
+// };
+
+// onFailure = message => {
+// 	console.log("On Failure message", message);
+// 	console.log(message);
+// };
+
+// onError = message => {
+// 	console.log("error", message);
+// 	console.log(message);
+// };
 
 // function mapStateToProps() {
 // 	// state

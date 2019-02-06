@@ -1,15 +1,15 @@
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { Colors, Metrics, ScalePerctFullWidth } from "../../asset";
-import { getImageHeight } from "../../utilities";
 
 type Props = {
 	imageUrl?: string,
 	padded?: boolean,
+	isNotopMargin?: boolean,
 };
 
 export default function ArticleListBigImage(props: Props) {
-	const { imageUrl, padded, height } = props;
+	const { imageUrl, padded, isNotopMargin, height } = props;
 	return (
 		<View
 			style={[
@@ -39,6 +39,7 @@ export default function ArticleListBigImage(props: Props) {
 ArticleListBigImage.defaultProps = {
 	imageUrl: "https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg",
 	padded: false,
+	isNotopMargin: false,
 };
 
 const styles = StyleSheet.create({

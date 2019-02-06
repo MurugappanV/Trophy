@@ -2,11 +2,20 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import SvgUri from "react-native-svg-uri";
 import Svg, { Circle, Rect } from "react-native-svg";
 import { Actions } from "../../redux";
-import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Strings, Metrics } from "../../asset";
-import { Button, TextInput, AuthBackground } from "../../components";
+import {
+	Colors,
+	ScalePerctFullWidth,
+	ScalePerctFullHeight,
+	Strings,
+	Metrics,
+	emailValidator,
+} from "../../asset";
+import { Button, TextInput, AuthBackground, AlertComp } from "../../components";
+import { ResetPasswordApi } from "../../service";
 
 type Props = {
 	navigation: any,
@@ -15,7 +24,7 @@ type Props = {
 class ForgotAuthScreen extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { email: "", Password: "" };
+		this.state = { email: "", showLoader: false };
 	}
 
 	handleSignUp = () => {
@@ -24,17 +33,30 @@ class ForgotAuthScreen extends PureComponent<Props> {
 	};
 
 	handleLoginEvent = () => {
-		this.onSuccess();
+		if (!emailValidator(this.state.email)) {
+			AlertComp(Strings.authentication.ALERT, Strings.authentication.ENTER_VALID_EMAIL);
+		} else {
+			this.setState({ showLoader: true });
+			ResetPasswordApi(this.state.email, this.onSuccess, this.onFaliure, this.onError);
+		}
 	};
 
-	onSuccess = () => {
+	onSuccess = (message: string) => {
 		const { navigation } = this.props;
-		navigation.navigate("MessageAuthScreen");
+		this.setState({ showLoader: false });
+		navigation.navigate("MessageAuthScreen", { message });
 	};
 
-	onFaliure = () => {};
+	onFaliure = (message: string) => {
+		const { navigation } = this.props;
+		this.setState({ showLoader: false });
+		navigation.navigate("MessageAuthScreen", { message });
+	};
 
-	onError = () => {};
+	onError = (error: any) => {
+		this.setState({ showLoader: false });
+		AlertComp(Strings.authentication.ALERT, error.toString());
+	};
 
 	renderForm = () => (
 		<View style={styles.formStyle}>
@@ -58,6 +80,7 @@ class ForgotAuthScreen extends PureComponent<Props> {
 				marginTop: ScalePerctFullHeight(8),
 				marginBottom: ScalePerctFullHeight(4),
 			}}
+			showLoader={this.state.showLoader}
 			onPress={this.handleLoginEvent}
 		/>
 	);
@@ -65,12 +88,25 @@ class ForgotAuthScreen extends PureComponent<Props> {
 	render() {
 		return (
 			<AuthBackground>
-				<View style={{ flex: 1, margin: 100 }} />
-				{this.renderForm()}
-				{this.renderButton()}
-				<Text style={styles.createAccountText} onPress={this.handleSignUp}>
-					{Strings.authentication.CREATE_AN_ACCOUNT}
-				</Text>
+				<KeyboardAwareScrollView>
+					<View
+						style={{
+							width: ScalePerctFullWidth(100),
+							height: ScalePerctFullHeight(100),
+						}}
+					>
+						<View style={styles.logoContainer}>
+							<Text>LOGO</Text>
+						</View>
+						<View style={styles.paddingHorizontal}>
+							{this.renderForm()}
+							{this.renderButton()}
+							<Text style={styles.createAccountText} onPress={this.handleSignUp}>
+								{Strings.authentication.CREATE_AN_ACCOUNT}
+							</Text>
+						</View>
+					</View>
+				</KeyboardAwareScrollView>
 			</AuthBackground>
 		);
 	}
@@ -97,6 +133,11 @@ const mobileStyles = StyleSheet.create({
 		alignItems: "center",
 		flex: 1,
 	},
+	logoContainer: {
+		flex: 1,
+		margin: ScalePerctFullHeight(10),
+		alignItems: "center",
+	},
 	createAccountText: {
 		fontSize: Metrics.SMALL_TEXT_SIZE,
 		letterSpacing: 0.3,
@@ -105,7 +146,10 @@ const mobileStyles = StyleSheet.create({
 	},
 	formStyle: {
 		alignSelf: "stretch",
+	},
+	paddingHorizontal: {
 		paddingHorizontal: ScalePerctFullWidth(9),
+		alignItems: "center",
 	},
 });
 
@@ -116,15 +160,23 @@ const tabStyles = StyleSheet.create({
 		alignItems: "center",
 		flex: 1,
 	},
+	logoContainer: {
+		flex: 1,
+		margin: ScalePerctFullHeight(20),
+		alignItems: "center",
+	},
 	createAccountText: {
 		fontSize: Metrics.SMALL_TEXT_SIZE,
 		letterSpacing: 0.3,
-		marginBottom: 150,
+		marginBottom: ScalePerctFullHeight(10.9),
 		color: Colors.bgPrimaryLight,
 	},
 	formStyle: {
 		alignSelf: "stretch",
-		paddingHorizontal: 352,
+	},
+	paddingHorizontal: {
+		paddingHorizontal: ScalePerctFullWidth(35),
+		alignItems: "center",
 	},
 });
 

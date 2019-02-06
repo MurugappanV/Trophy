@@ -7,6 +7,7 @@ import LoginTabletUI from "./LoginTabletUI";
 import { Metrics, emailValidator, Strings } from "../../asset";
 import { LoginApi } from "../../service";
 import { AlertComp } from "../../components";
+import { addUserCredentialsRealm } from "../../storage";
 
 type Props = {
 	navigation: any,
@@ -43,12 +44,16 @@ class Login extends PureComponent<Props> {
 	};
 
 	onSuccess = (data: Object) => {
-		const { setUserAction } = this.props;
+		const { setUserAction, navigation } = this.props;
 		this.setState({ showLoader: false });
 		console.log("success");
-		alert("logged in");
 		setUserAction(data);
-		navigation.navigate("TopicsAuthScreen");
+		//addUserCredentialsRealm(data);
+		if (data.topics === null) {
+			navigation.navigate("TopicsAuthScreen");
+		} else {
+			navigation.navigate("TopicsAuthScreen");
+		}
 	};
 
 	onFailure = (response: Object) => {

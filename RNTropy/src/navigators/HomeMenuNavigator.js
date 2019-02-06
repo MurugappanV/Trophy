@@ -4,33 +4,35 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Actions } from "../redux";
 import { AuthLoading, ArticleList } from "../containers";
-import { Colors, ScalePerctFullWidth, Metrics } from "../asset";
+import { Colors, ScalePerctFullWidth, Metrics, Constants } from "../asset";
+
+type Props = {
+	menuTopics: any,
+	navigation: any,
+};
 
 class HomeMenuNav extends PureComponent<Props> {
+	tab = (category: any) => {
+		// const screen = this.getTabForCategory(category);
+		const screen = category.name === "Economics" ? AuthLoading : ArticleList;
+		return {
+			screen,
+		};
+	};
+
 	tabs(categories) {
 		const routes = {};
-		categories.forEach(category => {
+		categories.forEach((category: any) => {
 			routes[category.name] = this.tab(category);
 		});
 		return routes;
 	}
 
-	tab(category) {
-		// const screen = this.getTabForCategory(category);
-		const screen = category.name == "Economics" ? AuthLoading : ArticleList;
-		return {
-			screen: screen,
-		};
-	}
-
-	// getTabForCategory (category){
-	//     return () => (<ArticlesList category={category} />);
-	// }
-
 	render() {
 		const { menuTopics, navigation } = this.props;
+		const topics = Constants.menuSections.defaultSection.concat(menuTopics);
 		const HomeMenuNavigator = createAppContainer(
-			createMaterialTopTabNavigator(this.tabs(menuTopics), {
+			createMaterialTopTabNavigator(this.tabs(topics), {
 				tabBarPosition: "top",
 				swipeEnabled: true,
 				tabBarOptions: {
@@ -63,13 +65,13 @@ class HomeMenuNav extends PureComponent<Props> {
 			}),
 		);
 
-		return <HomeMenuNavigator screenProps={{ navigation: navigation }} />;
+		return <HomeMenuNavigator screenProps={{ navigation }} />;
 	}
 }
 
 function mapStateToProps(state: any) {
 	return {
-		menuTopics: state.menuTopics,
+		menuTopics: state.allTopics,
 	};
 }
 
@@ -81,3 +83,7 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps,
 )(HomeMenuNav);
+
+// getTabForCategory (category){
+//     return () => (<ArticlesList category={category} />);
+// }

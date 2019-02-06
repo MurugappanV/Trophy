@@ -1,20 +1,34 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View, FlatList, Text } from "react-native";
+import { StyleSheet, View, FlatList, Text, TouchableOpacity } from "react-native";
 import { TopicsCard } from "../common";
-import { Colors, ScalePerctFullHeight, Metrics, ScalePerctFullWidth } from "../../asset";
+import {
+	Colors,
+	ScalePerctFullHeight,
+	Metrics,
+	ScalePerctFullWidth,
+	Constants,
+} from "../../asset";
 import { BuildFeedButton, PagerHeader } from "..";
+
+type Props = {
+	data: array,
+	selectedList:array,
+	isTopic: boolean,
+	onSelected: function,
+
+};
 
 class FollowList extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
+			followBrandTrack: [],
 			followTrack: props.selectedList,
-			lastTwoVisibleItems: [],
 		};
 		this.lastItems = [];
 	}
 
-	onFollow = (topic: object) => {
+	onFollowTopics = (topic: object) => {
 		const newFollowTrack = [];
 		let isChanged = false;
 		this.state.followTrack.forEach((item: object) => {
@@ -30,7 +44,23 @@ class FollowList extends PureComponent {
 		this.setState({ followTrack: newFollowTrack });
 	};
 
-	checkFollowStatus = (topicId: number) => {
+	onFollowBrand = (topic: object) => {
+		const newFollowTrack = [];
+		let isChanged = false;
+		this.state.followTrack.forEach((item: object) => {
+			if (item.nid !== topic.nid) {
+				newFollowTrack.push(item);
+			} else {
+				isChanged = true;
+			}
+		});
+		if (!isChanged) {
+			newFollowTrack.push(topic);
+		}
+		this.setState({ followTrack: newFollowTrack });
+	};
+
+	checkFollowStatusTopics = (topicId: number) => {
 		const { followTrack } = this.state;
 		let found = false;
 		followTrack.forEach((item: object) => {
@@ -41,33 +71,31 @@ class FollowList extends PureComponent {
 		return found;
 	};
 
-	isBlurRequired = (id: number) => {
-		if (this.lastItems.indexOf(id) !== -1) {
-			return true;
-		}
-		return false;
-	};
-
-	viewItemsChanged = (items: any) => {
-		const newItems = [...items.viewableItems];
-		const lastTwoVisibleItems = [
-			newItems[newItems.length - 1].key,
-			newItems[newItems.length - 2].key,
-		];
-		this.lastItems = lastTwoVisibleItems;
+	checkFollowStatusBrands = (topicId: number) => {
+		const { followTrack } = this.state;
+		let found = false;
+		followTrack.forEach((item: object) => {
+			if (item.nid === topicId) {
+				found = true;
+			}
+		});
+		return found;
 	};
 
 	render() {
-		const { data, navigation } = this.props;
-		const { onSelected, topic } = this.props;
+		const { data, navigation, isTopic, onSelected, selectedList } = this.props;
 		const { followTrack } = this.state;
 		const noOfColumn = Metrics.isTablet ? 4 : 2;
+		console.log("flatlist data", data  )
 		return (
 			<View style={style.container}>
 				<View>
 					{Metrics.isTablet ? (
-						!topic ? (
-							<Text style={style.skip}>Skip</Text>
+						!isTopic ? (
+							<TouchableOpacity onPress= {()=>navigation.navigate("HomeNavigation")}>
+									<Text style={style.skip} >Skip</Text>
+							</TouchableOpacity>
+							
 						) : null
 					) : null}
 				</View>
@@ -77,57 +105,82 @@ class FollowList extends PureComponent {
 							<Text
 								style={[
 									style.askQuestion,
-									Metrics.isTablet && !topic && style.brand,
+									Metrics.isTablet && !isTopic && style.brand,
 								]}
 							>
-								Which {topic ? "News" : "brand"} you want to read?
+								Which {isTopic ? "News" : "brand"} you want to read?
 							</Text>
 							<Text style={style.pickInfo}>
 								Pick the topics that interest you. add more at anytime.
 							</Text>
 						</View>
-					) : topic ? (
-						<PagerHeader />
+					) : isTopic ? (
+						<PagerHeader style={style.pageHeader} page={"1"} />
 					) : (
 						<PagerHeader
+							style={style.pageHeader}
+							actionLabel={"Skip"}
 							onAction={() => {
 								navigation.navigate("HomeNavigation");
 							}}
 							onBack={() => {
 								navigation.goBack();
 							}}
+							page={"2"}
+						/>
+					)}
+				</View>
+				<View>
+					{isTopic ? (
+						<FlatList
+							contentContainerStyle={style.contentContainer}
+							numColumns={noOfColumn}
+							data={data}
+							extraData={[this.state.followTrack, this.lastItems]}
+							keyExtractor={(x, i) => i.toString()}
+							horizontal={false}
+							onEndReachedThreshold={0.5}
+							ItemSeparatorComponent={() => <View />}
+							ListHeaderComponent={() => <View style={style.header} />}
+							ListFooterComponent={() => <View style={style.footer} />}
+							renderItem={({ item }) => (
+								<TopicsCard
+									isTopic={true}
+									containerStyle={style.items}
+									isFollowed={this.checkFollowStatusTopics(item.tid)}
+									onPress={() => this.onFollowTopics(item)}
+									name={item.name}
+									field_image={item.field_image}
+								/>
+							)}
+						/>
+					) : (
+						<FlatList
+							contentContainerStyle={style.contentContainer}
+							numColumns={noOfColumn}
+							data={data}
+							extraData={[this.state.followTrack, this.lastItems]}
+							keyExtractor={(x, i) => i.toString()}
+							horizontal={false}
+							onEndReachedThreshold={0.5}
+							ItemSeparatorComponent={() => <View />}
+							ListHeaderComponent={() => <View style={style.header} />}
+							ListFooterComponent={() => <View style={style.footer} />}
+							renderItem={({ item }) => (
+								<TopicsCard
+									isTopic={false}
+									containerStyle={style.items}
+									isFollowed={this.checkFollowStatusBrands(item.nid)}
+									onPress={() => this.onFollowBrand(item)}
+									name={item.title}
+									field_image={item.field_square_logo}
+								/>
+							)}
 						/>
 					)}
 				</View>
 
-				<FlatList
-					contentContainerStyle={style.contentContainer}
-					numColumns={noOfColumn}
-					data={data}
-					extraData={[this.state.followTrack, this.lastItems]}
-					keyExtractor={(x, i) => i.toString()}
-					horizontal={false}
-					onEndReachedThreshold={0.5}
-					ItemSeparatorComponent={() => <View />}
-					ListHeaderComponent={() => <View style={style.header} />}
-					ListFooterComponent={() => <View style={style.footer} />}
-					// onViewableItemsChanged={(items: any) => {
-					// 	console.log(items);
-					// 	this.viewItemsChanged(items);
-					// }}
-					renderItem={({ item }) => (
-						<TopicsCard
-							isTopic={false}
-							containerStyle={style.items}
-							isFollowed={this.checkFollowStatus(item.tid)}
-							onPress={() => this.onFollow(item)}
-							blur={this.isBlurRequired(item)}
-							name={item.name}
-							field_image={item.field_image}
-						/>
-					)}
-				/>
-				{(!topic || this.state.followTrack.length >= 3) && (
+				{(!isTopic || this.state.followTrack.length >= Constants.topics.minimumTopics) && (
 					<View style={style.BuildFeedButton}>
 						<BuildFeedButton onPress={() => onSelected(followTrack)} />
 					</View>
@@ -152,6 +205,7 @@ const normalStyles = StyleSheet.create({
 	},
 	contentContainer: {
 		alignItems: "flex-start",
+		paddingHorizontal: ScalePerctFullWidth(10),
 	},
 	item: {
 		margin: 5,
@@ -160,7 +214,7 @@ const normalStyles = StyleSheet.create({
 		marginTop: 20,
 	},
 	footer: {
-		marginBottom: 100,
+		padding: ScalePerctFullHeight(13),
 		backgroundColor: "#00000000",
 	},
 });
@@ -207,7 +261,7 @@ const tabStyles = StyleSheet.create({
 		marginTop: 20,
 	},
 	footer: {
-		marginBottom: 100,
+		marginBottom: ScalePerctFullHeight(10),
 		backgroundColor: "#00000000",
 	},
 });

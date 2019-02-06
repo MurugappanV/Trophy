@@ -22,7 +22,7 @@ const GREY10 = "rgb(110,110,112)"; // border color
 const RED = "rgb(255,0,0)"; // text
 const LIGHTBLACK = "#1d1d1d";
 const yellow = "#feee00";
-
+const GREY11 = "rgb(219, 228, 242)";
 
 const Colors = {
 	bgPrimaryDark: BLACK,
@@ -55,7 +55,8 @@ const Colors = {
 	textHeading: BLACK4,
 
 	//border color
-	borderlight: GREY10
+	borderlight: GREY10,
+	borderSeparator: GREY11,
 };
 
 export default Colors;

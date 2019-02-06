@@ -17,8 +17,15 @@ import { bindActionCreators } from "redux";
 import SvgUri from "react-native-svg-uri";
 import Svg, { Circle, Rect } from "react-native-svg";
 import { Actions } from "../../redux";
-import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Strings, Metrics } from "../../asset";
-import { Button, TextInput, TextButton } from "../../components";
+import {
+	Colors,
+	ScalePerctFullWidth,
+	ScalePerctFullHeight,
+	Strings,
+	Metrics,
+	Images,
+} from "../../asset";
+import { Button, TextInput } from "../../components";
 
 const image = require("../../asset/Images/login.png");
 
@@ -36,7 +43,7 @@ export default class ArticleFooter extends PureComponent<Props> {
 					onPress={() => selectFont("small")}
 					style={[styles.icons, { flex: 0.5, alignItems: "center" }]}
 				>
-					<Icon name="filledBookmark" size={20} color={color} />
+					<Icon name={Images.aA} size={12} color={color} />
 				</TouchableOpacity>
 				<View
 					style={{
@@ -50,7 +57,7 @@ export default class ArticleFooter extends PureComponent<Props> {
 					style={[styles.icons, { flex: 0.5, alignItems: "center" }]}
 					onPress={() => selectFont("large")}
 				>
-					<Icon name="filledBookmark" size={20} color={color} />
+					<Icon name={Images.aA} size={20} color={color} />
 				</TouchableOpacity>
 			</View>
 		);
@@ -130,16 +137,16 @@ export default class ArticleFooter extends PureComponent<Props> {
 						// onPress={() => ()}
 						style={styles.icons}
 					>
-						<Icon name="filledBookmark" size={20} color={color} />
+						<Icon name={Images.share} size={14} color={color} />
 					</TouchableOpacity>
 					<TouchableOpacity
 						// onPress={() => ()}
 						style={styles.icons}
 					>
-						<Icon name="filledBookmark" size={20} color={color} />
+						<Icon name={Images.selectedBookmark} size={14} color={color} />
 					</TouchableOpacity>
 					<TouchableOpacity onPress={() => toggleFooter()} style={styles.icons}>
-						<Icon name="filledBookmark" size={20} color={color} />
+						<Icon name={Images.aA} size={14} color={color} />
 					</TouchableOpacity>
 				</View>
 				{this.renderAlphaContainer()}
@@ -170,7 +177,7 @@ const dynamicStyles = isOpen => {
 const styles = StyleSheet.create({
 	footerContainer: {
 		width: ScalePerctFullWidth(100),
-		height: ScalePerctFullHeight(40),
+		height: ScalePerctFullHeight(37),
 		backgroundColor: "white",
 		alignItems: "stretch",
 		flexDirection: "column",
@@ -183,10 +190,10 @@ const styles = StyleSheet.create({
 	},
 	collapseView: {
 		width: ScalePerctFullWidth(100),
-		height: ScalePerctFullHeight(10),
+		height: ScalePerctFullHeight(7),
 		alignItems: "center",
 		flexDirection: "row",
-		justifyContent: "space-around",
+		justifyContent: "center",
 	},
 	expandAlphaView: {
 		width: ScalePerctFullWidth(100),
@@ -218,6 +225,7 @@ const styles = StyleSheet.create({
 	},
 	icons: {
 		padding: 10,
+		paddingHorizontal: Metrics.DEFAULT_PADDING * 2,
 	},
 	focusedTheme: {
 		borderColor: Colors.bgPrimaryVarient,

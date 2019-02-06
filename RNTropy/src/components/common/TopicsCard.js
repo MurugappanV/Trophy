@@ -37,7 +37,7 @@ export default function TopcisCard(props: Props) {
 
 	const followButtonWidth = Metrics.isTablet? 10:24;
 	field_image = field_image ? field_image : "https://www.the-star.co.ke/sites/default/files/styles/new_full_content/public/articles/2018/06/03/1481290.jpg?itok=tr_Wexxs"
-	console.log("render card ");
+	console.log("render card isTopic: ", isTopic);
 	return (
 		<TouchableOpacity onPress={onPress}>
 			{isTopic ? (<ImageBackground
@@ -78,7 +78,7 @@ export default function TopcisCard(props: Props) {
 				style={StyleSheet.flatten([style.container, containerStyle,style.brandContainer])}
 			>
 				<View style = {style.fieldLogo}>
-					<Image source = {{uri:"http://trove-drupal.itp.com/sites/default/files/2019-01/AD.png"}} style = {style.fieldLogo}/>
+					<Image source = {{uri:field_image}} style = {style.fieldLogo}/>
 				</View>
 				
 				{/* <View style={style.followButton} /> */}
@@ -135,7 +135,7 @@ const tabStyles = StyleSheet.create({
 		margin: 10,
 	},
 	brandContainer: {
-		backgroundColor:Colors.bgPrimaryDark,
+		backgroundColor: Colors.bgPrimaryDark,
 	},
 	emptyView: {
 		flex: 1,
@@ -160,10 +160,12 @@ const tabStyles = StyleSheet.create({
 		marginBottom: 16,
 	},
 	fieldLogo:{
-		flex:1,
 		alignSelf:"center",
-		height: ScalePerctFullHeight(5),
-		width: ScalePerctFullWidth(24),
+		height: ScalePerctFullHeight(4),
+		width: ScalePerctFullWidth(14),
+		marginBottom:ScalePerctFullHeight(3),
+		marginTop:ScalePerctFullHeight(2),
+		resizeMode:"contain",
 	},
 	followText: {
 		position: "absolute",

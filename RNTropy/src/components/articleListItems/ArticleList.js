@@ -7,20 +7,6 @@ type Props = {
 	list?: object,
 };
 
-const templates = {
-	"1": ["bigImage", "logo", "title", "footer"],
-	"2": ["logo", "title", "footer"],
-	"3": ["logo", "bigImage", "title", "footer"],
-	"4": ["logo", "bigImage", "title", "description", "footer"],
-	"5": ["logo", "bigImage", "title", "description", "footer"],
-	"6": ["logo", "title", "description", "footer"],
-	"7": ["title", "description", "footer"],
-	"8": ["title", "footer"],
-	"9": ["logo", "bigImage", "title", "description", "footer"],
-	"10": ["logo", "bigImage", "title", "description", "footer"],
-	"11": ["logo", "bigImage", "title", "description", "footer"],
-};
-
 // renderArticle = (order: array) => {
 // 	return order.map(item => renderItem(item));
 // };

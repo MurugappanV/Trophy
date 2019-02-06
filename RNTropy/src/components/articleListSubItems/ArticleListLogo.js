@@ -30,7 +30,7 @@ export default function ArticleListLogo(props: Props) {
 }
 
 ArticleListLogo.defaultProps = {
-	imageUrl: null,
+	imageUrl: "http://www.matcheyewear.com/images/BrandImages/Cosmopolitan-Logo.jpg",
 	isFollow: true,
 };
 
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
 	},
 	imageContainer: {
 		flex: 1,
+		alignItems: "flex-start",
 	},
 	imageOne: {
 		height: ScalePerctFullWidth(8),
