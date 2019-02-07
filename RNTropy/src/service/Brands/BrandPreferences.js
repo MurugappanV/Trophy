@@ -5,14 +5,12 @@ function getBrandString(selectedBrands) {
 	let brands;
 	selectedBrands.forEach((item, index) => {
 		if (index === 0) {
-			brands = item.field_site_key + "|";
+			brands = item.field_site_key;
 		} else {
-			brands = brands + item.field_site_key + "|";
+			brands = brands + "|" + item.field_site_key;
 		}
 	});
-	let brandValue = brands.slice(0, -1);
-	console.log("brandValue: ", brandValue);
-	return brandValue;
+	return brands;
 }
 
 const BrandsPreferenceAPI = (userId, selectedBrands, onSuccess, onFailure, onError) => {
@@ -31,22 +29,3 @@ const BrandsPreferenceAPI = (userId, selectedBrands, onSuccess, onFailure, onErr
 };
 
 export default BrandsPreferenceAPI;
-
-// export default LoginApi;
-
-// import { BaseAxiosInstance } from "../axios";
-
-// const BrandsPreferenceAPI = (userId, selectedBrands, onSuccess, onFailure, onError) => {
-// 	const url = "ws/save-preferences/brand";
-// 	BaseAxiosInstance.post(url, { user_id: userId, values: getBrandString(selectedBrands) })
-// 		.then((response: any) => {
-// 			if (response.data.status === 1) {
-// 				onSuccess(response.data.data.token, response.data.data.user_id);
-// 			} else {
-// 				onFailure(response.data.message);
-// 			}
-// 		})
-// 		.catch((error: any) => {
-// 			onError(error);
-// 		});
-// };

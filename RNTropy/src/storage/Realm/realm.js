@@ -3,9 +3,10 @@ import Realm from "realm";
 class UserCredentials extends Realm.Object {}
 UserCredentials.schema = {
 	name: "UserCredentials",
+	primaryKey: "id",
 	properties: {
 		status: "string",
-		id: "string",
+		id: "int",
 		name: "string",
 		article_bg_color: "string",
 		article_font_size: "string",
@@ -15,14 +16,14 @@ UserCredentials.schema = {
 	},
 };
 
-class UserPreference extends Realm.Object {}
-UserCredentials.schema = {
-	name: "UserCredentials",
-	properties: {
-		token: "string",
-		userId: "int",
-	},
-};
+// class UserPreference extends Realm.Object {}
+// UserCredentials.schema = {
+// 	name: "UserCredentials",
+// 	properties: {
+// 		token: "string",
+// 		userId: "int",
+// 	},
+// };
 
 // class UserPreference extends Realm.Object {}
 // UserCredentials.schema = {

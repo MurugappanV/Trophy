@@ -27,15 +27,10 @@ const renderBackbtn = (onBack: Function, onGrid: Function) => {
 const renderActionbtn = (onAction: Function, imageUrl: string, navigation: any) => {
 	return (
 		<TouchableOpacity
-			onPress={onAction || (() => navigation.navigate("ProfileDrawerScreen"))}
+			onPress={onAction || (() => alert("Your details are updated successfully"))}
 			style={styles.actionPicContainer}
 		>
-			<Image
-				style={styles.actionPic}
-				source={{
-					uri: imageUrl,
-				}}
-			/>
+			<Text style={styles.actionPic}>save</Text>
 		</TouchableOpacity>
 	);
 };
@@ -48,21 +43,21 @@ const renderTitle = (title: string) => {
 	);
 };
 
-export default function ProfileHeader(props: Props) {
-	const { style, onAction, onBack, onGrid, imageUrl, title, navigation } = props;
+export default function ProfilePageHeader(props: Props) {
+	const { style, onAction, onBack, onGrid, imageUrl, title, navigation, isChanged } = props;
 	return (
 		<View style={StyleSheet.flatten([styles.container, style])}>
 			<StatusBar backgroundColor="transparent" translucent barStyle="dark-content" />
 			<View style={[styles.headerContainer]}>
 				{renderBackbtn(onBack, onGrid)}
 				{renderTitle(title)}
-				{renderActionbtn(onAction, imageUrl, navigation)}
+				{isChanged ? renderActionbtn(onAction, imageUrl, navigation) : null}
 			</View>
 		</View>
 	);
 }
 
-ProfileHeader.defaultProps = {
+ProfilePageHeader.defaultProps = {
 	style: undefined,
 	onBack: undefined,
 	onAction: undefined,
@@ -108,9 +103,8 @@ const styles = StyleSheet.create({
 		paddingVertical: 8,
 	},
 	actionPic: {
-		borderRadius: 10,
-		backgroundColor: Colors.bgPrimaryBlack,
-		width: 20,
+		fontWeight: "bold",
+		width: 35,
 		height: 20,
 	},
 	emptyView: { padding: 18 },
@@ -128,7 +122,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		color: Colors.bodyPrimaryDark,
-		fontSize: Metrics.MEDIUM_TEXT_SIZE,
+		fontSize: Metrics.SMALL_TEXT_SIZE,
 		fontWeight: "bold",
 	},
 });

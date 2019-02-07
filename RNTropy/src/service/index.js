@@ -4,3 +4,4 @@ export { SignUpApi, LoginApi, ResendApi, ResetPasswordApi } from "./Authenticati
 export { BrandsPreferenceAPI } from "./Brands";
 export { TopicsPreferenceAPI } from "./Topics";
 export { MyTroveApi } from "./Articles";
+export { ShowBoookmarkApi } from "./BookmarkService";

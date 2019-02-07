@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, SectionList, Text } from "react-native";
-import { Article } from "../../components";
-import { TemplateConfig, Metrics } from "../../asset";
+import { Article, ArticleEditorial } from "../../components";
+import { TemplateConfig, Metrics, Constants } from "../../asset";
 
 type Props = {
 	data: any,
@@ -19,20 +19,37 @@ export default function ArticleListUI(props: Props) {
 			// ItemSeparatorComponent={() => <View />}
 			// ListHeaderComponent={() => <View style={styles.header} />}
 			// ListFooterComponent={() => <View style={styles.footer} />}
-			renderItem={({ item, index }) => (
-				<Article
-					onPress={onItemPress}
-					key={index.toString()}
-					order={TemplateConfig.articleTemplates[item.template || 2]}
-					settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
-					data={item}
-				/>
-			)}
-			renderSectionHeader={({ section: { title } }) => (
-				<Text style={{ fontWeight: "bold", padding: Metrics.DEFAULT_LIST_PADDING }}>
-					{title}
-				</Text>
-			)}
+			renderItem={({ item, index, section }) => {
+				console.log("data render", section);
+				if (section.title === Constants.articleListSections.editorial) {
+					console.log("data render");
+					return (
+						<ArticleEditorial
+							onPress={onItemPress}
+							key={index.toString()}
+							order={TemplateConfig.articleTemplates[item.template || 2]}
+							settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
+							data={item}
+						/>
+					);
+				}
+				return (
+					<Article
+						onPress={onItemPress}
+						key={index.toString()}
+						order={TemplateConfig.articleTemplates[item.template || 2]}
+						settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
+						data={item}
+					/>
+				);
+			}}
+			renderSectionHeader={({ section: { title } }) => {
+				return (
+					<Text style={{ fontWeight: "bold", padding: Metrics.DEFAULT_LIST_PADDING }}>
+						{title}
+					</Text>
+				);
+			}}
 		/>
 		// <Article {...props} key={index.toString()} data={item} />
 		// <ScrollView style={styles.container}>

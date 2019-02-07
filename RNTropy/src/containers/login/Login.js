@@ -4,10 +4,10 @@ import { bindActionCreators } from "redux";
 import { Actions } from "../../redux";
 import LoginUI from "./LoginUI";
 import LoginTabletUI from "./LoginTabletUI";
-import { Metrics, emailValidator, Strings } from "../../asset";
+import { Metrics, emailValidator, Strings, Constants } from "../../asset";
 import { LoginApi } from "../../service";
 import { AlertComp } from "../../components";
-import { addUserCredentialsRealm } from "../../storage";
+// import { addUserCredentialsRealm, setCurrentUserIdStorage } from "../../storage";
 
 type Props = {
 	navigation: any,
@@ -48,7 +48,8 @@ class Login extends PureComponent<Props> {
 		this.setState({ showLoader: false });
 		console.log("success");
 		setUserAction(data);
-		//addUserCredentialsRealm(data);
+		// addUserCredentialsRealm(data);
+		// setCurrentUserIdStorage(data.id);
 		if (data.topics === null) {
 			navigation.navigate("TopicsAuthScreen");
 		} else {
@@ -74,7 +75,11 @@ class Login extends PureComponent<Props> {
 	onError = (error: any) => {
 		this.setState({ showLoader: false });
 		console.log("error", error);
-		AlertComp(Strings.authentication.ALERT, error.toString());
+		let message = Constants.errorMessages.general;
+		if (error.toString().includes(Constants.errorMessages.checkNetwork)) {
+			message = Constants.errorMessages.network;
+		}
+		AlertComp(Strings.authentication.ALERT, message);
 	};
 
 	renderItem = () => {

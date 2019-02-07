@@ -17,11 +17,16 @@ import {
 	Topics,
 	Brands,
 	ArticleView,
+	ListPodcastScreen,
+	StartUp,
+	Bookmark,
+	Author,
 } from "../containers";
 import TabBarNavigator from "./TabBarNavigator";
 import { Colors, Metrics } from "../asset";
 import { ProfileHeader } from "../components";
 import HomeMenuNavigator from "./HomeMenuNavigator";
+// import AuthNavigator from "./AuthNavigator";
 
 const LoginScreen = Metrics.isTablet ? Login : FirstAuthScreen;
 
@@ -107,7 +112,7 @@ const ArticleStack = createStackNavigator(
 
 const PodcastStack = createStackNavigator(
 	{
-		ListPoscastScreen: { screen: AuthLoading },
+		ListPoscastScreen: { screen: ListPodcastScreen },
 		chaptorPodcastScreen: { screen: AuthLoading },
 	},
 	{
@@ -160,8 +165,8 @@ const HomeStack = createStackNavigator(
 const HomeDrawer = createDrawerNavigator(
 	{
 		HomeDrawerScreen: { screen: HomeStack },
-		HistoryDrawerScreen: { screen: AuthLoading }, // 1
-		BookmarkDrawerScreen: { screen: AuthLoading }, // 2
+		HistoryDrawerScreen: { screen: Author }, // 1
+		BookmarkDrawerScreen: { screen: Bookmark }, // 2
 		CustomizeInterestDrawerScreen: { screen: AuthLoading },
 		ProfileDrawerScreen: { screen: Profile },
 		SettingsDrawerScreen: { screen: AuthLoading },
@@ -178,13 +183,13 @@ const HomeDrawer = createDrawerNavigator(
 const NavContainer = createAppContainer(
 	createSwitchNavigator(
 		{
-			AuthLoading,
+			StartUp,
 			HomeNavigation: HomeDrawer,
 			AuthNavigation: AuthStack,
 			NewUserNavigation: NewUserStack,
 		},
 		{
-			initialRouteName: "AuthNavigation",
+			initialRouteName: "HomeNavigation",
 		},
 	),
 );

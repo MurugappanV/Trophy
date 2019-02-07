@@ -1,14 +1,24 @@
 import React, { Component } from "react";
-import { View, Text, Image, Dimensions, TouchableOpacity, StyleSheet } from "react-native";
-import { ProfileHeader } from "../../components";
-import { ScalePerctFullWidth, ScalePerctFullHeight, Colors, Icon, Images } from "../../asset";
+import { View, ScrollView, Image, TouchableOpacity, StyleSheet } from "react-native";
 import ImagePicker from "react-native-image-picker";
-//import EStyleSheet from "react-native-extended-stylesheet";
+import ProfilePageHeader from "./ProfilePageHeader";
+import InputTextField from "./InputTextField";
+import NormalTextField from "./normalTextField";
+import { ScalePerctFullWidth, ScalePerctFullHeight, Colors, Images } from "../../asset";
 
 class Profile extends Component {
-	state = {
-		pickedImage: null,
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			pickedImage: {
+				uri: "https://facebook.github.io/react-native/docs/assets/favicon.png",
+			},
+			profileName: "Profile name",
+			newPassword: "",
+			confirmPassword: "",
+			isChanged: false,
+		};
+	}
 
 	pickImageHandler = () => {
 		ImagePicker.showImagePicker(
@@ -28,30 +38,46 @@ class Profile extends Component {
 	};
 
 	render() {
-		const { imageUrl } = this.state;
+		const { imageUrl, isChanged, profileName, newPassword, confirmPassword } = this.state;
 		return (
-			<View style={styles.container}>
-				<ProfileHeader />
+			<ScrollView style={styles.container}>
+				<ProfilePageHeader isChanged={isChanged} />
 				<TouchableOpacity onPress={this.pickImageHandler}>
-					<Image
-						style={styles.image}
-						// source={{
-						// 	uri: "https://facebook.github.io/react-native/docs/assets/favicon.png",
-						// }}
-						source={this.state.pickedImage}
-					/>
+					<Image style={styles.image} source={this.state.pickedImage} />
 				</TouchableOpacity>
 
 				<View style={styles.uploadIcon} />
-				<View style={styles.textContainer}>
-					<Text style={styles.name}>Name</Text>
-					<View style={styles.separator} />
-				</View>
-				<View style={styles.textContainer}>
-					<Text style={styles.name}>Password</Text>
-					<View style={styles.separator} />
-				</View>
-			</View>
+				<NormalTextField label="Email" value={"solomon@itpshare.com"} />
+				<View style={styles.separator} />
+				<InputTextField
+					isProfile
+					key={"1"}
+					label="Name:"
+					values={profileName}
+					onChange={profileName => this.setState({ profileName, isChanged: true })}
+				/>
+				<View style={styles.separator} />
+				<NormalTextField label="Password:" value={"*******"} />
+				<View style={styles.separator} />
+				<InputTextField
+					key={"2"}
+					label="New Password:"
+					values={newPassword}
+					placeholder={"Enter the new password"}
+					onChange={newPassword => this.setState({ newPassword, isChanged: true })}
+				/>
+				<View style={styles.separator} />
+				<InputTextField
+					key={"3"}
+					label="Confirm Password:"
+					values={confirmPassword}
+					placeholder={"Enter the confirm password"}
+					onChange={confirmPassword =>
+						this.setState({ confirmPassword, isChanged: true })
+					}
+				/>
+				<View style={styles.separator} />
+			</ScrollView>
 		);
 	}
 }
@@ -73,30 +99,21 @@ const styles = StyleSheet.create({
 	uploadIcon: {
 		position: "absolute",
 		left: ScalePerctFullWidth(54),
-		top: ScalePerctFullHeight(25),
-		height: ScalePerctFullHeight(7),
+		top: ScalePerctFullHeight(24),
+		height: ScalePerctFullWidth(12),
 		width: ScalePerctFullWidth(12),
 		borderRadius: ScalePerctFullWidth(6),
 		borderWidth: 0.5,
 		borderColor: Colors.bgTertiaryLight,
 		backgroundColor: "white",
 	},
-	name: {
-		color: Colors.bgPrimaryDark,
-		fontSize: 12,
-		marginTop: ScalePerctFullHeight(9),
-		marginLeft: ScalePerctFullWidth(6),
-		fontWeight: "bold",
-	},
 	separator: {
 		color: Colors.bgPrimaryDark,
-		width: ScalePerctFullWidth(90),
-		marginLeft: ScalePerctFullWidth(6),
-		marginTop: ScalePerctFullHeight(3),
+		width: ScalePerctFullWidth(70),
+		marginLeft: ScalePerctFullWidth(12),
 		borderBottomWidth: 2,
 		borderBottomColor: Colors.borderSeparator,
 	},
-	textContainer: {},
 });
 
 export default Profile;

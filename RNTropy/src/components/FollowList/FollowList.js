@@ -22,7 +22,7 @@ class FollowList extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-			followBrandTrack: [],
+			followBrandTrack: props.selectedList,
 			followTrack: props.selectedList,
 		};
 		this.lastItems = [];
@@ -47,7 +47,7 @@ class FollowList extends PureComponent {
 	onFollowBrand = (topic: object) => {
 		const newFollowTrack = [];
 		let isChanged = false;
-		this.state.followTrack.forEach((item: object) => {
+		this.state.followBrandTrack.forEach((item: object) => {
 			if (item.nid !== topic.nid) {
 				newFollowTrack.push(item);
 			} else {
@@ -57,7 +57,7 @@ class FollowList extends PureComponent {
 		if (!isChanged) {
 			newFollowTrack.push(topic);
 		}
-		this.setState({ followTrack: newFollowTrack });
+		this.setState({ followBrandTrack: newFollowTrack });
 	};
 
 	checkFollowStatusTopics = (topicId: number) => {
@@ -72,9 +72,9 @@ class FollowList extends PureComponent {
 	};
 
 	checkFollowStatusBrands = (topicId: number) => {
-		const { followTrack } = this.state;
+		const { followBrandTrack } = this.state;
 		let found = false;
-		followTrack.forEach((item: object) => {
+		followBrandTrack.forEach((item: object) => {
 			if (item.nid === topicId) {
 				found = true;
 			}
@@ -179,12 +179,19 @@ class FollowList extends PureComponent {
 						/>
 					)}
 				</View>
+				{ isTopic ? (this.state.followTrack.length >= Constants.topics.minimumTopics
+					&& (
+						<View style={style.BuildFeedButton}>
+							<BuildFeedButton onPress={() => onSelected(followTrack)} />
+						</View>
+					)) :
+					(this.state.followBrandTrack.length >= 1
+					&& (
+						<View style={style.BuildFeedButton} >
+							<BuildFeedButton onPress={() => onSelected(followTrack)} />
+						</View>
+					))}
 
-				{(!isTopic || this.state.followTrack.length >= Constants.topics.minimumTopics) && (
-					<View style={style.BuildFeedButton}>
-						<BuildFeedButton onPress={() => onSelected(followTrack)} />
-					</View>
-				)}
 			</View>
 		);
 	}

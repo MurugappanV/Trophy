@@ -21,10 +21,10 @@ const manipulateMyTrove = (list: any) => {
 			data: list.stories_list.slice(0, Constants.myTrove.first),
 		});
 	}
-	if (list.editors_choice.items != null) {
+	if (list.editors_choice != null) {
 		myTroveArray.push({
 			title: Constants.articleListSections.editorial,
-			data: list.editors_choice.items,
+			data: [list.editors_choice],
 		});
 	}
 	if (list.stories_list != null) {

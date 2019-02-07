@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function ArticleListBigImage(props: Props) {
-	const { imageUrl, padded, isNotopMargin, height } = props;
+	const { imageUrl, padded, isNotopMargin, height, width } = props;
 	return (
 		<View
 			style={[
@@ -17,6 +17,7 @@ export default function ArticleListBigImage(props: Props) {
 				padded
 					? { padding: Metrics.DEFAULT_LIST_PADDING }
 					: { paddingTop: Metrics.DEFAULT_LIST_PADDING },
+				width && { width },
 			]}
 		>
 			<Image
@@ -30,6 +31,7 @@ export default function ArticleListBigImage(props: Props) {
 						  }
 						: { width: ScalePerctFullWidth(100) },
 					{ height: height },
+					width && { width },
 				])}
 			/>
 		</View>

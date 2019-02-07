@@ -23,6 +23,7 @@ const ALERT = "Alert";
 const ENTER_VALID_EMAIL = "Enter valid Email";
 const ENTER_VALID_PASSWORD = "Enter valid password";
 const AGREE_TERMS_AND_CONDITION = "Please agree Terms and Condition to proceed";
+const VIEW_ALL = "View all";
 
 export const Strings = {
 	authentication: {
@@ -51,5 +52,8 @@ export const Strings = {
 		ENTER_VALID_EMAIL,
 		ENTER_VALID_PASSWORD,
 		AGREE_TERMS_AND_CONDITION,
+	},
+	podCast: {
+		VIEW_ALL,
 	},
 };

@@ -25,8 +25,8 @@ const TopicsPreferenceAPI = (userId, selectedTopics, onSuccess, onFailure, onErr
 	);
 
 	ItpAxiosInstance.post(url, {
-		user_id: "1",
-		values: "1|2|3",
+		user_id: userId,
+		values: getTopicString(selectedTopics),
 	})
 		.then((response: any) => {
 			if (response) {
