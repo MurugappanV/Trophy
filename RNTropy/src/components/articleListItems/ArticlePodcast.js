@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import { View, Image, StyleSheet } from "react-native";
 import Carousel from "react-native-snap-carousel";
-import { Colors, Metrics, ScalePerctFullWidth } from "../../asset";
+import { Colors, Metrics, ScalePerctFullWidth, Images } from "../../asset";
 import {
 	ArticleListTitleImage,
 	ArticleListFooter,
 	ArticleListDescription,
 } from "../articleListSubItems";
+import Icon from "../../asset/fonts/icons";
 
 type Props = {};
 
@@ -21,7 +22,14 @@ export default class ArticleListItem extends PureComponent<Props> {
 			!item.image || item.image.includes("public://")
 				? "https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg"
 				: item.image;
-		return <Image source={{ uri: url }} style={StyleSheet.flatten([styles.image])} />;
+		return (
+			<View>
+				<Image source={{ uri: url }} style={StyleSheet.flatten([styles.image])} />
+				<View style={styles.symbolContainer}>
+					<Icon name={Images.podcast} size={15} color={Colors.bgPrimaryLight} />
+				</View>
+			</View>
+		);
 	};
 
 	onItemChanged = (index: number) => {
@@ -68,8 +76,12 @@ export default class ArticleListItem extends PureComponent<Props> {
 					title={data[index].title}
 					imageUrl={null}
 				/>
-				<ArticleListDescription description={data[index].lead_text} isCenter={false} />
-				<ArticleListFooter isCenter={false} time={"3 days ago"} isBookMarked={false} />
+				<ArticleListFooter
+					isBookMarkNeeded={false}
+					isCenter={false}
+					time={data[index].field_total_duration}
+					isBookMarked={false}
+				/>
 				<View style={styles.lineSeperator} />
 			</View>
 			// </TouchableOpacity>
@@ -100,5 +112,17 @@ const styles = StyleSheet.create({
 		marginHorizontal: 10,
 		borderRadius: 10,
 		backgroundColor: Colors.bgSecondaryLight,
+	},
+	symbolContainer: {
+		height: 30,
+		borderRadius: 15,
+		width: 30,
+		position: "absolute",
+		bottom: 20,
+		right: 15,
+		backgroundColor: Colors.bodySecondaryDark,
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center",
 	},
 });

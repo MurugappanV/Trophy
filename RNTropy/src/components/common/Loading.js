@@ -23,6 +23,28 @@ export default function Loading(props: Props) {
 	);
 }
 
+type ListProps = {
+	loading?: boolean,
+	refresh?: boolean,
+};
+
+export function ListLoading(props: ListProps) {
+	const { loading, refresh } = props;
+	if (loading && !refresh) {
+		return (
+			<View style={styles.footer}>
+				<ActivityIndicator size="small" color={Colors.bodyTitleVarient} />
+			</View>
+		);
+	}
+	return null;
+}
+
+ListLoading.defaultProps = {
+	loading: true,
+	refresh: false,
+};
+
 Loading.defaultProps = {
 	style: undefined,
 	textStyle: undefined,
@@ -42,6 +64,9 @@ const styles = StyleSheet.create({
 		paddingBottom: 20,
 		fontSize: 17,
 		color: Colors.bodyPrimaryLight,
+	},
+	footer: {
+		padding: 100,
 	},
 });
 

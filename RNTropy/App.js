@@ -8,7 +8,7 @@
 import React, { PureComponent } from "react";
 import SplashScreen from "react-native-splash-screen";
 import { Provider } from "react-redux";
-import { Store, Navigator, Profile } from "./src";
+import { Store, Navigator } from "./src";
 
 type Props = {};
 
@@ -31,7 +31,7 @@ export default class App extends PureComponent<Props> {
 	render() {
 		return (
 			<Provider store={Store}>
-				<Profile />
+				<Navigator />
 			</Provider>
 		);
 	}

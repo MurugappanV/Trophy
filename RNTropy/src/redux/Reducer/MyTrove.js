@@ -15,48 +15,49 @@ export const myTrove = createReducer(initialMyTrove, {
 
 const manipulateMyTrove = (list: any) => {
 	const myTroveArray = [];
-	if (list.stories_list != null) {
-		myTroveArray.push({
-			title: Constants.articleListSections.topStories,
-			data: list.stories_list.slice(0, Constants.myTrove.first),
-		});
+	if (list) {
+		if (list.stories_list != null && list.stories_list.length > 0) {
+			myTroveArray.push({
+				title: Constants.articleListSections.topStories,
+				data: list.stories_list.slice(0, Constants.myTrove.first),
+			});
+		}
+		if (list.editors_choice != null && list.editors_choice.length > 0) {
+			myTroveArray.push({
+				title: Constants.articleListSections.editorial,
+				data: [list.editors_choice],
+			});
+		}
+		if (list.stories_list != null && list.stories_list.length > Constants.myTrove.first) {
+			myTroveArray.push({
+				title: Constants.articleListSections.empty,
+				data: list.stories_list.slice(Constants.myTrove.first, Constants.myTrove.second),
+			});
+		}
+		if (list.podcast != null && list.podcast.length > 0) {
+			myTroveArray.push({
+				title: Constants.articleListSections.podcast,
+				data: [list.podcast],
+			});
+		}
+		if (list.stories_list != null && list.stories_list.length > Constants.myTrove.second) {
+			myTroveArray.push({
+				title: Constants.articleListSections.empty,
+				data: list.stories_list.slice(Constants.myTrove.second, Constants.myTrove.third),
+			});
+		}
+		if (list.videos != null && list.videos.length > 0) {
+			myTroveArray.push({
+				title: Constants.articleListSections.videos,
+				data: [list.videos],
+			});
+		}
+		if (list.stories_list != null && list.stories_list.length > Constants.myTrove.third) {
+			myTroveArray.push({
+				title: Constants.articleListSections.empty,
+				data: list.stories_list.slice(Constants.myTrove.third),
+			});
+		}
 	}
-	if (list.editors_choice != null) {
-		myTroveArray.push({
-			title: Constants.articleListSections.editorial,
-			data: [list.editors_choice],
-		});
-	}
-	if (list.stories_list != null) {
-		myTroveArray.push({
-			title: Constants.articleListSections.empty,
-			data: list.stories_list.slice(Constants.myTrove.first, Constants.myTrove.second),
-		});
-	}
-	if (list.podcast != null) {
-		myTroveArray.push({
-			title: Constants.articleListSections.podcast,
-			data: list.podcast,
-		});
-	}
-	if (list.stories_list != null) {
-		myTroveArray.push({
-			title: Constants.articleListSections.empty,
-			data: list.stories_list.slice(Constants.myTrove.second, Constants.myTrove.third),
-		});
-	}
-	if (list.videos != null) {
-		myTroveArray.push({
-			title: Constants.articleListSections.videos,
-			data: list.videos,
-		});
-	}
-	if (list.stories_list != null) {
-		myTroveArray.push({
-			title: Constants.articleListSections.empty,
-			data: list.stories_list.slice(Constants.myTrove.third),
-		});
-	}
-
 	return myTroveArray;
 };

@@ -57,10 +57,11 @@ export default class ArticleListItem extends PureComponent<Props> {
 		if (type === "bigImage") {
 			return (
 				<ArticleListBigImage
-					height={height}
+					height={settings.height}
 					imageUrl={data.image}
 					padded={settings.isPadded}
 					isNotopMargin={settings.isNoTopMargin}
+					isVideo={settings.isVideo}
 				/>
 			);
 		}

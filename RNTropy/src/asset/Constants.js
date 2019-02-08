@@ -1,4 +1,5 @@
 import { Images } from "./Images";
+import { ScalePerctFullWidth } from "./Scale";
 
 export const NavigationIconMap = new Map([
 	["HomeTabScreen", { icon: Images.home, size: 20 }],
@@ -56,6 +57,7 @@ export const TemplateConfig = {
 		10: ["logo", "bigImage", "title", "description", "footer"],
 		11: ["logo", "bigImage", "title", "description", "footer"],
 		12: ["logo", "title", "description", "footer"],
+		13: ["logo", "bigImage", "title", "footer"],
 	},
 	articleTemplateSettings: {
 		1: {
@@ -64,72 +66,92 @@ export const TemplateConfig = {
 			isFollow: false,
 			isPadded: false,
 			isCenter: false,
+			height: ScalePerctFullWidth(68),
 		},
 		2: {
 			isTitleImage: true,
 			isFollow: false,
 			isPadded: false,
 			isCenter: false,
+			height: ScalePerctFullWidth(68),
 		},
 		3: {
 			isTitleImage: false,
 			isFollow: false,
 			isPadded: false,
 			isCenter: false,
+			height: ScalePerctFullWidth(68),
 		},
 		4: {
 			isTitleImage: false,
 			isFollow: false,
 			isPadded: false,
 			isCenter: true,
+			height: ScalePerctFullWidth(110),
 		},
 		5: {
 			isTitleImage: false,
 			isFollow: false,
 			isPadded: false,
 			isCenter: false,
+			height: ScalePerctFullWidth(58),
 		},
 		6: {
 			isTitleImage: true,
 			isFollow: true,
 			isPadded: false,
 			isCenter: false,
+			height: ScalePerctFullWidth(68),
 		},
 		7: {
 			isTitleImage: true,
 			isFollow: false,
 			isPadded: false,
 			isCenter: false,
+			height: ScalePerctFullWidth(68),
 		},
 		8: {
 			isTitleImage: false,
 			isFollow: false,
 			isPadded: false,
 			isCenter: false,
+			height: ScalePerctFullWidth(68),
 		},
 		9: {
 			isTitleImage: false,
 			isFollow: false,
 			isPadded: false,
 			isCenter: true,
+			height: ScalePerctFullWidth(58),
 		},
 		10: {
 			isTitleImage: false,
 			isFollow: false,
 			isPadded: true,
 			isCenter: false,
+			height: ScalePerctFullWidth(68),
 		},
 		11: {
 			isTitleImage: false,
 			isFollow: true,
 			isPadded: true,
 			isCenter: false,
+			height: ScalePerctFullWidth(68),
 		},
 		12: {
 			isTitleImage: true,
 			isFollow: false,
 			isPadded: false,
 			isCenter: false,
+			height: ScalePerctFullWidth(68),
+		},
+		13: {
+			isTitleImage: false,
+			isFollow: false,
+			isPadded: false,
+			isCenter: false,
+			height: ScalePerctFullWidth(68),
+			isVideo: true,
 		},
 	},
 };

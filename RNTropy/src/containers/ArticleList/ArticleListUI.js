@@ -1,34 +1,74 @@
 import React from "react";
-import { StyleSheet, View, SectionList, Text } from "react-native";
-import { Article, ArticleEditorial } from "../../components";
-import { TemplateConfig, Metrics, Constants } from "../../asset";
+import { StyleSheet, View, ActivityIndicator, SectionList, Text } from "react-native";
+import {
+	Article,
+	ArticleEditorial,
+	ArticlePodcast,
+	ArticleVideo,
+	ListLoading,
+} from "../../components";
+import { TemplateConfig, Metrics, Constants, Colors } from "../../asset";
 
 type Props = {
 	data: any,
+	loading: boolean,
+	refresh: boolean,
 };
 
 export default function ArticleListUI(props: Props) {
-	const { data, onItemPress } = props;
+	const { data, onItemPress, loading, refresh } = props;
 	console.log("article data to render ", data);
 	return (
 		<SectionList
 			sections={data}
 			keyExtractor={(x, i) => i.toString()}
+			stickySectionHeadersEnabled={false}
 			// horizontal={false}
 			// onEndReachedThreshold={0.5}
 			// ItemSeparatorComponent={() => <View />}
 			// ListHeaderComponent={() => <View style={styles.header} />}
-			// ListFooterComponent={() => <View style={styles.footer} />}
+			ListFooterComponent={() => <ListLoading loading={loading} refresh={refresh} />}
 			renderItem={({ item, index, section }) => {
-				console.log("data render", section);
 				if (section.title === Constants.articleListSections.editorial) {
-					console.log("data render");
 					return (
 						<ArticleEditorial
 							onPress={onItemPress}
 							key={index.toString()}
 							order={TemplateConfig.articleTemplates[item.template || 2]}
 							settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
+							data={item}
+						/>
+					);
+				}
+				if (section.title === Constants.articleListSections.podcast) {
+					return (
+						<ArticlePodcast
+							onPress={onItemPress}
+							key={index.toString()}
+							order={TemplateConfig.articleTemplates[item.template || 2]}
+							settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
+							data={item}
+						/>
+					);
+				}
+				if (section.title === Constants.articleListSections.videos) {
+					return (
+						<ArticleVideo
+							onPress={onItemPress}
+							key={index.toString()}
+							order={TemplateConfig.articleTemplates[item.template || 2]}
+							settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
+							data={item}
+						/>
+					);
+				}
+				if (item.content_type === "video") {
+					return (
+						<Article
+							onPress={onItemPress}
+							key={index.toString()}
+							order={TemplateConfig.articleTemplates[13]}
+							settings={TemplateConfig.articleTemplateSettings[13]}
 							data={item}
 						/>
 					);
@@ -44,17 +84,18 @@ export default function ArticleListUI(props: Props) {
 				);
 			}}
 			renderSectionHeader={({ section: { title } }) => {
-				return (
-					<Text style={{ fontWeight: "bold", padding: Metrics.DEFAULT_LIST_PADDING }}>
-						{title}
-					</Text>
-				);
+				if (title !== Constants.articleListSections.empty) {
+					return (
+						<Text
+							style={{ fontWeight: "bold", padding: Metrics.DEFAULT_LIST_PADDING }}
+						>
+							{title}
+						</Text>
+					);
+				}
+				return null;
 			}}
 		/>
-		// <Article {...props} key={index.toString()} data={item} />
-		// <ScrollView style={styles.container}>
-		// <Article {...props} />
-		// </ScrollView>
 	);
 }
 

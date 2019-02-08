@@ -9,19 +9,23 @@ type Props = {
 
 export default function ArticleListLogo(props: Props) {
 	const { imageUrl, isFollow } = props;
+	const url =
+		!imageUrl || imageUrl.includes("public://")
+			? "http://www.matcheyewear.com/images/BrandImages/Cosmopolitan-Logo.jpg"
+			: imageUrl;
 	return (
 		<View style={styles.container}>
 			<View style={styles.imageContainer}>
 				<Image
-					source={{ uri: imageUrl }}
+					source={{ uri: url }}
 					resizeMode={"contain"}
 					style={StyleSheet.flatten([styles.imageOne])}
 				/>
 			</View>
 			{isFollow && (
 				<Image
-					source={{ uri: imageUrl }}
-					resizeMode={"contain"}
+					source={require("../../asset/Images/follow.png")}
+					resizeMode={"stretch"}
 					style={StyleSheet.flatten([styles.followImage])}
 				/>
 			)}
@@ -50,10 +54,11 @@ const styles = StyleSheet.create({
 	imageOne: {
 		height: ScalePerctFullWidth(8),
 		width: ScalePerctFullWidth(40),
+		backgroundColor: Colors.bgSecondaryLight,
 	},
 	followImage: {
 		height: ScalePerctFullWidth(8),
-		width: ScalePerctFullWidth(40),
+		width: ScalePerctFullWidth(25),
 		paddingLeft: Metrics.DEFAULT_LIST_PADDING,
 	},
 });

@@ -4,18 +4,21 @@ import { Colors, Metrics, ScalePerctFullWidth } from "../../asset";
 
 type Props = {
 	description?: string,
-	isCenter: boolean,
+	isCenter?: boolean,
 };
 
 export default function ArticleListDescription(props: Props) {
 	const { description, isCenter } = props;
-	return (
-		<View style={styles.container}>
-			<Text style={[styles.descriptionText, isCenter ? { textAlign: "center" } : {}]}>
-				{description}
-			</Text>
-		</View>
-	);
+	if (description && description.length > 0) {
+		return (
+			<View style={styles.container}>
+				<Text style={[styles.descriptionText, isCenter ? { textAlign: "center" } : {}]}>
+					{description}
+				</Text>
+			</View>
+		);
+	}
+	return null;
 }
 
 ArticleListDescription.defaultProps = {
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
 		width: ScalePerctFullWidth(100),
 		flexDirection: "row",
 		padding: Metrics.DEFAULT_LIST_PADDING,
-		paddingBottom: 0
+		paddingBottom: 0,
 	},
 	descriptionText: {
 		color: Colors.textHeading,

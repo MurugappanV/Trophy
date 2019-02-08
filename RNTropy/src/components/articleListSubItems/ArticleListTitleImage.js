@@ -15,12 +15,16 @@ const renderImage = (image: string) => {
 
 export default function ArticleListTitleImage(props: Props) {
 	const { title, imageUrl, isTitleImage, isCenter } = props;
+	const url =
+		!imageUrl || imageUrl.includes("public://")
+			? "https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg"
+			: imageUrl;
 	return (
 		<View style={styles.container}>
 			<Text style={[styles.titleText, isCenter ? { textAlign: "center" } : {}]}>
 				{title}
 			</Text>
-			{isTitleImage && renderImage(imageUrl)}
+			{isTitleImage && renderImage(url)}
 		</View>
 	);
 }

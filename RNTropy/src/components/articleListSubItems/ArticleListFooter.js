@@ -5,14 +5,15 @@ import Icon from "../../asset/fonts/icons";
 
 type Props = {
 	time?: string,
-	isCenter: boolean,
-	isBookMarked: boolean,
-	onShare: Function,
-	onBookMarkToggle: Function
+	isCenter?: boolean,
+	isBookMarked?: boolean,
+	isBookMarkNeeded?: boolean,
+	onShare?: Function,
+	onBookMarkToggle?: Function,
 };
 
 export default function ArticleListFooter(props: Props) {
-	const { time, isCenter, isBookMarked, onShare, onBookMarkToggle } = props;
+	const { time, isCenter, isBookMarked, isBookMarkNeeded, onShare, onBookMarkToggle } = props;
 	return (
 		<View style={styles.container}>
 			{!isCenter && <Text style={styles.hours}>{time}</Text>}
@@ -24,14 +25,16 @@ export default function ArticleListFooter(props: Props) {
 					color={Colors.bodySecondaryLight}
 				/>
 			</TouchableOpacity>
-			<TouchableOpacity onPress={onBookMarkToggle}>
-				<Icon
-					style={styles.icon}
-					name={isBookMarked ? Images.selectedBookmark : Images.selectedBookmark}
-					size={16}
-					color={isBookMarked ? Colors.bodyPrimaryDark : Colors.bodySecondaryLight}
-				/>
-			</TouchableOpacity>
+			{isBookMarkNeeded && (
+				<TouchableOpacity onPress={onBookMarkToggle}>
+					<Icon
+						style={styles.icon}
+						name={isBookMarked ? Images.selectedBookmark : Images.selectedBookmark}
+						size={16}
+						color={isBookMarked ? Colors.bodyPrimaryDark : Colors.bodySecondaryLight}
+					/>
+				</TouchableOpacity>
+			)}
 		</View>
 	);
 }
@@ -40,8 +43,9 @@ ArticleListFooter.defaultProps = {
 	time: "3 hours ago",
 	isCenter: false,
 	isBookMarked: false,
-	onShare: () => { },
-	onBookMarkToggle: () => { }
+	isBookMarkNeeded: true,
+	onShare: () => {},
+	onBookMarkToggle: () => {},
 };
 
 const styles = StyleSheet.create({
