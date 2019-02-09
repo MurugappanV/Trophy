@@ -34,9 +34,10 @@ type Props = {
 };
 
 export default class ArticleFooter extends PureComponent<Props> {
-	renderAlphaContainer = () => {
-		const { selectFont } = this.props;
-		const color = "white";
+	renderAlphaContainer = color => {
+		const { selectFont, isOpen, dynamicColor, themeId } = this.props;
+		// const color = "black";
+		console.log("themeId", themeId);
 		return (
 			<View style={StyleSheet.flatten([styles.expandAlphaView])}>
 				<TouchableOpacity
@@ -47,9 +48,9 @@ export default class ArticleFooter extends PureComponent<Props> {
 				</TouchableOpacity>
 				<View
 					style={{
-						height: 100,
-						width: 0.5,
-						backgroundColor: Colors.borderlight,
+						alignSelf: "stretch",
+						borderRightWidth: 0.5,
+						borderColor: Colors.bodyTertiaryDark,
 					}}
 				/>
 
@@ -71,7 +72,7 @@ export default class ArticleFooter extends PureComponent<Props> {
 					style={StyleSheet.flatten([
 						styles.colorPanel,
 						{ backgroundColor: color },
-						themeId == selectId ? styles.focusedTheme : {},
+						themeId === selectId ? styles.focusedTheme : {},
 					])}
 				/>
 			</TouchableOpacity>
@@ -123,13 +124,23 @@ export default class ArticleFooter extends PureComponent<Props> {
 			dynamicColor,
 			selectFont,
 		} = this.props;
-		const color = isOpen ? "white" : dynamicColor.fontColor;
+		const color = isOpen
+			? themeId == 1 || themeId == 2
+				? Colors.bgSecondaryLight
+				: "black"
+			: dynamicColor.fontColor;
 		return (
 			<View
 				style={StyleSheet.flatten([
 					styles.footerContainer,
 					dynamicStyles(isOpen).footerContainer,
-					{ backgroundColor: isOpen ? "black" : dynamicColor.bgColor },
+					{
+						backgroundColor: isOpen
+							? themeId == 3 || themeId == 4 || themeId == 5
+								? Colors.bgSecondaryLight
+								: Colors.bgTertiaryDark
+							: dynamicColor.bgColor,
+					},
 				])}
 			>
 				<View style={StyleSheet.flatten([styles.collapseView])}>
@@ -149,7 +160,7 @@ export default class ArticleFooter extends PureComponent<Props> {
 						<Icon name={Images.aA} size={14} color={color} />
 					</TouchableOpacity>
 				</View>
-				{this.renderAlphaContainer()}
+				{this.renderAlphaContainer(color)}
 				{this.renderThemeContainer(themeId)}
 			</View>
 		);
@@ -202,26 +213,23 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-around",
 		alignContent: "stretch",
-		backgroundColor: "black",
 		borderTopWidth: 0.5,
-		borderColor: Colors.borderlight,
 	},
 	expandThameView: {
 		width: ScalePerctFullWidth(100),
 		height: ScalePerctFullHeight(15),
-		alignItems: "center",
 		flexDirection: "row",
 		justifyContent: "space-around",
-		backgroundColor: "black",
 		alignItems: "stretch",
 		borderTopWidth: 0.5,
-		borderColor: Colors.borderlight,
 		paddingTop: 20,
 	},
 	colorPanel: {
 		width: ScalePerctFullWidth(100) / 8,
 		height: ScalePerctFullWidth(100) / 8,
 		borderRadius: 50,
+		borderColor: Colors.borderlight,
+		borderWidth: 0.5,
 	},
 	icons: {
 		padding: 10,

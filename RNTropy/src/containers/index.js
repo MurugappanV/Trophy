@@ -12,4 +12,6 @@ export { Brands } from "./TopicsAndBrands";
 export { ArticleList } from "./ArticleList";
 export { ArticleView } from "./Article";
 export { ListPodcastScreen } from "./ListPodcastScreen";
+export { ChaptorPodcastScreen } from "./ChaptorPodcastScreen";
 export { Bookmark } from "./Bookmark";
+export { History } from "./History";

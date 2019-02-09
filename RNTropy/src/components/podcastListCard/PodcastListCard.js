@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Metrics, Colors } from "../../asset";
 
 type Props = {
@@ -9,9 +9,9 @@ type Props = {
 };
 
 export default function PodcastListCard(props: Props) {
-	const { title, description, imageURL } = props;
+	const { title, description, imageURL, onPress } = props;
 	return (
-		<View style={style.container}>
+		<TouchableOpacity style={style.container} onPress={onPress}>
 			<Image
 				source={{
 					uri: imageURL,
@@ -20,7 +20,7 @@ export default function PodcastListCard(props: Props) {
 			/>
 			<Text style={style.title}>{title}</Text>
 			<Text style={style.description}>{description}</Text>
-		</View>
+		</TouchableOpacity>
 	);
 }
 

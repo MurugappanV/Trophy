@@ -8,7 +8,7 @@ export default function Separator() {
 
 const styles = StyleSheet.create({
 	container: {
-		borderBottomColor: Colors.bgPrimaryLight,
+		borderBottomColor: Colors.linePrimary,
 		borderBottomWidth: 1,
 		flex: 1,
 		alignSelf: "center",

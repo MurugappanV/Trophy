@@ -101,7 +101,7 @@ export default function TopcisCard(props: Props) {
 						}}
 					>
 						{isFollowed ? (
-							<Text> Following</Text>
+							<Text style = {style.following}> Following</Text>
 						) : (
 								<Text style={style.follow}>+ Follow</Text>
 							)}
@@ -129,7 +129,7 @@ const tabStyles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 4,
-		backgroundColor: Colors.bgSecondaryLight,
+		backgroundColor: Colors.bgPrimaryDark,
 		height: ScalePerctFullHeight(15),
 		width: ScalePerctFullWidth(15),
 		margin: 10,
@@ -177,7 +177,13 @@ const tabStyles = StyleSheet.create({
 		alignSelf: "center",
 	},
 	follow: {
+		alignSelf: "center",
 		color: Colors.bgPrimaryLight,
+	},
+	following: {
+	
+		color: Colors.bgPrimaryDark,
+		alignSelf: "center",
 	},
 	blur: {
 		backgroundColor: Colors.bgTransparent,
@@ -195,7 +201,7 @@ const normalStyles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 4,
-		backgroundColor: Colors.bgSecondaryLight,
+		backgroundColor: Colors.bgPrimaryDark,
 		height: ScalePerctFullHeight(28),
 		width: ScalePerctFullWidth(35),
 		margin: 10,
@@ -205,7 +211,7 @@ const normalStyles = StyleSheet.create({
 	},
 
 	brandContainer: {
-		backgroundColor:Colors.bgPrimaryDark,
+		backgroundColor: Colors.bgPrimaryDark,
 	},
 	fieldLogo:{
 		alignSelf:"center",
@@ -243,7 +249,13 @@ const normalStyles = StyleSheet.create({
 		alignSelf: "center",
 	},
 	follow: {
+		alignSelf: "center",
 		color: Colors.bgPrimaryLight,
+	},
+	following: {
+		
+		color: Colors.bgPrimaryDark,
+		alignSelf: "center",
 	},
 	blur: {
 		backgroundColor: Colors.bgTransparent,

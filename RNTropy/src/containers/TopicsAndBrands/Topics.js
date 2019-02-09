@@ -18,8 +18,22 @@ class Topics extends Component {
 		this.state = {
 			imageUrl: "https://facebook.github.io/react-native/docs/assets/favicon.png",
 		};
-		new StartUp(props);
+		this.magnageTopics(this.props.topics);
+		// new StartUp(props);
 	}
+
+	magnageTopics = (topics: array) => {
+		const { user, setMenuTopicsAction } = this.props;
+		const alreadySelected = new Set(user["topics"].split("|"));
+		const selectedTopics = [];
+		topics.forEach(item => {
+			if (alreadySelected.has(item.tid)) {
+				selectedTopics.push(item);
+			}
+		});
+		setMenuTopicsAction(selectedTopics);
+		console.log("Selected topics in topics after login", selectedTopics);
+	};
 
 	onSelected = (followTrack: array) => {
 		const { setMenuTopicsAction, navigation, user, selectedTopics } = this.props;
@@ -42,18 +56,19 @@ class Topics extends Component {
 	};
 
 	render() {
-		const { topics, selectedTopics, user } = this.props;
-		console.log("User id details in Topics: ", user.id);
+		const { topics, selectedTopics, user, navigation } = this.props;
+		const isBack = navigation.getParam("isBack", false);
+		console.log("Selected Topics inside render: ", selectedTopics);
+		console.log("User id details in Topics: ", user);
 		return (
 			<FollowList
 				data={topics}
 				userId={user.id}
+				isBack={isBack}
+				navigation={navigation}
 				isTopic
-				// preferenceAPI={(userId, selectedTopicsList, onSuccess, onFailure, onError) =>
-				// 	TopicsPreferenceAPI(userId, selectedTopics, onSuccess, onFailure, onError)
-				// }
 				onSelected={followTrack => this.onSelected(followTrack)}
-				selectedList={selectedTopics}
+				selectedTopicList={selectedTopics}
 			/>
 		);
 	}

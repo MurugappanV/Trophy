@@ -2,10 +2,34 @@ import { Images } from "./Images";
 import { ScalePerctFullWidth } from "./Scale";
 
 export const NavigationIconMap = new Map([
-	["HomeTabScreen", { icon: Images.home, size: 20 }],
-	["VideoTabScreen", { icon: Images.play, size: 20 }],
-	["PodcastTabScreen", { icon: Images.podcast, size: 18 }],
-	["MagazineTabScreen", { icon: Images.book, size: 20 }],
+	[
+		"HomeTabScreen",
+		{
+			icon: Images.home,
+			size: 20,
+		},
+	],
+	[
+		"VideoTabScreen",
+		{
+			icon: Images.play,
+			size: 20,
+		},
+	],
+	[
+		"PodcastTabScreen",
+		{
+			icon: Images.podcast,
+			size: 18,
+		},
+	],
+	[
+		"MagazineTabScreen",
+		{
+			icon: Images.book,
+			size: 20,
+		},
+	],
 ]);
 
 export const Constants = {
@@ -152,6 +176,32 @@ export const TemplateConfig = {
 			isCenter: false,
 			height: ScalePerctFullWidth(68),
 			isVideo: true,
+		},
+	},
+	articleDisplayTemplates: {
+		1: ["logo", "image", "title", "description"],
+		2: ["image", "logo", "title", "description"],
+		3: ["logo", "title", "image", "description"],
+	},
+	articleDisplayTemplateSettings: {
+		1: {
+			// isNoTopMargin: true,
+			// isTitleImage: false,
+			// isFollow: false,
+			// isPadded: false,
+			isCenter: false,
+		},
+		2: {
+			// isTitleImage: true,
+			// isFollow: false,
+			// isPadded: false,
+			isCenter: false,
+		},
+		3: {
+			// isTitleImage: false,
+			// isFollow: false,
+			// isPadded: false,
+			isCenter: false,
 		},
 	},
 };

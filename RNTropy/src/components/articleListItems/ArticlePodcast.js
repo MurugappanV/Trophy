@@ -23,7 +23,7 @@ export default class ArticleListItem extends PureComponent<Props> {
 				? "https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg"
 				: item.image;
 		return (
-			<View>
+			<View style={styles.imageEditorialContainer}>
 				<Image source={{ uri: url }} style={StyleSheet.flatten([styles.image])} />
 				<View style={styles.symbolContainer}>
 					<Icon name={Images.podcast} size={15} color={Colors.bgPrimaryLight} />
@@ -63,12 +63,13 @@ export default class ArticleListItem extends PureComponent<Props> {
 						this._carousel = c;
 					}}
 					data={data}
+					firstItem={data.length > 1 ? 1 : 0}
 					renderItem={({ item }) => this.renderImage(item)}
 					sliderWidth={ScalePerctFullWidth(100)}
-					itemWidth={ScalePerctFullWidth(80)}
+					itemWidth={ScalePerctFullWidth(84)}
 					onSnapToItem={this.onItemChanged}
 					inactiveSlideOpacity={1}
-					inactiveSlideScale={0.9}
+					inactiveSlideScale={1}
 				/>
 				<ArticleListTitleImage
 					isCenter={false}
@@ -107,9 +108,8 @@ const styles = StyleSheet.create({
 		borderColor: Colors.linePrimary,
 	},
 	image: {
-		width: ScalePerctFullWidth(80),
+		width: ScalePerctFullWidth(84) - 16,
 		height: ScalePerctFullWidth(55),
-		marginHorizontal: 10,
 		borderRadius: 10,
 		backgroundColor: Colors.bgSecondaryLight,
 	},
@@ -119,10 +119,17 @@ const styles = StyleSheet.create({
 		width: 30,
 		position: "absolute",
 		bottom: 20,
-		right: 15,
+		right: 25,
 		backgroundColor: Colors.bodySecondaryDark,
 		flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
+	},
+	imageEditorialContainer: {
+		width: ScalePerctFullWidth(84),
+		height: ScalePerctFullWidth(55),
+		paddingHorizontal: 8,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 });

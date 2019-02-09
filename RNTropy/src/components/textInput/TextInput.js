@@ -37,7 +37,7 @@ const mobileStyles = StyleSheet.create({
 	formInput: {
 		borderBottomWidth: (StyleSheet.hairlineWidth = 0.5),
 		alignSelf: "stretch",
-		borderColor: Colors.bgPrimaryLight,
+		borderColor: Colors.linePrimaryOpacity,
 		marginBottom: ScalePerctFullHeight(2),
 	},
 	input: {
@@ -61,7 +61,7 @@ const tabStyles = StyleSheet.create({
 	formInput: {
 		borderBottomWidth: (StyleSheet.hairlineWidth = 0.5),
 		alignSelf: "stretch",
-		borderColor: Colors.bgPrimaryLight,
+		borderColor: Colors.linePrimaryOpacity,
 		marginBottom: ScalePerctFullHeight(2.1),
 	},
 	input: {

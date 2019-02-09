@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, ScrollView, Image, TouchableOpacity, StyleSheet } from "react-native";
 import ImagePicker from "react-native-image-picker";
+import Icon from "react-native-vector-icons/FontAwesome";
 import ProfilePageHeader from "./ProfilePageHeader";
 import InputTextField from "./InputTextField";
 import NormalTextField from "./normalTextField";
@@ -39,14 +40,19 @@ class Profile extends Component {
 
 	render() {
 		const { imageUrl, isChanged, profileName, newPassword, confirmPassword } = this.state;
+		const { navigation } = this.props;
 		return (
 			<ScrollView style={styles.container}>
-				<ProfilePageHeader isChanged={isChanged} />
-				<TouchableOpacity onPress={this.pickImageHandler}>
-					<Image style={styles.image} source={this.state.pickedImage} />
+				<ProfilePageHeader
+					isChanged={isChanged}
+					onBack={() => {
+						navigation.goBack();
+					}}
+				/>
+				<Image style={styles.image} source={this.state.pickedImage} />
+				<TouchableOpacity style={styles.uploadIcon} onPress={this.pickImageHandler}>
+					<Icon name="camera" size={25} color={Colors.bgPrimaryDark} />
 				</TouchableOpacity>
-
-				<View style={styles.uploadIcon} />
 				<NormalTextField label="Email" value={"solomon@itpshare.com"} />
 				<View style={styles.separator} />
 				<InputTextField
@@ -102,6 +108,8 @@ const styles = StyleSheet.create({
 		top: ScalePerctFullHeight(24),
 		height: ScalePerctFullWidth(12),
 		width: ScalePerctFullWidth(12),
+		justifyContent: "center",
+		alignItems: "center",
 		borderRadius: ScalePerctFullWidth(6),
 		borderWidth: 0.5,
 		borderColor: Colors.bgTertiaryLight,

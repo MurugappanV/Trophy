@@ -1,18 +1,17 @@
 import React, { PureComponent } from "react";
-import { View, Text, Image, Dimensions, StyleSheet, FlatList } from "react-native";
-import { ProfileHeader } from "../../components";
+import { View, StyleSheet, FlatList } from "react-native";
+import { ProfileHeader, Article } from "../../components";
 import { ScalePerctFullWidth, ScalePerctFullHeight, Colors, TemplateConfig } from "../../asset";
-import { AuthorInfo, BuildFeedButton, Article } from "../../components";
-import { ShowBoookmarkApi } from "../../service";
+import { ShowBoookmarkApi, ShowHistorykApi } from "../../service";
 
-class Author extends PureComponent {
+class History extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
 			bookmarks: [],
 			imageUrl: "https://facebook.github.io/react-native/docs/assets/favicon.png",
 		};
-		ShowBoookmarkApi("1", this.onSuccess, this.onFailure, this.onError);
+		ShowHistorykApi("1", this.onSuccess, this.onFailure, this.onError);
 	}
 
 	onSuccess = (bookmarks: array) => {
@@ -39,7 +38,7 @@ class Author extends PureComponent {
 					onBack={() => {
 						navigation.goBack();
 					}}
-					title={"Bookmark"}
+					title="History"
 				/>
 				<View>
 					<FlatList
@@ -61,7 +60,7 @@ class Author extends PureComponent {
 	}
 }
 
-Author.defaultProps = {
+History.defaultProps = {
 	data: [
 		{
 			nid: 275542,
@@ -477,4 +476,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Author;
+export default History;

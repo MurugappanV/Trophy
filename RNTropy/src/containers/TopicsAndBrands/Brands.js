@@ -18,8 +18,22 @@ class Brands extends Component {
 		this.state = {
 			imageUrl: "https://facebook.github.io/react-native/docs/assets/favicon.png",
 		};
-		StartBrandsService(props);
+		this.magnageBrands(this.props.brands);
+		// StartBrandsService(props);
 	}
+
+	magnageBrands = (brands: array) => {
+		const { user, setSelectedBrands } = this.props;
+		const alreadySelected = new Set(user["brands"].split("|"));
+		const selectedBrands = [];
+		brands.forEach(item => {
+			if (alreadySelected.has(item.field_site_key)) {
+				selectedBrands.push(item);
+			}
+		});
+		setSelectedBrands(selectedBrands);
+		console.log("Selected Brands in topics after login", selectedBrands);
+	};
 
 	onSelected = (brands: array) => {
 		const { setSelectedBrands, user } = this.props;
@@ -42,14 +56,14 @@ class Brands extends Component {
 	};
 
 	render() {
-		let { brands, selectedBrands, navigation, user } = this.props;
-		console.log("User details in Brands: ", user);
+		const { brands, selectedBrands, navigation, user } = this.props;
+		console.log("Selected Brands in Brands: ", selectedBrands);
 		return (
 			<FollowList
 				isBrand
 				data={brands}
 				onSelected={this.onSelected}
-				selectedList={selectedBrands}
+				selectedBrandsList={selectedBrands}
 				navigation={navigation}
 			/>
 		);

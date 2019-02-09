@@ -5,3 +5,4 @@ export { BrandsPreferenceAPI } from "./Brands";
 export { TopicsPreferenceAPI } from "./Topics";
 export { MyTroveApi } from "./Articles";
 export { ShowBoookmarkApi } from "./BookmarkService";
+export { ShowHistorykApi } from "./History";

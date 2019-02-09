@@ -7,7 +7,7 @@ export default class ListPodcastScreen extends PureComponent {
 	state = {};
 
 	render() {
-		const { data } = this.props;
+		const { data, navigation } = this.props;
 		return (
 			<View style={style.container}>
 				<View style={style.header}>
@@ -35,8 +35,10 @@ export default class ListPodcastScreen extends PureComponent {
 								title="Heading"
 								description="Description"
 								imageURL="https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg"
+								onPress={() => navigation.navigate("ChaptorPodcastScreen")}
 							/>
 						)}
+						keyExtractor={(item, index) => item.key}
 					/>
 				</View>
 			</View>

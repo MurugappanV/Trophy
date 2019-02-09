@@ -10,7 +10,7 @@ import {
 
 type Props = {};
 
-export default class ArticleListItem extends PureComponent<Props> {
+export default class ArticleEditorial extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
 		this.state = { index: 0 };
@@ -21,7 +21,11 @@ export default class ArticleListItem extends PureComponent<Props> {
 			!item.image || item.image.includes("public://")
 				? "https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg"
 				: item.image;
-		return <Image source={{ uri: url }} style={StyleSheet.flatten([styles.image])} />;
+		return (
+			<View style={styles.imageEditorialContainer}>
+				<Image source={{ uri: url }} style={StyleSheet.flatten([styles.image])} />
+			</View>
+		);
 	};
 
 	onItemChanged = (index: number) => {
@@ -33,34 +37,18 @@ export default class ArticleListItem extends PureComponent<Props> {
 		const { index } = this.state;
 		return (
 			<View>
-				{/* <FlatList
-					horizontal
-					data={data}
-					keyExtractor={(x, i) => i.toString()}
-					renderItem={({ item }) => {
-						console.log("list", item);
-						return (
-							<ArticleListBigImage
-								height={300}
-								width={ScalePerctFullWidth(84)}
-								imageUrl={item.image}
-								padded
-								isNotopMargin
-							/>
-						);
-					}}
-				/> */}
 				<Carousel
 					ref={c => {
 						this._carousel = c;
 					}}
 					data={data}
+					firstItem={data.length > 1 ? 1 : 0}
 					renderItem={({ item }) => this.renderImage(item)}
 					sliderWidth={ScalePerctFullWidth(100)}
-					itemWidth={ScalePerctFullWidth(80)}
+					itemWidth={ScalePerctFullWidth(84)}
 					onSnapToItem={this.onItemChanged}
 					inactiveSlideOpacity={1}
-					inactiveSlideScale={0.9}
+					inactiveSlideScale={1}
 				/>
 				<ArticleListTitleImage
 					isCenter={false}
@@ -77,7 +65,7 @@ export default class ArticleListItem extends PureComponent<Props> {
 	}
 }
 
-ArticleListItem.defaultProps = {
+ArticleEditorial.defaultProps = {
 	order: ["logo", "bigImage", "title", "footer"],
 };
 
@@ -95,10 +83,16 @@ const styles = StyleSheet.create({
 		borderColor: Colors.linePrimary,
 	},
 	image: {
-		width: ScalePerctFullWidth(80),
+		width: ScalePerctFullWidth(84) - 16,
 		height: ScalePerctFullWidth(55),
-		marginHorizontal: 10,
 		borderRadius: 10,
 		backgroundColor: Colors.bgSecondaryLight,
+	},
+	imageEditorialContainer: {
+		width: ScalePerctFullWidth(84),
+		height: ScalePerctFullWidth(55),
+		paddingHorizontal: 8,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 });

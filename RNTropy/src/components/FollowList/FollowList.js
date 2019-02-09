@@ -8,7 +8,7 @@ import {
 	ScalePerctFullWidth,
 	Constants,
 } from "../../asset";
-import { BuildFeedButton, PagerHeader } from "..";
+import { BuildFeedButton, PagerHeader } from "../../components";
 
 type Props = {
 	data: array,
@@ -22,10 +22,28 @@ class FollowList extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
-			followBrandTrack: props.selectedList,
-			followTrack: props.selectedList,
+			followBrandTrack: props.selectedBrandsList,
+			followTrack: props.selectedTopicList,
+			selectedTopicList: props.selectedTopicList,
+			selectedBrandsList: props.selectedBrandsList,
 		};
 		this.lastItems = [];
+	}
+
+	static getDerivedStateFromProps(nextProps, prevState) {
+		let newState = {};
+		let changed = false;
+		if (prevState.selectedTopicList !== nextProps.selectedTopicList) {
+			newState.followTrack = nextProps.selectedTopicList;
+			newState.selectedTopicList = nextProps.selectedTopicList;
+			changed = true;
+		}
+		if (prevState.selectedBrandsList !== nextProps.selectedBrandsList) {
+			newState.followBrandTrack = nextProps.selectedBrandsList;
+			newState.selectedBrandsList = nextProps.selectedBrandsList;
+			changed = true;
+		}
+		return changed ? newState : null;
 	}
 
 	onFollowTopics = (topic: object) => {
@@ -83,8 +101,9 @@ class FollowList extends PureComponent {
 	};
 
 	render() {
-		const { data, navigation, isTopic, onSelected, selectedList } = this.props;
-		const { followTrack } = this.state;
+		const { isBack, data, navigation, isTopic, onSelected, selectedTopicList, selectedBrandsList } = this.props;
+		console.log("Selected BrandList inside FollowList: ", selectedBrandsList)
+		const { followTrack, followBrandTrack } = this.state;
 		const noOfColumn = Metrics.isTablet ? 4 : 2;
 		console.log("flatlist data", data  )
 		return (
@@ -115,7 +134,7 @@ class FollowList extends PureComponent {
 							</Text>
 						</View>
 					) : isTopic ? (
-						<PagerHeader style={style.pageHeader} page={"1"} />
+						<PagerHeader onBack={() => navigation.goBack()} style={style.pageHeader} page={"1"} />
 					) : (
 						<PagerHeader
 							style={style.pageHeader}
@@ -188,7 +207,7 @@ class FollowList extends PureComponent {
 					(this.state.followBrandTrack.length >= 1
 					&& (
 						<View style={style.BuildFeedButton} >
-							<BuildFeedButton onPress={() => onSelected(followTrack)} />
+							<BuildFeedButton onPress={() => onSelected(followBrandTrack)} />
 						</View>
 					))}
 

@@ -25,7 +25,9 @@ export default class ArticleListItem extends PureComponent<Props> {
 		return (
 			<View>
 				<Image source={{ uri: url }} style={StyleSheet.flatten([styles.image])} />
-				<Text style={[styles.titleText]}>{item.video.filename}</Text>
+				<Text style={[styles.titleText]}>
+					{item.video && item.video.length > 0 && item.video[0].filename}
+				</Text>
 			</View>
 		);
 	};
@@ -90,6 +92,7 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 	},
 	lineSeperator: {
+		paddingTop: Metrics.DEFAULT_PADDING,
 		width: ScalePerctFullWidth(100) - Metrics.DEFAULT_LIST_PADDING * 2,
 		alignSelf: "center",
 		borderBottomWidth: 1,
@@ -113,7 +116,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	paginationContainer: {
-		bottom: -10,
+		bottom: 0,
 		left: 0,
 		right: 0,
 		position: "absolute",

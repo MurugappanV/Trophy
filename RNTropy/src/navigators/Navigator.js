@@ -20,7 +20,9 @@ import {
 	ListPodcastScreen,
 	StartUp,
 	Bookmark,
+	History,
 	Author,
+	ChaptorPodcastScreen,
 } from "../containers";
 import TabBarNavigator from "./TabBarNavigator";
 import { Colors, Metrics } from "../asset";
@@ -113,7 +115,7 @@ const ArticleStack = createStackNavigator(
 const PodcastStack = createStackNavigator(
 	{
 		ListPoscastScreen: { screen: ListPodcastScreen },
-		chaptorPodcastScreen: { screen: AuthLoading },
+		ChaptorPodcastScreen: { screen: ChaptorPodcastScreen },
 	},
 	{
 		defaultNavigationOptions: () => ({
@@ -142,7 +144,12 @@ const HomeTab = createMaterialTopTabNavigator(
 
 HomeTab.navigationOptions = ({ navigation }) => ({
 	header: () => (
-		<ProfileHeader navigation={navigation} title="T R O V E" isBottomBorder={false} />
+		<ProfileHeader
+			navigation={navigation}
+			onGrid={() => navigation.navigate("NewUserNavigation", { isBack: true })}
+			title="T R O V E"
+			isBottomBorder={false}
+		/>
 	),
 });
 const HomeStack = createStackNavigator(
@@ -165,8 +172,8 @@ const HomeStack = createStackNavigator(
 const HomeDrawer = createDrawerNavigator(
 	{
 		HomeDrawerScreen: { screen: HomeStack },
-		HistoryDrawerScreen: { screen: Author }, // 1
-		BookmarkDrawerScreen: { screen: Bookmark }, // 2
+		HistoryDrawerScreen: { screen: History },
+		BookmarkDrawerScreen: { screen: Bookmark },
 		CustomizeInterestDrawerScreen: { screen: AuthLoading },
 		ProfileDrawerScreen: { screen: Profile },
 		SettingsDrawerScreen: { screen: AuthLoading },

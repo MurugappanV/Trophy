@@ -5,7 +5,7 @@ import { Actions } from "../../redux";
 import SignUpUI from "./SignUpUI";
 import { AlertComp } from "../../components";
 import { SignUpApi } from "../../service";
-import { emailValidator, Strings } from "../../asset";
+import { emailValidator, Strings, Constants } from "../../asset";
 
 type Props = {
 	navigation: any,
@@ -26,6 +26,7 @@ class SignUpAuthScreen extends PureComponent<Props> {
 
 	handleReturnToSignIn = () => {
 		const { navigation } = this.props;
+		this.setState({ clear: true });
 		navigation.navigate("LoginAuthScreen");
 	};
 
@@ -58,6 +59,7 @@ class SignUpAuthScreen extends PureComponent<Props> {
 		this.setState({ showLoader: false, clear: true });
 		navigation.navigate("MessageAuthScreen", {
 			message,
+			success: true,
 		});
 	};
 
@@ -69,7 +71,12 @@ class SignUpAuthScreen extends PureComponent<Props> {
 
 	onError = (error: any) => {
 		this.setState({ showLoader: false });
-		AlertComp(Strings.authentication.ALERT, error.toString());
+		//AlertComp(Strings.authentication.ALERT, error.toString());
+		let message = Constants.errorMessages.general;
+		if (error.toString().includes(Constants.errorMessages.checkNetwork)) {
+			message = Constants.errorMessages.network;
+		}
+		AlertComp(Strings.authentication.ALERT, message);
 	};
 
 	render() {

@@ -5,7 +5,7 @@ import { Actions } from "../../redux";
 import LoginUI from "./LoginUI";
 import LoginTabletUI from "./LoginTabletUI";
 import { Metrics, emailValidator, Strings, Constants } from "../../asset";
-import { LoginApi } from "../../service";
+import { LoginApi, StartUp, StartBrandsService } from "../../service";
 import { AlertComp } from "../../components";
 // import { addUserCredentialsRealm, setCurrentUserIdStorage } from "../../storage";
 
@@ -20,6 +20,8 @@ class Login extends PureComponent<Props> {
 		this.state = {
 			showLoader: false,
 		};
+		new StartUp(props);
+		StartBrandsService(props);
 	}
 
 	handleSignUp = () => {
