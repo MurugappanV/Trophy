@@ -34,7 +34,7 @@ export default class ListPodcastScreen extends PureComponent {
 							<PodcastListCard
 								title="Heading"
 								description="Description"
-								imageURL="https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg"
+								imageURL="https://firebasestorage.googleapis.com/v0/b/tastewithme-1.appspot.com/o/images.jpg?alt=media&token=ed152fde-8690-434b-afa5-7fbedecbf401"
 								onPress={() => navigation.navigate("ChaptorPodcastScreen")}
 							/>
 						)}

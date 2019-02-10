@@ -24,6 +24,7 @@ const LIGHTBLACK = "#1d1d1d";
 const yellow = "#feee00";
 const GREY11 = "rgb(219, 228, 242)";
 const WHITE_OPACITY = "rgba(255,255,255,.5)";
+const BLACK5 = "rgb(27,27,27)"; // text , bg
 
 const Colors = {
 	bgPrimaryDark: BLACK,
@@ -36,6 +37,7 @@ const Colors = {
 	bgPrimaryVarient: PINK,
 	bgSecondaryVarient: DARK_BLUE,
 	bgPrimaryBlack: BLACK3,
+	bgDrawer: BLACK5,
 
 	bodyPrimaryDark: BLACK,
 	bodyPrimaryLight: WHITE,

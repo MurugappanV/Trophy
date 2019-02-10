@@ -1,13 +1,13 @@
 import Types from "../Types";
 
-export function setMyTroveAction(list) {
+export function setMyTroveAction(tid, list) {
 	return (dispatch, getState) => {
-		dispatch({ type: Types.myTrove.SET_MY_TROVE, data: { list } });
+		dispatch({ type: Types.myTrove.SET_MY_TROVE, data: { tid, list } });
 	};
 }
 
-export function clearMyTroveAction() {
+export function clearMyTroveAction(tid) {
 	return (dispatch, getState) => {
-		dispatch({ type: Types.myTrove.CLEAR_MY_TROVE });
+		dispatch({ type: Types.myTrove.CLEAR_MY_TROVE, data: { tid } });
 	};
 }

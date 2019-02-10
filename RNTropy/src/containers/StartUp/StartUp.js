@@ -28,7 +28,7 @@ class StartUp extends PureComponent<Props> {
 		// 			navigation.navigate("TopicsAuthScreen");
 		// 			SplashScreen.hide();
 		// 		} else {
-		// 			navigation.navigate("HomeNavigation");
+		// 			navigation.navigate("HomeDrawerScreen");
 		// 			SplashScreen.hide();
 		// 		}
 		// 		console.log("user cred", userCred.topics);

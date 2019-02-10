@@ -14,7 +14,7 @@ type Props = {
 class HomeMenuNav extends PureComponent<Props> {
 	tab = (category: any) => {
 		// const screen = this.getTabForCategory(category);
-		const screen = category.name === "Economics" ? AuthLoading : ArticleList;
+		const screen = props => <ArticleList tid={category.tid} {...props} />;
 		return {
 			screen,
 		};

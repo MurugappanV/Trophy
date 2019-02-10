@@ -28,6 +28,7 @@ import TabBarNavigator from "./TabBarNavigator";
 import { Colors, Metrics } from "../asset";
 import { ProfileHeader } from "../components";
 import HomeMenuNavigator from "./HomeMenuNavigator";
+import DrawerNavigator from "./DrawerNavigator";
 // import AuthNavigator from "./AuthNavigator";
 
 const LoginScreen = Metrics.isTablet ? Login : FirstAuthScreen;
@@ -52,6 +53,18 @@ const NewUserStack = createStackNavigator(
 	{
 		TopicsAuthScreen: { screen: Topics },
 		BrandsAuthScreen: { screen: Brands },
+	},
+	{
+		defaultNavigationOptions: () => ({
+			header: null,
+		}),
+	},
+);
+
+const TopicsBrandsStack = createStackNavigator(
+	{
+		TopicsStackScreen: { screen: props => <Topics isNotStartUp {...props} /> },
+		BrandsStackScreen: { screen: Brands },
 	},
 	{
 		defaultNavigationOptions: () => ({
@@ -146,7 +159,7 @@ HomeTab.navigationOptions = ({ navigation }) => ({
 	header: () => (
 		<ProfileHeader
 			navigation={navigation}
-			onGrid={() => navigation.navigate("NewUserNavigation", { isBack: true })}
+			onGrid={() => navigation.navigate("CustomizeInterestDrawerScreen")}
 			title="T R O V E"
 			isBottomBorder={false}
 		/>
@@ -174,16 +187,18 @@ const HomeDrawer = createDrawerNavigator(
 		HomeDrawerScreen: { screen: HomeStack },
 		HistoryDrawerScreen: { screen: History },
 		BookmarkDrawerScreen: { screen: Bookmark },
-		CustomizeInterestDrawerScreen: { screen: AuthLoading },
+		CustomizeInterestDrawerScreen: { screen: TopicsBrandsStack },
+		BrandsDrawerScreen: { screen: Brands },
 		ProfileDrawerScreen: { screen: Profile },
 		SettingsDrawerScreen: { screen: AuthLoading },
 		HelpDrawerScreen: { screen: AuthLoading },
 		TosDrawerScreen: { screen: AuthLoading },
 	},
 	{
-		// tabBarComponent: TXTabBar,
+		contentComponent: DrawerNavigator,
 		drawerPosition: "right",
 		drawerType: "slide",
+		drawerWidth: 300,
 	},
 );
 
@@ -196,7 +211,7 @@ const NavContainer = createAppContainer(
 			NewUserNavigation: NewUserStack,
 		},
 		{
-			initialRouteName: "HomeNavigation",
+			initialRouteName: "AuthNavigation",
 		},
 	),
 );

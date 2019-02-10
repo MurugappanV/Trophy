@@ -1,8 +1,9 @@
 import { ItpAxiosInstance } from "../axios";
 
-const MyTroveApi = (onSuccess, onFailure, onError) => {
+const MyTroveApi = (topic_id, brand, onSuccess, onFailure, onError) => {
 	const url = "ws/my-trove";
-	ItpAxiosInstance.post(url, { topic_id: "2|3|5", brand: "cwo_en|mea_en|aviation_en" })
+	console.log("my trove api :", { topic_id, brand });
+	ItpAxiosInstance.post(url, { topic_id, brand })
 		.then((response: any) => {
 			if (response.status === 200) {
 				// null or empty
@@ -19,3 +20,5 @@ const MyTroveApi = (onSuccess, onFailure, onError) => {
 };
 
 export default MyTroveApi;
+// : "2|3|5"
+// : "cwo_en|mea_en|aviation_en"

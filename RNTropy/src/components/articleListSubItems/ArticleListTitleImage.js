@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
 		borderRadius: Metrics.SMALL_RADIUS,
 		marginLeft: Metrics.DEFAULT_LIST_PADDING,
 		marginTop: 4,
-		backgroundColor: "black",
+		backgroundColor: Colors.bgSecondaryLight,
 	},
 });

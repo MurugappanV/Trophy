@@ -44,7 +44,13 @@ export default class TabBarNavigator extends PureComponent<Props> {
 		return (
 			<View style={[styles.container, style]}>
 				{tabBarButtons}
-				<TouchableOpacity onPress={() => { navigation.toggleDrawer() }} style={styles.tabBarButton} key="berguer">
+				<TouchableOpacity
+					onPress={() => {
+						navigation.openDrawer();
+					}}
+					style={styles.tabBarButton}
+					key="berguer"
+				>
 					<Icon name={Images.menu} size={18} color={inactiveTintColor} />
 				</TouchableOpacity>
 			</View>

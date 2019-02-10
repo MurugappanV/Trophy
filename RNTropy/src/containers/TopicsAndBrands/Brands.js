@@ -43,7 +43,7 @@ class Brands extends Component {
 
 	onSuccess = (response: any) => {
 		const { navigation } = this.props;
-		navigation.navigate("HomeNavigation");
+		navigation.navigate("HomeDrawerScreen");
 		console.log("OnSuccess of Preference Brands: ", response);
 	};
 

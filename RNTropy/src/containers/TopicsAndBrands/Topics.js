@@ -10,6 +10,7 @@ type Props = {
 	navigation: any,
 	topics: array,
 	selectedList: array,
+	isNotStartUp?: boolean,
 };
 
 class Topics extends Component {
@@ -18,21 +19,24 @@ class Topics extends Component {
 		this.state = {
 			imageUrl: "https://facebook.github.io/react-native/docs/assets/favicon.png",
 		};
-		this.magnageTopics(this.props.topics);
+		console.log("topics const ", props);
+		this.magnageTopics(props.topics);
 		// new StartUp(props);
 	}
 
 	magnageTopics = (topics: array) => {
 		const { user, setMenuTopicsAction } = this.props;
-		const alreadySelected = new Set(user["topics"].split("|"));
-		const selectedTopics = [];
-		topics.forEach(item => {
-			if (alreadySelected.has(item.tid)) {
-				selectedTopics.push(item);
-			}
-		});
-		setMenuTopicsAction(selectedTopics);
-		console.log("Selected topics in topics after login", selectedTopics);
+		if (user) {
+			const alreadySelected = new Set(user["topics"].split("|"));
+			const selectedTopics = [];
+			topics.forEach(item => {
+				if (alreadySelected.has(item.tid)) {
+					selectedTopics.push(item);
+				}
+			});
+			setMenuTopicsAction(selectedTopics);
+			console.log("Selected topics in topics after login", selectedTopics);
+		}
 	};
 
 	onSelected = (followTrack: array) => {
@@ -42,8 +46,8 @@ class Topics extends Component {
 	};
 
 	onSuccess = (response: any) => {
-		const { navigation } = this.props;
-		navigation.navigate("BrandsAuthScreen");
+		const { navigation, isNotStartUp } = this.props;
+		navigation.navigate(isNotStartUp ? "BrandsStackScreen" : "BrandsAuthScreen");
 		console.log("OnSuccess of Preference Topics: ", response);
 	};
 
@@ -56,10 +60,11 @@ class Topics extends Component {
 	};
 
 	render() {
-		const { topics, selectedTopics, user, navigation } = this.props;
-		const isBack = navigation.getParam("isBack", false);
-		console.log("Selected Topics inside render: ", selectedTopics);
-		console.log("User id details in Topics: ", user);
+		const { topics, selectedTopics, user, navigation, isNotStartUp } = this.props;
+		const isBack = isNotStartUp;
+		console.log("topics navigation", navigation);
+		// console.log("Selected Topics inside render: ", selectedTopics);
+		// console.log("User id details in Topics: ", user);
 		return (
 			<FollowList
 				data={topics}
@@ -73,6 +78,10 @@ class Topics extends Component {
 		);
 	}
 }
+
+Topics.defaultProps = {
+	isNotStartUp: false,
+};
 
 const mapStateToProps = state => ({
 	topics: state.allTopics,

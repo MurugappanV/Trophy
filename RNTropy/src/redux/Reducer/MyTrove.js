@@ -2,14 +2,19 @@ import Types from "../Types";
 import createReducer from "./CreateReducer";
 import { Constants } from "../../asset";
 
-const initialMyTrove = [];
+const initialMyTrove = {};
 
 export const myTrove = createReducer(initialMyTrove, {
 	[Types.myTrove.SET_MY_TROVE](state, action) {
-		return manipulateMyTrove(action.data.list);
+		return {
+			...state,
+			[action.data.tid]: manipulateMyTrove(action.data.list),
+		};
 	},
-	[Types.myTrove.CLEAR_MY_TROVE]() {
-		return initialMyTrove;
+	[Types.myTrove.CLEAR_MY_TROVE](state, action) {
+		return {
+			[action.data.tid]: [],
+		};
 	},
 });
 

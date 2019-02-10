@@ -1,5 +1,14 @@
 import React, { PureComponent } from "react";
-import { View, FlatList, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+	View,
+	FlatList,
+	Image,
+	Text,
+	Platform,
+	TouchableNativeFeedback,
+	TouchableHighlight,
+	StyleSheet,
+} from "react-native";
 import { Colors, Metrics, ScalePerctFullWidth } from "../../asset";
 import {
 	ArticleListTitleImage,
@@ -13,6 +22,8 @@ import { getImageDisplayHeight } from "../../utilities";
 type Props = {
 	order?: object,
 };
+
+const Touchable = Platform.OS === "android" ? TouchableNativeFeedback : TouchableHighlight;
 
 // else if (type == "titleImage") {
 // 	return <ArticleListTitleImage imageUrl={"https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg"} />;
@@ -111,10 +122,12 @@ export default class ArticleListItem extends PureComponent<Props> {
 		const { order, data, settings, onPress } = this.props;
 		const { height } = this.state;
 		return (
-			<TouchableOpacity onPress={() => onPress()} style={styles.container}>
-				{this.renderArticle(order, data, settings, height)}
-				<View style={styles.lineSeperator} />
-			</TouchableOpacity>
+			<Touchable onPress={() => onPress()}>
+				<View style={styles.container}>
+					{this.renderArticle(order, data, settings, height)}
+					<View style={styles.lineSeperator} />
+				</View>
+			</Touchable>
 		);
 	}
 }

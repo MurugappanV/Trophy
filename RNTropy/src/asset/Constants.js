@@ -65,6 +65,17 @@ export const Constants = {
 		second: 10,
 		third: 15,
 	},
+	drawerTopData: [
+		{ routeName: "HistoryDrawerScreen", title: "History" },
+		{ routeName: "BookmarkDrawerScreen", title: "Bookmark" },
+		{ routeName: "CustomizeInterestDrawerScreen", title: "Customize your interests" },
+	],
+	drawerBottomData: [
+		{ routeName: "SettingsDrawerScreen", title: "Settings" },
+		{ routeName: "HelpDrawerScreen", title: "Help" },
+		{ routeName: "TosDrawerScreen", title: "Terms of service" },
+	],
+	drawerMiddleData: { routeName: "ProfileDrawerScreen", title: "Profile" },
 };
 
 export const TemplateConfig = {

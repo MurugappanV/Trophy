@@ -15,17 +15,25 @@ class ArticleListContainer extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
 		this.state = { loading: true, refresh: false, message: Constants.emptyMessages.noRecord };
-		MyTroveApi(this.onFetchSuccess, this.onFetchFailure, this.onFetchError);
+		const { tid, user } = this.props;
+		const topicId = tid === 0 ? user["topics"] : tid;
+		MyTroveApi(
+			topicId,
+			user["brands"],
+			this.onFetchSuccess,
+			this.onFetchFailure,
+			this.onFetchError,
+		);
 	}
 
 	onFetchSuccess = (data: any) => {
-		const { setMyTroveAction } = this.props;
+		const { setMyTroveAction, tid } = this.props;
 		this.setState({
 			loading: false,
 			refresh: false,
 			message: Constants.emptyMessages.noRecord,
 		});
-		setMyTroveAction(data);
+		setMyTroveAction(tid, data);
 	};
 
 	onFetchFailure = () => {
@@ -51,7 +59,7 @@ class ArticleListContainer extends PureComponent<Props> {
 
 	render() {
 		const { loading, message, refresh } = this.state;
-		const { data } = this.props;
+		const { data, tid } = this.props;
 		return (
 			<ArticleListUI
 				loading={loading}
@@ -59,7 +67,7 @@ class ArticleListContainer extends PureComponent<Props> {
 				refresh={refresh}
 				{...this.props}
 				onItemPress={this.onItemPress}
-				data={data}
+				data={data[tid] ? data[tid] : []}
 			/>
 		);
 	}
@@ -68,6 +76,7 @@ class ArticleListContainer extends PureComponent<Props> {
 function mapStateToProps(state) {
 	return {
 		data: state.myTrove,
+		user: state.user,
 	};
 }
 

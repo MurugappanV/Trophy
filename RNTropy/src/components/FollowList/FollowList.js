@@ -111,7 +111,7 @@ class FollowList extends PureComponent {
 				<View>
 					{Metrics.isTablet ? (
 						!isTopic ? (
-							<TouchableOpacity onPress= {()=>navigation.navigate("HomeNavigation")}>
+							<TouchableOpacity onPress= {()=>navigation.navigate("HomeDrawerScreen")}>
 									<Text style={style.skip} >Skip</Text>
 							</TouchableOpacity>
 							
@@ -134,13 +134,13 @@ class FollowList extends PureComponent {
 							</Text>
 						</View>
 					) : isTopic ? (
-						<PagerHeader onBack={() => navigation.goBack()} style={style.pageHeader} page={"1"} />
+						<PagerHeader onBack={isBack ? () => navigation.navigate("HomeDrawerScreen") : null} style={style.pageHeader} page={"1"} />
 					) : (
 						<PagerHeader
 							style={style.pageHeader}
 							actionLabel={"Skip"}
 							onAction={() => {
-								navigation.navigate("HomeNavigation");
+								navigation.navigate("HomeDrawerScreen");
 							}}
 							onBack={() => {
 								navigation.goBack();
