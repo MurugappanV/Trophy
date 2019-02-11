@@ -157,12 +157,12 @@ class ArticleView extends PureComponent<Props> {
 					isBottomBorder
 					onBack={() => navigation.goBack()}
 					isTransculent
-					contentColor={Colors.bodyPrimaryLight}
+					dynamicColor={theme[themeId]}
 				/>
 				<View
 					style={StyleSheet.flatten([
 						styles.container,
-						(contentContainerStyle = styles.containerStyle),
+						// (contentContainerStyle = styles.containerStyle),
 						// { backgroundcolor: "black" },
 					])}
 				>

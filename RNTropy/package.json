@@ -16,8 +16,8 @@
 		"react-native-gesture-handler": "^1.0.12",
 		"react-native-image-picker": "^0.28.0",
 		"react-native-keyboard-aware-scroll-view": "^0.8.0",
-		"react-native-snap-carousel": "^3.7.5",
 		"react-native-progress": "^3.5.0",
+		"react-native-snap-carousel": "^3.7.5",
 		"react-native-splash-screen": "^3.1.1",
 		"react-native-svg": "^9.0.6",
 		"react-native-svg-uri": "^1.2.3",
@@ -26,7 +26,6 @@
 		"react-navigation": "^3.0.9",
 		"react-navigation-fluid-transitions": "^0.3.0",
 		"react-redux": "^6.0.0",
-		"realm": "^2.22.0",
 		"redux": "^4.0.1",
 		"redux-logger": "^3.0.6",
 		"redux-thunk": "^2.3.0"
