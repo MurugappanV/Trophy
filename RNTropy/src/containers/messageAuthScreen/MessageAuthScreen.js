@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator, Image } from "react-native";
 import { connect } from "react-redux";
+import SvgUri from "react-native-svg-uri";
 import { bindActionCreators } from "redux";
 import { Actions } from "../../redux";
 import {
@@ -10,6 +11,7 @@ import {
 	Metrics,
 	Strings,
 	Constants,
+	Images,
 } from "../../asset";
 import { Button, AlertComp, TextButton } from "../../components";
 import { ResendApi } from "../../service";
@@ -56,7 +58,10 @@ class MessageAuthScreen extends PureComponent<Props> {
 
 	renderSuccessMessage = message => (
 		<View style={{ alignItems: "center" }}>
-			<Text style={styles.image}>Image</Text>
+			{/* <Text style={styles.image}>Image</Text> */}
+			<View style={styles.imageView}>
+				<Image source={Images.mailBox} style={styles.image} resizeMode="stretch" />
+			</View>
 			<Text style={styles.title}>{message}</Text>
 		</View>
 	);
@@ -86,16 +91,26 @@ class MessageAuthScreen extends PureComponent<Props> {
 		console.log("loader", this.state.showLoader);
 
 		return (
-			<View style={styles.container}>
+			<View style={[styles.container]}>
 				{success ? this.renderSuccessMessage(message) : this.renderFailureMessage(message)}
-				{this.state.showLoader ? <ActivityIndicator size="small" color="white" /> : null}
+				{this.state.showLoader ? (
+					<View style={styles.indicator}>
+						<ActivityIndicator size="small" color="white" />
+					</View>
+				) : null}
 				<Button
 					title={Strings.authentication.OK}
 					buttonStyle={{
-						marginTop: ScalePerctFullHeight(25),
+						marginTop: ScalePerctFullHeight(15),
 						marginBottom: ScalePerctFullHeight(11),
 					}}
-					onPress={this.handleLogin}
+					onPress={!this.state.showLoader ? this.handleLogin : null}
+					button={Images.downloadButton}
+					imageStyle={{
+						width: ScalePerctFullWidth(82),
+						height: 150,
+					}}
+					top={20}
 				/>
 			</View>
 		);
@@ -122,11 +137,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 	},
-	image: {
+	imageView: {
 		marginTop: ScalePerctFullHeight(23),
-		height: ScalePerctFullHeight(17),
 		marginBottom: ScalePerctFullHeight(3),
-		color: "white",
 	},
 	title: {
 		fontSize: Metrics.LARGE_TEXT_SIZE,
@@ -149,4 +162,15 @@ const styles = StyleSheet.create({
 	touchableText: {
 		textDecorationLine: "underline",
 	},
+	indicator: {
+		position: "absolute",
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "#00000080",
+	},
+	image: { height: ScalePerctFullWidth(31), width: ScalePerctFullWidth(31) },
 });

@@ -1,1 +1,6 @@
-export { setCurrentUserIdStorage, getCurrentUserIdStorage } from "./AsyncStore";
+export {
+	setCurrentUserIdStorage,
+	getCurrentUserIdStorage,
+	getUserStorage,
+	setUserStorage,
+} from "./AsyncStore";

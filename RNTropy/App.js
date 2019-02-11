@@ -25,7 +25,7 @@ export default class App extends PureComponent<Props> {
 		// 	.catch((error: any) => {
 		// 		console.log("error", error);
 		// 	});
-		SplashScreen.hide();
+		// SplashScreen.hide();
 	}
 
 	render() {

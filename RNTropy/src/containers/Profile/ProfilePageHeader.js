@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, StatusBar, TouchableOpacity, Image } from "react-native";
 import Icon from "../../asset/fonts/icons";
 import { Colors, ScalePerctFullWidth, Metrics, Images } from "../../asset";
+import { AlertComp } from "../../components";
 
 type Props = {
 	onBack?: Function,
@@ -24,13 +25,19 @@ const renderBackbtn = (onBack: Function, onGrid: Function) => {
 	);
 };
 
-const renderActionbtn = (onAction: Function, imageUrl: string, navigation: any) => {
+const renderActionbtn = (onAction: Function, imageUrl: string, navigation: any, onSave) => {
 	return (
 		<TouchableOpacity
-			onPress={onAction || (() => alert("Your details are updated successfully"))}
+			onPress={
+				onAction ||
+				(() => {
+					onSave();
+					alert("Your details are updated successfully");
+				})
+			}
 			style={styles.actionPicContainer}
 		>
-			<Text style={styles.actionPic}>save</Text>
+			<Text style={styles.actionPic}>Save</Text>
 		</TouchableOpacity>
 	);
 };
@@ -44,14 +51,24 @@ const renderTitle = (title: string) => {
 };
 
 export default function ProfilePageHeader(props: Props) {
-	const { style, onAction, onBack, onGrid, imageUrl, title, navigation, isChanged } = props;
+	const {
+		style,
+		onAction,
+		onBack,
+		onGrid,
+		imageUrl,
+		title,
+		navigation,
+		isChanged,
+		onSave,
+	} = props;
 	return (
 		<View style={StyleSheet.flatten([styles.container, style])}>
 			<StatusBar backgroundColor="transparent" translucent barStyle="dark-content" />
 			<View style={[styles.headerContainer]}>
 				{renderBackbtn(onBack, onGrid)}
 				{renderTitle(title)}
-				{isChanged ? renderActionbtn(onAction, imageUrl, navigation) : null}
+				{isChanged ? renderActionbtn(onAction, imageUrl, navigation, onSave) : null}
 			</View>
 		</View>
 	);

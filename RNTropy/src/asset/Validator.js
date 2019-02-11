@@ -4,6 +4,6 @@ export const emailValidator = (email: string) => {
 };
 
 export const passwordValidator = (password: string) => {
-	const reg = /^(?=.[0-9])(?=.[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+	const reg = new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,})");
 	return reg.test(password) === true;
 };

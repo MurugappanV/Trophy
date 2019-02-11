@@ -11,7 +11,14 @@ import {
 import SvgUri from "react-native-svg-uri";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Colors, ScalePerctFullWidth, ScalePerctFullHeight, Strings, Metrics } from "../../asset";
+import {
+	Colors,
+	ScalePerctFullWidth,
+	ScalePerctFullHeight,
+	Strings,
+	Metrics,
+	Images,
+} from "../../asset";
 import { TextInput, Button, AuthBackground, TextButton } from "../../components";
 
 type Props = {
@@ -75,6 +82,12 @@ export default class SignUpUI extends PureComponent<Props> {
 				}}
 				showLoader={showLoader}
 				onPress={() => handleSignUp(name, email, password, deviceId, checked)}
+				button={Images.loginButton}
+				imageStyle={{
+					width: ScalePerctFullWidth(100),
+					height: 100,
+				}}
+				top={11}
 			/>
 		);
 	};
@@ -119,7 +132,7 @@ export default class SignUpUI extends PureComponent<Props> {
 
 	renderPolicyText = () => (
 		<View style={styleUI.viewStyle}>
-			<TouchableOpacity onPress={this.handleCheckbox}>
+			<TouchableOpacity onPress={this.handleCheckbox} style={{ padding: 2 }}>
 				<Icon
 					name={this.state.checked ? "check-square" : "square-o"}
 					size={18}

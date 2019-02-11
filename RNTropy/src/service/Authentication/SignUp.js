@@ -12,9 +12,9 @@ function SignUpApi(name, email, password, deviceId, onSuccess, onFailure, onErro
 		device_id: deviceId,
 	})
 		.then((response: any) => {
-			if (response.data.status === "1") {
+			if (response.data.status === "Success" || response.data.status === "1") {
 				onSuccess(response.data.message);
-			} else if (response.data.status === "2") {
+			} else {
 				onFailure(response.data.message);
 			}
 		})

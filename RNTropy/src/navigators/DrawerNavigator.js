@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { Actions } from "../redux";
 import { Colors, Constants } from "../asset";
 import { Line, AlertComp } from "../components";
+import { setCurrentUserIdStorage } from "../storage";
 
 type Props = {
 	navigation: any,
@@ -48,6 +49,7 @@ class DrawerNavigator extends PureComponent<Props> {
 				"Are you sure you want to log out?",
 				() => {
 					clearUserAction();
+					setCurrentUserIdStorage(null);
 					navigation.navigate("AuthNavigation");
 				},
 				true,

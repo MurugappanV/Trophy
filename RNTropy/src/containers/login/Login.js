@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import SplashScreen from "react-native-splash-screen";
 import { bindActionCreators } from "redux";
 import { Actions } from "../../redux";
 import LoginUI from "./LoginUI";
@@ -7,6 +8,7 @@ import LoginTabletUI from "./LoginTabletUI";
 import { Metrics, emailValidator, Strings, Constants } from "../../asset";
 import { LoginApi, StartUp, StartBrandsService } from "../../service";
 import { AlertComp } from "../../components";
+import { setUserStorage, setCurrentUserIdStorage } from "../../storage";
 // import { addUserCredentialsRealm, setCurrentUserIdStorage } from "../../storage";
 
 type Props = {
@@ -20,8 +22,13 @@ class Login extends PureComponent<Props> {
 		this.state = {
 			showLoader: false,
 		};
-		new StartUp(props);
-		StartBrandsService(props);
+	}
+
+	componentDidMount() {
+		SplashScreen.hide();
+		if (!this.props.isSplashScreenHide) {
+			this.props.setStartUpAction(true);
+		}
 	}
 
 	handleSignUp = () => {
@@ -36,7 +43,7 @@ class Login extends PureComponent<Props> {
 
 	handleLogin = (email, password) => {
 		if (!email || !password) {
-			AlertComp(Strings.authentication.ALERT, "Enter the required fields");
+			AlertComp(Strings.authentication.ALERT, "Enter the valid email and password");
 		} else if (!emailValidator(email)) {
 			AlertComp(Strings.authentication.ALERT, Strings.authentication.ENTER_VALID_EMAIL);
 		} else {
@@ -51,7 +58,8 @@ class Login extends PureComponent<Props> {
 		console.log("success");
 		setUserAction(data);
 		// addUserCredentialsRealm(data);
-		// setCurrentUserIdStorage(data.id);
+		setCurrentUserIdStorage(data.id);
+		setUserStorage(data.id, data);
 		if (data.topics === null) {
 			navigation.navigate("TopicsAuthScreen");
 		} else {
@@ -76,7 +84,7 @@ class Login extends PureComponent<Props> {
 
 	onError = (error: any) => {
 		this.setState({ showLoader: false });
-		console.log("error", error);
+		console.log("error", error.toString().includes(Constants.errorMessages.checkNetwork));
 		let message = Constants.errorMessages.general;
 		if (error.toString().includes(Constants.errorMessages.checkNetwork)) {
 			message = Constants.errorMessages.network;
@@ -111,6 +119,7 @@ function mapStateToProps(state) {
 	// state
 	return {
 		user: state.User,
+		isSplashScreenHide: state.isSplashScreenHide,
 	};
 }
 

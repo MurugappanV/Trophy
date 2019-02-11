@@ -45,6 +45,7 @@ class Author extends PureComponent {
 					<FlatList
 						data={bookmarks}
 						keyExtractor={(x, i) => i.toString()}
+						ListFooterComponent={() => <View style={styles.footer} />}
 						renderItem={({ item, index }) => (
 							<Article
 								onPress={() => {}}
@@ -457,6 +458,9 @@ const styles = StyleSheet.create({
 	authorDetails: {
 		flexDirection: "row",
 		width: ScalePerctFullWidth(100),
+	},
+	footer: {
+		marginBottom: ScalePerctFullHeight(20),
 	},
 	image: {
 		height: ScalePerctFullWidth(32),

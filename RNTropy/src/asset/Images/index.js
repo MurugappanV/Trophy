@@ -15,4 +15,8 @@ export const Images = {
 	aA: "aA",
 	book: "book",
 	googlePlus: "googlePlus",
+	loginButton: require("./login_button.png"),
+	subscribeButton: require("./subscribe.png"),
+	downloadButton: require("./downloadButton.png"),
+	mailBox: require("./mailBox.png"),
 };

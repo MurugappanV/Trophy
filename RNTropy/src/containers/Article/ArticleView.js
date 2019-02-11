@@ -27,6 +27,7 @@ import {
 	ArticleDisplaytitle,
 	ProfileHeader,
 } from "../../components";
+import { ArticleDisplayApi } from "../../service";
 
 const image = require("../../asset/Images/login.png");
 
@@ -71,11 +72,34 @@ class ArticleView extends PureComponent<Props> {
 			isOpen: false,
 			themeId: "1",
 			size: "small",
+			loading: true,
 		};
+		this.onDocumentDisplay();
 	}
+
+	onDocumentDisplay = () => {
+		// const id = "16456~aviation_en";
+		this.props.clearDisplayArticleAction();
+		ArticleDisplayApi("16456~aviation_en", this.onSuccess, this.onFailure, this.onError);
+	};
+
+	onSuccess = response => {
+		this.setState({ loading: false });
+		this.props.setDisplayArticleAction(response);
+	};
+
+	onFailure = response => {
+		this.setState({ loading: false });
+	};
+
+	onError = response => {
+		this.setState({ loading: false });
+	};
 
 	renderDisplayItem = (type: string, data: any, settings: any) => {
 		const { themeId, size } = this.state;
+		const { articleDisplay } = this.props;
+		console.log("Article display ====", this.props.articleDisplay.data.title);
 		if (type === "logo") {
 			return <ArticleDisplayLogo dynamicColor={theme[themeId]} font={font[size]} />;
 		}
@@ -87,6 +111,7 @@ class ArticleView extends PureComponent<Props> {
 				<ArticleDisplaytitle
 					dynamicColor={theme[themeId]}
 					font={font[size]}
+					// data={articleDisplay.data.title}
 					// isCenter={settings.isCenter}
 				/>
 			);
@@ -146,9 +171,10 @@ class ArticleView extends PureComponent<Props> {
 	};
 
 	render() {
-		console.log("aaa", this.state.size);
+		console.log("Display", this.props.articleDisplay);
+		// console.log("aaa", this.state.size);
 		const { isOpen, themeId, size } = this.state;
-		const { order, data, settings, navigation } = this.props;
+		const { order, data, settings, navigation, articleDisplay } = this.props;
 		return (
 			<View style={styles.container}>
 				<ProfileHeader
@@ -178,7 +204,14 @@ class ArticleView extends PureComponent<Props> {
 							]
 						}
 					/> */}
-					{this.renderDisplayArticle(order, data, settings, size, themeId)}
+					{this.renderDisplayArticle(
+						order,
+						data,
+						settings,
+						size,
+						themeId,
+						articleDisplay,
+					)}
 				</View>
 				{isOpen && (
 					<TouchableOpacity
@@ -206,13 +239,22 @@ ArticleView.defaultProps = {
 // ["image", "logo", "title", "description"]
 // ["logo", "title", "image", "description"]
 
-function mapStateToProps() {
-	// state
-	return {};
-}
+// function mapStateToProps(state) {
+// 	// state
+// 	console.log("data_display", state.ArticleDisplay);
+// 	return {
+// 		articleDisplay: state.ArticleDisplay,
+// 	};
+// }
+const mapStateToProps = state => {
+	console.log("state", state.articleDisplay);
+	return {
+		articleDisplay: state.articleDisplay,
+	};
+};
 
 function mapDispatchToProps(dispatch) {
-	return {};
+	return bindActionCreators(Actions, dispatch);
 }
 
 export default connect(

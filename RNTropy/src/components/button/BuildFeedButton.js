@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, ImageBackground } from "react-native";
 import { ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
 import { Colors, Metrics } from "../../asset";
 
@@ -13,7 +13,13 @@ export default class BuildFeedButton extends Component {
 		let { onPress, title, style, ...props } = this.props;
 		return (
 			<TouchableOpacity onPress={onPress} style={[styles.container, style]}>
-				<Text style={styles.text}>{title ? title : "Build My Feed"}</Text>
+				<ImageBackground
+					source={require("../../asset/Images/subscribe.png")}
+					resizeMode={"stretch"}
+					style={[styles.container, style]}
+				>
+					<Text style={styles.text}>{title ? title : "Build My Feed"}</Text>
+				</ImageBackground>
 			</TouchableOpacity>
 		);
 	}
@@ -33,6 +39,8 @@ const tabStyles = StyleSheet.create({
 		color: Colors.bgPrimaryLight,
 		fontSize: 12,
 		fontWeight: "bold",
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	linearGradient: {
 		flex: 1,

@@ -8,7 +8,7 @@ export function setMenuTopicsAction(topics) {
 
 export function clearMenuTopicsAction() {
 	return (dispatch, getState) => {
-		dispatch({ type: Types.user.CLEAR_USER_ID });
+		dispatch({ type: Types.topic.CLEAR_MENU_TOPIC });
 	};
 }
 

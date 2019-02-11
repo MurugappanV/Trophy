@@ -47,6 +47,12 @@ const renderButton = (handleLoginEvent: Function) => (
 				marginBottom: ScalePerctFullHeight(5),
 			}}
 			onPress={() => handleLoginEvent()}
+			button={Images.loginButton}
+			imageStyle={{
+				width: ScalePerctFullWidth(100),
+				height: 100,
+			}}
+			top={11}
 		/>
 	</View>
 );

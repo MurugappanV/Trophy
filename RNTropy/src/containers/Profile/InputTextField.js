@@ -15,6 +15,7 @@ export default function InputTextField(props: Props) {
 					onChangeText={onChange}
 					placeholder={placeholder}
 					value={values}
+					secureTextEntry
 				/>
 			)}
 		</View>
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
 		height: ScalePerctFullWidth(12),
 		width: ScalePerctFullWidth(90),
 		marginTop: ScalePerctFullWidth(5),
-		marginLeft: ScalePerctFullWidth(5),
+		//marginLeft: ScalePerctFullWidth(5),
 		justifyContent: "center",
 		flexDirection: "row",
 		alignItems: "flex-start",
@@ -43,11 +44,11 @@ const styles = StyleSheet.create({
 	name: {
 		color: Colors.bgPrimaryDark,
 		fontSize: 12,
-		alignSelf: "center",
-		marginTop: ScalePerctFullHeight(4),
+		//alignSelf: "center",
+		marginTop: ScalePerctFullHeight(2),
 		fontWeight: "bold",
 		height: ScalePerctFullWidth(12),
-		width: ScalePerctFullWidth(22),
+		width: ScalePerctFullWidth(26),
 	},
 	separator: {
 		color: Colors.bgPrimaryDark,

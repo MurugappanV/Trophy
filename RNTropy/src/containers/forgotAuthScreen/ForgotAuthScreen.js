@@ -14,6 +14,7 @@ import {
 	Metrics,
 	emailValidator,
 	Constants,
+	Images,
 } from "../../asset";
 import { Button, TextInput, AuthBackground, AlertComp } from "../../components";
 import { ResetPasswordApi } from "../../service";
@@ -82,8 +83,7 @@ class ForgotAuthScreen extends PureComponent<Props> {
 				reference={(component: any) => {
 					this.email = component;
 				}}
-				onSubmitEditing={this.handleLogin}
-				returnKeyType="next"
+				onSubmitEditing={this.handleLoginEvent}
 				keyboardType="email-address"
 				onChangeText={text => this.setState({ email: text })}
 			/>
@@ -99,6 +99,12 @@ class ForgotAuthScreen extends PureComponent<Props> {
 			}}
 			showLoader={this.state.showLoader}
 			onPress={this.handleLoginEvent}
+			button={Images.loginButton}
+			imageStyle={{
+				width: ScalePerctFullWidth(100),
+				height: 100,
+			}}
+			top={11}
 		/>
 	);
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Image, Dimensions, StyleSheet } from "react-native";
+import SplashScreen from "react-native-splash-screen";
 import { FollowList } from "../../components";
 import { connect } from "react-redux";
 import { StartUp, TopicsPreferenceAPI } from "../../service";
@@ -20,12 +21,18 @@ class Topics extends Component {
 			imageUrl: "https://facebook.github.io/react-native/docs/assets/favicon.png",
 		};
 		console.log("topics const ", props);
-		this.magnageTopics(props.topics);
+		this.magnageTopics(props.topics, props.user, props.setMenuTopicsAction);
 		// new StartUp(props);
 	}
 
-	magnageTopics = (topics: array) => {
-		const { user, setMenuTopicsAction } = this.props;
+	componentDidMount() {
+		SplashScreen.hide();
+		if (!this.props.isSplashScreenHide) {
+			this.props.setStartUpAction(true);
+		}
+	}
+
+	magnageTopics = (topics: array, user, setMenuTopicsAction) => {
 		if (user) {
 			const alreadySelected = new Set(user["topics"].split("|"));
 			const selectedTopics = [];
@@ -42,7 +49,14 @@ class Topics extends Component {
 	onSelected = (followTrack: array) => {
 		const { setMenuTopicsAction, navigation, user, selectedTopics } = this.props;
 		setMenuTopicsAction(followTrack);
-		TopicsPreferenceAPI(user.id, followTrack, this.onSuccess, this.onFailure, this.onError);
+		user &&
+			TopicsPreferenceAPI(
+				user.id,
+				followTrack,
+				this.onSuccess,
+				this.onFailure,
+				this.onError,
+			);
 	};
 
 	onSuccess = (response: any) => {
@@ -60,7 +74,7 @@ class Topics extends Component {
 	};
 
 	render() {
-		const { topics, selectedTopics, user, navigation, isNotStartUp } = this.props;
+		const { topics, selectedTopics, navigation, isNotStartUp } = this.props;
 		const isBack = isNotStartUp;
 		console.log("topics navigation", navigation);
 		// console.log("Selected Topics inside render: ", selectedTopics);
@@ -68,7 +82,6 @@ class Topics extends Component {
 		return (
 			<FollowList
 				data={topics}
-				userId={user.id}
 				isBack={isBack}
 				navigation={navigation}
 				isTopic
@@ -87,6 +100,7 @@ const mapStateToProps = state => ({
 	topics: state.allTopics,
 	selectedTopics: state.menuTopics,
 	user: state.user,
+	isSplashScreenHide: state.isSplashScreenHide,
 });
 
 function mapDispatchToProps(dispatch) {

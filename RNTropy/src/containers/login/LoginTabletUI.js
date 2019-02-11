@@ -89,6 +89,7 @@ export default class LoginTabletUI extends PureComponent<Props> {
 				buttonStyle={styles.buttonStyle}
 				showLoader={showLoader}
 				onPress={() => handleLogin(email, password)}
+				button={Images.loginButton}
 			/>
 		);
 	};

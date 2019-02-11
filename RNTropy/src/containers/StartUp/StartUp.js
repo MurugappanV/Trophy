@@ -1,47 +1,72 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SplashScreen from "react-native-splash-screen";
 import { Actions } from "../../redux";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
 import { LoadingComp } from "../../components";
-// import { getCurrentUserIdStorage, getUserCredentialsRealm } from "../../storage";
+import { getCurrentUserIdStorage, getUserStorage } from "../../storage";
+import { StartUp, StartBrandsService } from "../../service";
 
 type Props = {
 	navigation: any,
+	setUserAction: Function,
 };
 
-class StartUp extends PureComponent<Props> {
+class StartUpScreen extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
+		new StartUp(props);
+		StartBrandsService(props);
 		this.state = {};
 	}
 
 	componentDidMount() {
-		const { navigation } = this.props;
-		// getCurrentUserIdStorage()
-		// 	.then((userId: number) => {
-		// 		console.log("userId", userId);
-		// 		const userCred = getUserCredentialsRealm(userId);
-		// 		if (!userCred.topics || userCred.topics.length < 1) {
-		// 			navigation.navigate("TopicsAuthScreen");
-		// 			SplashScreen.hide();
-		// 		} else {
-		// 			navigation.navigate("HomeDrawerScreen");
-		// 			SplashScreen.hide();
-		// 		}
-		// 		console.log("user cred", userCred.topics);
-		// 	})
-		// 	.catch((error: any) => {
-		// 		console.log("error", error);
-		// 	});
+		const { setUserAction, navigation } = this.props;
+		getCurrentUserIdStorage()
+			.then((userId: number) => {
+				if (userId) {
+					getUserStorage(userId)
+						.then((userString: string) => {
+							if (userString) {
+								const user = JSON.parse(userString);
+								setUserAction(user.user);
+								if (user.topics === null) {
+									navigation.navigate("TopicsAuthScreen");
+									// SplashScreen.hide();
+								} else {
+									navigation.navigate("HomeNavigation");
+									// SplashScreen.hide();
+								}
+							} else {
+								navigation.navigate("AuthNavigation");
+								// SplashScreen.hide();
+							}
+						})
+						.catch((error: any) => {
+							console.log("error", error);
+							navigation.navigate("AuthNavigation");
+							// SplashScreen.hide();
+						});
+				} else {
+					navigation.navigate("AuthNavigation");
+					// SplashScreen.hide();
+				}
+			})
+			.catch((error: any) => {
+				console.log("error", error);
+			});
 	}
 
 	render() {
 		return (
 			<View style={styles.container}>
-				<LoadingComp title="Loading..." />
+				<Image
+					resizeMode={"cover"}
+					source={require("../../asset/Images/splashscreen.png")}
+					style={styles.image}
+				/>
 			</View>
 		);
 	}
@@ -59,7 +84,7 @@ function mapDispatchToProps(dispatch) {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps,
-)(StartUp);
+)(StartUpScreen);
 
 const styles = StyleSheet.create({
 	header: {
@@ -70,6 +95,10 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		alignContent: "center",
 		backgroundColor: Colors.bgSecondaryLight,
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+	},
+	image: {
 		width: ScalePerctFullWidth(100),
 		height: ScalePerctFullHeight(100),
 	},

@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import SplashScreen from "react-native-splash-screen";
 import { Actions } from "../../redux";
 import ArticleListUI from "./ArticleListUI";
 import { MyTroveApi } from "../../service";
@@ -24,6 +25,13 @@ class ArticleListContainer extends PureComponent<Props> {
 			this.onFetchFailure,
 			this.onFetchError,
 		);
+	}
+
+	componentDidMount() {
+		SplashScreen.hide();
+		if (!this.props.isSplashScreenHide) {
+			this.props.setStartUpAction(true);
+		}
 	}
 
 	onFetchSuccess = (data: any) => {
@@ -77,6 +85,7 @@ function mapStateToProps(state) {
 	return {
 		data: state.myTrove,
 		user: state.user,
+		isSplashScreenHide: state.isSplashScreenHide,
 	};
 }
 

@@ -5,7 +5,7 @@ import { Line } from "../common";
 
 export default class ArticleDisplaytitle extends PureComponent<Props> {
 	renderTitle = title => {
-		const { dynamicColor, font } = this.props;
+		const { dynamicColor, font, titles } = this.props;
 		console.log;
 		return (
 			<Text

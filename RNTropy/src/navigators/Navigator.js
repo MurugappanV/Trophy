@@ -162,6 +162,7 @@ HomeTab.navigationOptions = ({ navigation }) => ({
 			onGrid={() => navigation.navigate("CustomizeInterestDrawerScreen")}
 			title="T R O V E"
 			isBottomBorder={false}
+			isLogo
 		/>
 	),
 });
@@ -195,6 +196,7 @@ const HomeDrawer = createDrawerNavigator(
 		TosDrawerScreen: { screen: AuthLoading },
 	},
 	{
+		initialRouteName: "HomeDrawerScreen",
 		contentComponent: DrawerNavigator,
 		drawerPosition: "right",
 		drawerType: "slide",
@@ -211,7 +213,7 @@ const NavContainer = createAppContainer(
 			NewUserNavigation: NewUserStack,
 		},
 		{
-			initialRouteName: "AuthNavigation",
+			initialRouteName: "StartUp",
 		},
 	),
 );

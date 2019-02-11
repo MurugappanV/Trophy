@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 	},
 	titleText: {
 		color: Colors.textHeading,
-		fontSize: Metrics.EXTRA_LARGE_TEXT_SIZE,
+		fontSize: Metrics.LARGE_TEXT_SIZE,
 		flex: 1,
 	},
 	imageOne: {

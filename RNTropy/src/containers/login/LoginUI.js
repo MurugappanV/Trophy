@@ -2,7 +2,14 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import SvgUri from "react-native-svg-uri";
-import { Colors, ScalePerctFullHeight, ScalePerctFullWidth, Strings, Metrics } from "../../asset";
+import {
+	Colors,
+	ScalePerctFullHeight,
+	ScalePerctFullWidth,
+	Strings,
+	Metrics,
+	Images,
+} from "../../asset";
 import { Button, TextInput, AuthBackground, TextButton } from "../../components";
 
 const logo = `<?xml version="1.0" encoding="UTF-8"?>
@@ -72,6 +79,12 @@ export default class LoginUI extends PureComponent<Props> {
 				}}
 				showLoader={showLoader}
 				onPress={() => handleLogin(email, password, this.clearText)}
+				button={Images.loginButton}
+				imageStyle={{
+					width: ScalePerctFullWidth(100),
+					height: 100,
+				}}
+				top={11}
 			/>
 		);
 	};

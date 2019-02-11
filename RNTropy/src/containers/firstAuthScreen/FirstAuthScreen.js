@@ -15,6 +15,13 @@ class FirstAuthScreen extends PureComponent<Props> {
 		this.state = {};
 	}
 
+	componentDidMount() {
+		SplashScreen.hide();
+		if (!this.props.isSplashScreenHide) {
+			this.props.setStartUpAction(true);
+		}
+	}
+
 	handleLoginEvent = () => {
 		const { navigation } = this.props;
 		navigation.navigate("LoginAuthScreen");
@@ -35,9 +42,11 @@ class FirstAuthScreen extends PureComponent<Props> {
 	}
 }
 
-function mapStateToProps() {
+function mapStateToProps(state: any) {
 	// state
-	return {};
+	return {
+		isSplashScreenHide: state.isSplashScreenHide,
+	};
 }
 
 function mapDispatchToProps(dispatch) {

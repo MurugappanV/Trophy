@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SvgUri from "react-native-svg-uri";
 import Svg, { Circle, Rect } from "react-native-svg";
+// import Share, { ShareSheet, Button } from "react-native-share";
 import { Actions } from "../../redux";
 import {
 	Colors,
@@ -25,7 +26,7 @@ import {
 	Metrics,
 	Images,
 } from "../../asset";
-import { Button, TextInput } from "../../components";
+// import { Button, TextInput } from "../../components";
 
 const image = require("../../asset/Images/login.png");
 
@@ -34,6 +35,23 @@ type Props = {
 };
 
 export default class ArticleFooter extends PureComponent<Props> {
+	constructor(props) {
+		super(props);
+		this.state = {
+			visible: false,
+		};
+	}
+
+	// onCancel() {
+	// 	console.log("CANCEL");
+	// 	this.setState({ visible: false });
+	// }
+
+	// onShare() {
+	// 	console.log("OPEN");
+	// 	this.setState({ visible: true });
+	// }
+
 	renderAlphaContainer = color => {
 		const { selectFont, isOpen, dynamicColor, themeId } = this.props;
 		// const color = "black";
@@ -116,6 +134,13 @@ export default class ArticleFooter extends PureComponent<Props> {
 	};
 
 	render() {
+		// let shareOptions = {
+		// 	title: "React Native",
+		// 	message: "Hola mundo",
+		// 	url: "http://facebook.github.io/react-native/",
+		// 	subject: "Share Link", //  for email
+		// 	social: Share.Social.WHATSAPP
+		// };
 		const {
 			isOpen,
 			themeId,
@@ -145,7 +170,9 @@ export default class ArticleFooter extends PureComponent<Props> {
 			>
 				<View style={StyleSheet.flatten([styles.collapseView])}>
 					<TouchableOpacity
-						// onPress={() => ()}
+						// onPress={() => {
+						// 	Share.open(shareOptions);
+						// }}
 						style={styles.icons}
 					>
 						<Icon name={Images.share} size={14} color={color} />

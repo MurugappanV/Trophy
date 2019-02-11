@@ -7,7 +7,7 @@ const PASSWORD = "Password";
 const LOGIN = "Login";
 const NAME = "Name";
 const SIGN_UP = "Sign Up";
-const RETURN_TO_SIGN_IN = "Return to sign in";
+const RETURN_TO_SIGN_IN = "Return to Sign in";
 const I_AGREE_WITH_TROVE = " I agree with Trove";
 const PRIVACY = "Privacy";
 const POLICY = "Policy";
@@ -21,7 +21,8 @@ const CLICK_HERE = "Click here";
 const TO_RESEND_MAIL = "to resend mail.";
 const ALERT = "Alert";
 const ENTER_VALID_EMAIL = "Enter valid Email";
-const ENTER_VALID_PASSWORD = "Enter valid password";
+const ENTER_VALID_PASSWORD =
+	"Enter a valid password with minimum 6 characters, one special character and one number";
 const AGREE_TERMS_AND_CONDITION = "Please agree Terms and Condition to proceed";
 const VIEW_ALL = "View all";
 

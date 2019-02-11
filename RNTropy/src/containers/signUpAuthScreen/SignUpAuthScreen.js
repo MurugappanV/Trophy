@@ -5,7 +5,7 @@ import { Actions } from "../../redux";
 import SignUpUI from "./SignUpUI";
 import { AlertComp } from "../../components";
 import { SignUpApi } from "../../service";
-import { emailValidator, Strings, Constants } from "../../asset";
+import { emailValidator, Strings, Constants, passwordValidator } from "../../asset";
 
 type Props = {
 	navigation: any,
@@ -35,6 +35,8 @@ class SignUpAuthScreen extends PureComponent<Props> {
 			AlertComp(Strings.authentication.ALERT, "Enter the required fields");
 		} else if (!emailValidator(email)) {
 			AlertComp(Strings.authentication.ALERT, Strings.authentication.ENTER_VALID_EMAIL);
+		} else if (!passwordValidator(password)) {
+			AlertComp(Strings.authentication.ALERT, Strings.authentication.ENTER_VALID_PASSWORD);
 		} else if (checked) {
 			this.setState({ showLoader: true });
 			SignUpApi(
