@@ -55,7 +55,7 @@ class Login extends PureComponent<Props> {
 		if (data.topics === null) {
 			navigation.navigate("TopicsAuthScreen");
 		} else {
-			navigation.navigate("TopicsAuthScreen");
+			navigation.navigate("HomeNavigation");
 		}
 	};
 

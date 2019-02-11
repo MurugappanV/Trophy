@@ -76,6 +76,7 @@ export const Constants = {
 		{ routeName: "TosDrawerScreen", title: "Terms of service" },
 	],
 	drawerMiddleData: { routeName: "ProfileDrawerScreen", title: "Profile" },
+	drawerLogoutData: { routeName: "Logout", title: "Logout" },
 };
 
 export const TemplateConfig = {

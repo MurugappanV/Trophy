@@ -1,17 +1,18 @@
 import React, { PureComponent } from "react";
-import { ScrollView, FlatList, View, TouchableOpacity, Text, StyleSheet } from "react-native";
-import { NavigationRoute } from "react-navigation";
-import Icon from "../asset/fonts/icons";
-import { Metrics, Colors, NavigationIconMap, Images, Constants } from "../asset";
-import { Separator, Line } from "../components";
+import { ScrollView, FlatList, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Actions } from "../redux";
+import { Colors, Constants } from "../asset";
+import { Line, AlertComp } from "../components";
 
 type Props = {
-	activeTintColor: string,
-	inactiveTintColor: string,
 	navigation: any,
+	style: any,
+	clearUserAction: Function,
 };
 
-export default class DrawerNavigator extends PureComponent<Props> {
+class DrawerNavigator extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -39,12 +40,30 @@ export default class DrawerNavigator extends PureComponent<Props> {
 	// 	);
 	// }
 
-	renderItem = (item: object, navigation: object) => {
+	onPress = (routeName: string) => {
+		const { clearUserAction, navigation } = this.props;
+		if (routeName === "Logout") {
+			AlertComp(
+				"Confirmation",
+				"Are you sure you want to log out?",
+				() => {
+					clearUserAction();
+					navigation.navigate("AuthNavigation");
+				},
+				true,
+				"Logout",
+			);
+		} else {
+			navigation.navigate(routeName);
+		}
+	};
+
+	renderItem = (item: any) => {
 		return (
 			<TouchableOpacity
 				style={styles.drawerButton}
 				onPress={() => {
-					navigation.navigate(item.routeName);
+					this.onPress(item.routeName);
 				}}
 			>
 				<Text style={styles.text}>{item.title}</Text>
@@ -57,7 +76,7 @@ export default class DrawerNavigator extends PureComponent<Props> {
 	};
 
 	render() {
-		const { navigation, style } = this.props;
+		const { style } = this.props;
 		return (
 			<ScrollView
 				style={[styles.container, style]}
@@ -66,25 +85,40 @@ export default class DrawerNavigator extends PureComponent<Props> {
 				<FlatList
 					style={StyleSheet.flatten([styles.listContainer, this.props.style])}
 					contentContainerStyle={styles.listContentContainerStyle}
-					renderItem={({ item }) => this.renderItem(item, navigation)}
+					renderItem={({ item }) => this.renderItem(item)}
 					data={Constants.drawerTopData}
-					keyExtractor={(item, index) => item.routeName}
+					keyExtractor={item => item.routeName}
 					ItemSeparatorComponent={this.renderSeperator}
 				/>
-				{this.renderItem(Constants.drawerMiddleData, navigation)}
+				{this.renderItem(Constants.drawerMiddleData)}
+				{this.renderSeperator()}
+				{this.renderItem(Constants.drawerLogoutData)}
 				{this.renderSeperator()}
 				<FlatList
 					style={StyleSheet.flatten([styles.listContainer, this.props.style])}
 					contentContainerStyle={styles.listContentContainerStyle}
-					renderItem={({ item }) => this.renderItem(item, navigation)}
+					renderItem={({ item }) => this.renderItem(item)}
 					data={Constants.drawerBottomData}
-					keyExtractor={(item, index) => item.routeName}
+					keyExtractor={item => item.routeName}
 					ItemSeparatorComponent={this.renderSeperator}
 				/>
 			</ScrollView>
 		);
 	}
 }
+
+function mapStateToProps() {
+	return {};
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(DrawerNavigator);
 
 const styles = StyleSheet.create({
 	container: {

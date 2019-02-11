@@ -6,8 +6,8 @@ export function setUserAction(user) {
 	};
 }
 
-export function clearUserIdAction() {
+export function clearUserAction() {
 	return (dispatch, getState) => {
-		dispatch({ type: Types.user.CLEAR_USER_ID });
+		dispatch({ type: Types.user.CLEAR_USER });
 	};
 }

@@ -6,7 +6,7 @@ import SplashScreen from "react-native-splash-screen";
 import { Actions } from "../../redux";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
 import { LoadingComp } from "../../components";
-import { getCurrentUserIdStorage, getUserCredentialsRealm } from "../../storage";
+// import { getCurrentUserIdStorage, getUserCredentialsRealm } from "../../storage";
 
 type Props = {
 	navigation: any,
