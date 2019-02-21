@@ -3,7 +3,7 @@ import { View, Image, StyleSheet } from "react-native";
 import { getImageHeight } from "../../utilities";
 import { Colors, Metrics, ScalePerctFullWidth } from "../../asset";
 
-const image = "https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg";
+// const image = "https://timedotcom.files.wordpress.com/2017/12/barack-obama.jpeg";
 
 export default class ArticleDisplayImage extends PureComponent<Props> {
 	renderImage = image => {
@@ -13,11 +13,12 @@ export default class ArticleDisplayImage extends PureComponent<Props> {
 				source={{
 					uri: image,
 				}}
+				resizeMode="cover"
 				style={StyleSheet.flatten([
 					styles.imageOne,
 					{
 						height,
-						backgroundColor: "black",
+						backgroundColor: Colors.bgSecondaryLight,
 					},
 				])}
 			/>
@@ -25,7 +26,8 @@ export default class ArticleDisplayImage extends PureComponent<Props> {
 	};
 
 	render() {
-		const { dynamicColor } = this.props;
+		const { dynamicColor, data } = this.props;
+		const image = data.field_picture_ref.und[0].image_path;
 		return (
 			<View
 				style={[
@@ -38,7 +40,8 @@ export default class ArticleDisplayImage extends PureComponent<Props> {
 					},
 				]}
 			>
-				{this.renderImage(image)}
+				{image && this.renderImage(image)}
+				{/* {this.renderImage(image)} */}
 			</View>
 		);
 	}

@@ -42,7 +42,7 @@ class MessageAuthScreen extends PureComponent<Props> {
 
 	onSuccess = (message: "string") => {
 		this.setState({ showLoader: false });
-		console.log("message", message);
+		console.log("message", message.message);
 		AlertComp(Strings.authentication.ALERT, message.message, () => this.handleLogin());
 		//alert("Activation link has been sent to your email");
 	};
@@ -57,8 +57,7 @@ class MessageAuthScreen extends PureComponent<Props> {
 	};
 
 	renderSuccessMessage = message => (
-		<View style={{ alignItems: "center" }}>
-			{/* <Text style={styles.image}>Image</Text> */}
+		<View style={styles.successContainer}>
 			<View style={styles.imageView}>
 				<Image source={Images.mailBox} style={styles.image} resizeMode="stretch" />
 			</View>
@@ -70,15 +69,24 @@ class MessageAuthScreen extends PureComponent<Props> {
 		const { navigation } = this.props;
 		const resend = navigation.getParam("resend");
 		return (
-			<View style={{ marginTop: ScalePerctFullHeight(38) }}>
+			<View style={styles.failureContainer}>
 				<Text style={styles.title}>{message}</Text>
 				{resend && (
-					<Text style={styles.description}>
-						<Text onPress={() => this.handleResend()} style={styles.touchableText}>
-							{Strings.authentication.CLICK_HERE}{" "}
-						</Text>
-						<Text>{Strings.authentication.TO_RESEND_MAIL}</Text>
-					</Text>
+					// <Text style={styles.description}>
+					// 	<Text onPress={() => this.handleResend()} style={styles.touchableText}>
+					// 		{Strings.authentication.CLICK_HERE}{" "}
+					// 	</Text>
+					// 	<Text>{Strings.authentication.TO_RESEND_MAIL}</Text>
+					// </Text>
+					<Button
+						title={Strings.authentication.RESEND}
+						onPress={!this.state.showLoader ? this.handleResend : null}
+						button={Images.downloadButton}
+						imageStyle={
+							Metrics.isTablet ? styles.resendButtonTablet : styles.resendButton
+						}
+						top={10}
+					/>
 				)}
 			</View>
 		);
@@ -103,13 +111,11 @@ class MessageAuthScreen extends PureComponent<Props> {
 					buttonStyle={{
 						marginTop: ScalePerctFullHeight(15),
 						marginBottom: ScalePerctFullHeight(11),
+						alignSelf: "center",
 					}}
 					onPress={!this.state.showLoader ? this.handleLogin : null}
 					button={Images.downloadButton}
-					imageStyle={{
-						width: ScalePerctFullWidth(82),
-						height: 150,
-					}}
+					imageStyle={Metrics.isTablet ? styles.imageStyleTablet : styles.imageStyle}
 					top={20}
 				/>
 			</View>
@@ -147,7 +153,7 @@ const styles = StyleSheet.create({
 		letterSpacing: 0,
 		color: Colors.bgPrimaryLight,
 		marginBottom: ScalePerctFullHeight(3),
-		marginHorizontal: ScalePerctFullWidth(24),
+		marginHorizontal: ScalePerctFullWidth(15),
 		textAlign: "center",
 	},
 	description: {
@@ -172,5 +178,20 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: "#00000080",
 	},
-	image: { height: ScalePerctFullWidth(31), width: ScalePerctFullWidth(31) },
+	image: {
+		height: ScalePerctFullWidth(31),
+		width: ScalePerctFullWidth(31),
+	},
+	imageStyle: {
+		width: ScalePerctFullWidth(82),
+		height: 150,
+	},
+	imageStyleTablet: {
+		width: ScalePerctFullWidth(45),
+		height: 150,
+	},
+	resendButton: { width: ScalePerctFullWidth(50), height: 100 },
+	resendButtonTablet: { width: ScalePerctFullWidth(20), height: 100 },
+	successContainer: { alignItems: "center", flex: 1 },
+	failureContainer: { marginTop: ScalePerctFullHeight(38), flex: 1, alignItems: "center" },
 });

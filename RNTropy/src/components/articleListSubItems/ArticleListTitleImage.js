@@ -38,8 +38,6 @@ ArticleListTitleImage.defaultProps = {
 
 const styles = StyleSheet.create({
 	container: {
-		borderBottomColor: Colors.bgPrimaryLight,
-		borderBottomWidth: 1,
 		width: ScalePerctFullWidth(100),
 		flexDirection: "row",
 		padding: Metrics.DEFAULT_LIST_PADDING,
@@ -48,6 +46,7 @@ const styles = StyleSheet.create({
 	titleText: {
 		color: Colors.textHeading,
 		fontSize: Metrics.LARGE_TEXT_SIZE,
+		fontFamily: "Lato-Bold",
 		flex: 1,
 	},
 	imageOne: {

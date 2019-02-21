@@ -50,14 +50,14 @@ ArticleListFooter.defaultProps = {
 
 const styles = StyleSheet.create({
 	container: {
-		borderBottomColor: Colors.bgPrimaryLight,
-		borderBottomWidth: 1,
 		alignSelf: "center",
 		flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
 		padding: Metrics.DEFAULT_LIST_PADDING,
 		width: ScalePerctFullWidth(100),
+		// borderBottomColor: Colors.bgPrimaryLight,
+		// borderBottomWidth: 1,
 	},
 	hours: {
 		fontSize: Metrics.MEDIUM_TEXT_SIZE,

@@ -25,6 +25,9 @@ const ENTER_VALID_PASSWORD =
 	"Enter a valid password with minimum 6 characters, one special character and one number";
 const AGREE_TERMS_AND_CONDITION = "Please agree Terms and Condition to proceed";
 const VIEW_ALL = "View all";
+const RESEND = "Resend";
+const SUBSCRIBE = "Subscribe";
+const UNSUBSCRIBE = "Unsubscribe";
 
 export const Strings = {
 	authentication: {
@@ -53,8 +56,11 @@ export const Strings = {
 		ENTER_VALID_EMAIL,
 		ENTER_VALID_PASSWORD,
 		AGREE_TERMS_AND_CONDITION,
+		RESEND,
 	},
 	podCast: {
 		VIEW_ALL,
+		SUBSCRIBE,
+		UNSUBSCRIBE,
 	},
 };

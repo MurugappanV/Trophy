@@ -59,8 +59,6 @@ ArticleListBigImage.defaultProps = {
 
 const styles = StyleSheet.create({
 	container: {
-		borderBottomColor: Colors.bgPrimaryLight,
-		borderBottomWidth: 1,
 		width: ScalePerctFullWidth(100),
 	},
 	image: {

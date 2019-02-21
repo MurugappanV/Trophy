@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View, FlatList, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, FlatList, Text, TouchableOpacity, ActivityIndicator} from "react-native";
 import { TopicsCard } from "../common";
 import {
 	Colors,
@@ -22,6 +22,7 @@ class FollowList extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
+			showLoader: props.loading,
 			followBrandTrack: props.selectedBrandsList,
 			followTrack: props.selectedTopicList,
 			selectedTopicList: props.selectedTopicList,
@@ -100,116 +101,150 @@ class FollowList extends PureComponent {
 		return found;
 	};
 
-	render() {
-		const { isBack, data, navigation, isTopic, onSelected, selectedTopicList, selectedBrandsList } = this.props;
-		console.log("Selected BrandList inside FollowList: ", selectedBrandsList)
-		const { followTrack, followBrandTrack } = this.state;
+	renderBrandHeaderForTab = () => {
+		const { navigation } = this.props;
+		return (
+			<TouchableOpacity onPress={() => navigation.navigate("HomeDrawerScreen")}>
+				<Text style={style.skip}>Skip</Text>
+			</TouchableOpacity>
+		)
+	}
+
+	topicsHeaderForTab = () => {
+		const { isTopic } = this.props;
+		return (
+			<View>
+				<Text style={[style.askQuestion, Metrics.isTablet && !isTopic && style.brand]}>
+					Which {isTopic ? "News" : "brand"} you want to read?
+				</Text>
+				<Text style={style.pickInfo}>
+					Pick the topics that interest you. add more at anytime.
+				</Text>
+			</View>
+		);
+	}
+
+	normalHeadersForTopsAndBrands = (isTopic) => {
+		const {navigation, isBack, selectedBrandsList, selectedTopicList } = this.props;
+		return (
+			isTopic ? (
+				<PagerHeader onBack={ isBack ? () => {
+					this.setState({ followBrandTrack:selectedBrandsList,
+						followTrack: selectedTopicList });
+					navigation.navigate("HomeDrawerScreen")} : null } 
+					style={style.pageHeader} page={"1"} />
+			) : (
+				<PagerHeader
+					style={style.pageHeader}
+					actionLabel={"Skip"}
+					onAction={() => {
+						this.setState({followBrandTrack: selectedBrandsList,
+							followTrack: selectedTopicList });
+						navigation.navigate("HomeDrawerScreen");
+					}}
+					onBack={() => {
+						this.setState({followBrandTrack: selectedBrandsList,
+							followTrack: selectedTopicList });
+						navigation.goBack();
+					}}
+					page={"2"}
+				/>
+			)
+		)
+	}
+
+	topicsList = (data:any) => {
 		const noOfColumn = Metrics.isTablet ? 4 : 2;
-		console.log("flatlist data", data  )
+		const { followTrack } = this.state;
+		return (
+			<FlatList
+				contentContainerStyle={style.contentContainer}
+				numColumns={noOfColumn}
+				data={data}
+				extraData={[followTrack]}
+				keyExtractor={(x, i) => i.toString()}
+				horizontal={false}
+				onEndReachedThreshold={0.5}
+				ListHeaderComponent={() => <View style={style.header} />}
+				ListFooterComponent={() => <View style={style.footer} />}
+				renderItem={({ item }) => (
+					<TopicsCard
+						isTopic={true}
+						containerStyle={style.items}
+						isFollowed={this.checkFollowStatusTopics(item.tid)}
+						onPress={() => this.onFollowTopics(item)}
+						name={item.name}
+						field_image={item.field_image}
+					/>
+				)}
+			/>
+		);
+	}
+
+	brandsList = ( data:any ) => {
+		const noOfColumn = Metrics.isTablet ? 4 : 2;
+		return ( 
+			<FlatList
+				contentContainerStyle={style.contentContainer}
+				numColumns={noOfColumn}
+				data={data}
+				extraData={[this.state.followBrandTrack]}
+				keyExtractor={(x, i) => i.toString()}
+				horizontal={false}
+				onEndReachedThreshold={0.5}
+				ListHeaderComponent={() => <View style={style.header} />}
+				ListFooterComponent={() => <View style={style.footer} />}
+				renderItem={({ item }) => (
+					<TopicsCard
+						isTopic={false}
+						containerStyle={style.items}
+						isFollowed={this.checkFollowStatusBrands(item.nid)}
+						onPress={() => this.onFollowBrand(item)}
+						name={item.title}
+						field_image={item.field_square_logo}
+					/>
+				)}
+			/>
+		);
+	}
+
+	render() {
+		const { data, isTopic, isBrand, onSelected, preferenceLoading } = this.props;
+		const { followTrack, followBrandTrack, showLoader } = this.state;
 		return (
 			<View style={style.container}>
 				<View>
-					{Metrics.isTablet ? (
-						!isTopic ? (
-							<TouchableOpacity onPress= {()=>navigation.navigate("HomeDrawerScreen")}>
-									<Text style={style.skip} >Skip</Text>
-							</TouchableOpacity>
-							
-						) : null
-					) : null}
+					{Metrics.isTablet && isBrand && this.renderBrandHeaderForTab()}
 				</View>
 				<View>
-					{Metrics.isTablet ? (
-						<View>
-							<Text
-								style={[
-									style.askQuestion,
-									Metrics.isTablet && !isTopic && style.brand,
-								]}
-							>
-								Which {isTopic ? "News" : "brand"} you want to read?
-							</Text>
-							<Text style={style.pickInfo}>
-								Pick the topics that interest you. add more at anytime.
-							</Text>
+					{Metrics.isTablet ? this.topicsHeaderForTab() : this.normalHeadersForTopsAndBrands(isTopic)}
+				</View>
+				<View>
+					{isTopic ? this.topicsList(data) : this.brandsList(data) }
+					{preferenceLoading ? (
+						<View style={style.indicator}>
+							<ActivityIndicator size="small" color="white" />
 						</View>
-					) : isTopic ? (
-						<PagerHeader onBack={isBack ? () => navigation.navigate("HomeDrawerScreen") : null} style={style.pageHeader} page={"1"} />
-					) : (
-						<PagerHeader
-							style={style.pageHeader}
-							actionLabel={"Skip"}
-							onAction={() => {
-								navigation.navigate("HomeDrawerScreen");
-							}}
-							onBack={() => {
-								navigation.goBack();
-							}}
-							page={"2"}
-						/>
-					)}
-				</View>
-				<View>
-					{isTopic ? (
-						<FlatList
-							contentContainerStyle={style.contentContainer}
-							numColumns={noOfColumn}
-							data={data}
-							extraData={[this.state.followTrack, this.lastItems]}
-							keyExtractor={(x, i) => i.toString()}
-							horizontal={false}
-							onEndReachedThreshold={0.5}
-							ItemSeparatorComponent={() => <View />}
-							ListHeaderComponent={() => <View style={style.header} />}
-							ListFooterComponent={() => <View style={style.footer} />}
-							renderItem={({ item }) => (
-								<TopicsCard
-									isTopic={true}
-									containerStyle={style.items}
-									isFollowed={this.checkFollowStatusTopics(item.tid)}
-									onPress={() => this.onFollowTopics(item)}
-									name={item.name}
-									field_image={item.field_image}
-								/>
-							)}
-						/>
-					) : (
-						<FlatList
-							contentContainerStyle={style.contentContainer}
-							numColumns={noOfColumn}
-							data={data}
-							extraData={[this.state.followTrack, this.lastItems]}
-							keyExtractor={(x, i) => i.toString()}
-							horizontal={false}
-							onEndReachedThreshold={0.5}
-							ItemSeparatorComponent={() => <View />}
-							ListHeaderComponent={() => <View style={style.header} />}
-							ListFooterComponent={() => <View style={style.footer} />}
-							renderItem={({ item }) => (
-								<TopicsCard
-									isTopic={false}
-									containerStyle={style.items}
-									isFollowed={this.checkFollowStatusBrands(item.nid)}
-									onPress={() => this.onFollowBrand(item)}
-									name={item.title}
-									field_image={item.field_square_logo}
-								/>
-							)}
-						/>
-					)}
+					) : null}
 				</View>
 				{ isTopic ? (this.state.followTrack.length >= Constants.topics.minimumTopics
 					&& (
 						<View style={style.BuildFeedButton}>
-							<BuildFeedButton onPress={() => onSelected(followTrack)} />
+							<BuildFeedButton onPress={() => {
+								this.setState({ showLoader: true });
+								onSelected(followTrack);
+							}}
+							/>
 						</View>
-					)) :
-					(this.state.followBrandTrack.length >= 1
-					&& (
-						<View style={style.BuildFeedButton} >
-							<BuildFeedButton onPress={() => onSelected(followBrandTrack)} />
-						</View>
-					))}
+					)) : (
+					<View style={style.BuildFeedButton} >
+						<BuildFeedButton onPress={() => {
+							this.setState({ showLoader: true });
+							onSelected(followBrandTrack);
+						}}
+						/>
+					</View>
+				)}
 
 			</View>
 		);
@@ -242,6 +277,16 @@ const normalStyles = StyleSheet.create({
 	footer: {
 		padding: ScalePerctFullHeight(13),
 		backgroundColor: "#00000000",
+	},
+	indicator: {
+		position: "absolute",
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "#00000080",
 	},
 });
 
@@ -289,6 +334,16 @@ const tabStyles = StyleSheet.create({
 	footer: {
 		marginBottom: ScalePerctFullHeight(10),
 		backgroundColor: "#00000000",
+	},
+	indicator: {
+		position: "absolute",
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "#00000080",
 	},
 });
 

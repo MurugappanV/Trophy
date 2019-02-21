@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import SplashScreen from "react-native-splash-screen";
 import { Actions } from "../../redux";
 import ArticleListUI from "./ArticleListUI";
-import { MyTroveApi } from "../../service";
+import { MyTroveApi, TopicsArticleApi } from "../../service";
 import { Constants } from "../../asset";
 
 type Props = {
@@ -15,22 +15,57 @@ type Props = {
 class ArticleListContainer extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { loading: true, refresh: false, message: Constants.emptyMessages.noRecord };
-		const { tid, user } = this.props;
-		const topicId = tid === 0 ? user["topics"] : tid;
-		MyTroveApi(
-			topicId,
-			user["brands"],
-			this.onFetchSuccess,
-			this.onFetchFailure,
-			this.onFetchError,
-		);
+		this.state = { loading: false, refresh: false, message: Constants.emptyMessages.noRecord };
 	}
 
 	componentDidMount() {
 		SplashScreen.hide();
 		if (!this.props.isSplashScreenHide) {
 			this.props.setStartUpAction(true);
+		}
+		const { tid, user } = this.props;
+		this.setState({
+			loading: true,
+		});
+		if (tid == 0) {
+			// console.log("tid", tid);
+			user &&
+				MyTroveApi(
+					user["topics"],
+					user["brands"],
+					this.onFetchSuccess,
+					this.onFetchFailure,
+					this.onFetchError,
+				);
+		} else {
+			// console.log("tid", tid);
+			TopicsArticleApi(tid, this.onFetchSuccess, this.onFetchFailure, this.onFetchError);
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		// console.log("on update out ");
+		if (prevProps.user != this.props.user) {
+			// console.log("on update in ");
+			const { tid, user } = this.props;
+
+			if (tid == 0) {
+				// console.log("tid", tid);
+				user &&
+					MyTroveApi(
+						user["topics"],
+						user["brands"],
+						this.onFetchSuccess,
+						this.onFetchFailure,
+						this.onFetchError,
+					);
+			} else {
+				// console.log("tid", tid);
+				TopicsArticleApi(tid, this.onFetchSuccess, this.onFetchFailure, this.onFetchError);
+			}
+			this.setState({
+				loading: true,
+			});
 		}
 	}
 
@@ -60,9 +95,9 @@ class ArticleListContainer extends PureComponent<Props> {
 		this.setState({ loading: false, refresh: false, message });
 	};
 
-	onItemPress = () => {
+	onItemPress = (nid: number, site: string) => {
 		const { screenProps } = this.props;
-		screenProps.navigation.navigate("ArticleDisplayHomeScreen");
+		screenProps.navigation.navigate("ArticleDisplayHomeScreen", { nid, site });
 	};
 
 	render() {

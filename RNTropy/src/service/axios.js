@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// const PRODUCTION = "http://murugappan.pythonanywhere.com/";
-// const PATH = "api/v1/seller/";
-
 const BASE_URL = "http://trove-drupal.itp.com/";
 const ITP_URL = "http://trove.itp.com/";
 

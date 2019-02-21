@@ -23,6 +23,14 @@ import {
 	History,
 	Author,
 	ChaptorPodcastScreen,
+	GalleryView,
+	BigImage,
+	Search,
+	VideoHome,
+	ViewListPodcastScreen,
+	PlayScreen,
+	FlowPlayerContainer,
+	VideoDetail,
 } from "../containers";
 import TabBarNavigator from "./TabBarNavigator";
 import { Colors, Metrics } from "../asset";
@@ -129,6 +137,32 @@ const PodcastStack = createStackNavigator(
 	{
 		ListPoscastScreen: { screen: ListPodcastScreen },
 		ChaptorPodcastScreen: { screen: ChaptorPodcastScreen },
+		ViewListPodcastScreen: { screen: ViewListPodcastScreen },
+		PlayScreen: { screen: PlayScreen },
+	},
+	{
+		defaultNavigationOptions: () => ({
+			header: null,
+		}),
+	},
+);
+
+const GalleryStack = createStackNavigator(
+	{
+		GalleryView: { screen: GalleryView },
+		BigImage: { screen: BigImage },
+	},
+	{
+		defaultNavigationOptions: () => ({
+			header: null,
+		}),
+	},
+);
+
+const VideoStack = createStackNavigator(
+	{
+		VideoHome: { screen: VideoHome },
+		VideoDetail: { screen: VideoDetail },
 	},
 	{
 		defaultNavigationOptions: () => ({
@@ -140,11 +174,12 @@ const PodcastStack = createStackNavigator(
 const HomeTab = createMaterialTopTabNavigator(
 	{
 		HomeTabScreen: { screen: ArticleStack },
-		VideoTabScreen: { screen: AuthLoading },
+		VideoTabScreen: { screen: VideoStack },
 		PodcastTabScreen: { screen: PodcastStack },
-		MagazineTabScreen: { screen: AuthLoading },
+		MagazineTabScreen: { screen: FlowPlayerContainer },
 	},
 	{
+		lazy: true,
 		tabBarComponent: TabBarNavigator,
 		swipeEnabled: true,
 		tabBarPosition: "bottom",
@@ -159,7 +194,7 @@ HomeTab.navigationOptions = ({ navigation }) => ({
 	header: () => (
 		<ProfileHeader
 			navigation={navigation}
-			onGrid={() => navigation.navigate("CustomizeInterestDrawerScreen")}
+			onGrid={() => navigation.navigate("TopicsStackScreen")}
 			title="T R O V E"
 			isBottomBorder={false}
 			isLogo
@@ -191,9 +226,9 @@ const HomeDrawer = createDrawerNavigator(
 		CustomizeInterestDrawerScreen: { screen: TopicsBrandsStack },
 		BrandsDrawerScreen: { screen: Brands },
 		ProfileDrawerScreen: { screen: Profile },
-		SettingsDrawerScreen: { screen: AuthLoading },
-		HelpDrawerScreen: { screen: AuthLoading },
-		TosDrawerScreen: { screen: AuthLoading },
+		TosDrawerScreen: { screen: GalleryStack },
+		SettingsDrawerScreen: { screen: Author },
+		HelpDrawerScreen: { screen: Search },
 	},
 	{
 		initialRouteName: "HomeDrawerScreen",

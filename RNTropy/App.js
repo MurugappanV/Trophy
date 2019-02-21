@@ -1,9 +1,9 @@
-/**
- * Trove React Native App
- *
- * @format
- * @flow
- */
+// /**
+//  * Trove React Native App
+//  *
+//  * @format
+//  * @flow
+//  */
 
 import React, { PureComponent } from "react";
 import SplashScreen from "react-native-splash-screen";
@@ -36,3 +36,27 @@ export default class App extends PureComponent<Props> {
 		);
 	}
 }
+
+// import React, { PureComponent } from "react";
+// import {
+// 	View,
+// 	FlatList,
+// 	Image,
+// 	Text,
+// 	Platform,
+// 	TouchableNativeFeedback,
+// 	TouchableHighlight,
+// 	StyleSheet,
+// } from "react-native";
+// import { WebView } from "react-native-webview";
+
+// export default class App extends PureComponent<Props> {
+// 	render() {
+// 		return (
+// 			<WebView
+// 				originWhitelist={["*"]}
+// 				source={{ html: "<h1>This is a static HTML source!</h1>" }}
+// 			/>
+// 		);
+// 	}
+// }

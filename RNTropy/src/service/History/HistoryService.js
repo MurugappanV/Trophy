@@ -1,6 +1,6 @@
 import { ItpAxiosInstance } from "../axios";
 
-const ShowHistorykApi = (userId, onSuccess, onFailure, onError) => {
+const ShowHistoryApi = (userId, onSuccess, onFailure, onError) => {
 	const url = "ws/show-history/";
 	const bookmarkUrl = url + userId;
 	console.log("Show Bookmark Url: ", bookmarkUrl);
@@ -21,4 +21,4 @@ const ShowHistorykApi = (userId, onSuccess, onFailure, onError) => {
 		});
 };
 
-export default ShowHistorykApi;
+export default ShowHistoryApi;

@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
 	text: {
 		color: Colors.bodyPrimaryLight,
 		fontSize: 12,
+		fontFamily: "Lato-Bold",
 	},
 	tabBarButton: {
 		justifyContent: "center",

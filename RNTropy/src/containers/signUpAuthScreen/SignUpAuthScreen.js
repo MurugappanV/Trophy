@@ -65,10 +65,20 @@ class SignUpAuthScreen extends PureComponent<Props> {
 		});
 	};
 
-	onFailure = (message: "string") => {
+	onFailure = (data: "object") => {
 		const { navigation } = this.props;
 		this.setState({ showLoader: false, clear: true });
-		navigation.navigate("MessageAuthScreen", { message });
+		if (data.error_code === "101") {
+			navigation.navigate("MessageAuthScreen", {
+				message: data.message,
+				resend: true,
+				id: data.id,
+			});
+		} else if (data.error_code === "102") {
+			navigation.navigate("MessageAuthScreen", { message: data.message });
+		} else if (data.error_code === "103") {
+			navigation.navigate("MessageAuthScreen", { message: data.message });
+		}
 	};
 
 	onError = (error: any) => {

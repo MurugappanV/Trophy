@@ -12,7 +12,11 @@ export default class BuildFeedButton extends Component {
 	render() {
 		let { onPress, title, style, ...props } = this.props;
 		return (
-			<TouchableOpacity onPress={onPress} style={[styles.container, style]}>
+			<TouchableOpacity
+				onPress={onPress}
+				style={[styles.container, style]}
+				activeOpacity={0.4}
+			>
 				<ImageBackground
 					source={require("../../asset/Images/subscribe.png")}
 					resizeMode={"stretch"}
@@ -27,7 +31,6 @@ export default class BuildFeedButton extends Component {
 
 const tabStyles = StyleSheet.create({
 	container: {
-		//position: "absolute",
 		height: ScalePerctFullHeight(6),
 		width: ScalePerctFullWidth(25),
 		justifyContent: "center",

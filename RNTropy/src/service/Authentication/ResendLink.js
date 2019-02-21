@@ -11,6 +11,8 @@ const ResendApi = (id: number, onSuccess, onFailure, onError) => {
 			onSuccess(response.data.message);
 		})
 		.catch((error: any) => {
+			console.log("error error", error);
+
 			onError(error);
 		});
 };

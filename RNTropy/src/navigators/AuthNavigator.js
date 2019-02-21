@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { createAppContainer, createStackNavigator } from "react-navigation";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import Video from "react-native-video";
-import { Actions } from "../redux";
+import { createStackNavigator } from "react-navigation";
+// import { connect } from "react-redux";
+// import { bindActionCreators } from "redux";
+// import Video from "react-native-video";
+// import { Actions } from "../redux";
 import {
 	AuthLoading,
 	FirstAuthScreen,

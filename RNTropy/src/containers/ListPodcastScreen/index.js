@@ -1,1 +1,2 @@
-export { default as ListPodcastScreen } from "./TopListPodcastScreen";
+export { default as ListPodcastScreen } from "./ListPodcastScreen";
+export { default as ViewListPodcastScreen } from "./ViewListPodcastScreen";

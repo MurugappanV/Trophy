@@ -1,9 +1,7 @@
 import Types from "../Types";
 import createReducer from "./CreateReducer";
 
-const initialTopicMenu = [
-
-];
+const initialTopicMenu = [];
 
 export const menuTopics = createReducer(initialTopicMenu, {
 	[Types.topic.SET_MENU_TOPIC](state, action) {

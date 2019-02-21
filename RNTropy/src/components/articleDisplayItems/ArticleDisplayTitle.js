@@ -1,9 +1,20 @@
 import React, { PureComponent } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Colors, Metrics, ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { withNavigation } from "react-navigation";
+import {
+	Colors,
+	Metrics,
+	ScalePerctFullWidth,
+	ScalePerctFullHeight,
+	Constants,
+} from "../../asset";
 import { Line } from "../common";
 
-export default class ArticleDisplaytitle extends PureComponent<Props> {
+class ArticleDisplaytitle extends PureComponent<Props> {
+	onItemPress = (authorName: string, authorId: number, site: string) => {
+		const { navigation } = this.props;
+		navigation.navigate("SettingsDrawerScreen", { authorName, authorId, site });
+	};
 	renderTitle = title => {
 		const { dynamicColor, font, titles } = this.props;
 		console.log;
@@ -31,37 +42,73 @@ export default class ArticleDisplaytitle extends PureComponent<Props> {
 		);
 	};
 
-	renderDate = (author, date) => {
+	renderDate = (author, date, authorName: string, authorId: number, site: string) => {
 		const { dynamicColor, font } = this.props;
 		return (
-			<Text
-				style={[
-					styles.dateText,
-					{ color: dynamicColor.fontColor },
-					{
-						fontSize:
-							font == "large"
-								? Metrics.SMALL_TEXT_SIZE + 4
-								: Metrics.SMALL_TEXT_SIZE,
-					},
-					{
-						lineHeight:
-							font == "large"
-								? Metrics.LARGE_LINE_HEIGHT + 4
-								: Metrics.LARGE_LINE_HEIGHT,
-					},
-				]}
-			>
-				{author}
-				<Text>
-					<Text style={styles.dot}> . </Text> {date}
+			<View style={{ flexDirection: "row" }}>
+				<TouchableOpacity onPress={() => this.onItemPress(authorName, authorId, site)}>
+					<Text
+						style={[
+							styles.dateText,
+							{ color: dynamicColor.fontColor },
+							{
+								fontSize:
+									font == "large"
+										? Metrics.SMALL_TEXT_SIZE + 4
+										: Metrics.SMALL_TEXT_SIZE,
+							},
+							{
+								lineHeight:
+									font == "large"
+										? Metrics.LARGE_LINE_HEIGHT + 4
+										: Metrics.LARGE_LINE_HEIGHT,
+							},
+						]}
+					>
+						{author}
+					</Text>
+				</TouchableOpacity>
+				<Text style={styles.dot}>{Constants.articleDisplay.blackCircle}</Text>
+				<Text
+					style={[
+						styles.date,
+						{ color: dynamicColor.fontColor },
+						{
+							fontSize:
+								font == "large"
+									? Metrics.SMALL_TEXT_SIZE + 4
+									: Metrics.SMALL_TEXT_SIZE,
+						},
+						{
+							lineHeight:
+								font == "large"
+									? Metrics.LARGE_LINE_HEIGHT + 4
+									: Metrics.LARGE_LINE_HEIGHT,
+						},
+					]}
+				>
+					{date}
 				</Text>
-			</Text>
+			</View>
 		);
 	};
 	render() {
 		console.log("title called");
-		const { dynamicColor } = this.props;
+
+		const { dynamicColor, data } = this.props;
+
+		console.log("titleData", data);
+		// array.length < 1 || array == undefined
+		const author = !data.author
+			? "author"
+			: data.author.und[0].name
+			? data.author.und[0].name
+			: data.byline;
+		const title = data.title;
+		console.log("author", author);
+		// const author = data.author.und[0].name ? data.author.und[0].name : data.byline;
+		const date = data.published_date ? data.published_date : data.created_date;
+		const articleTemplate = data.article_template;
 		return (
 			<View
 				style={[
@@ -70,49 +117,50 @@ export default class ArticleDisplaytitle extends PureComponent<Props> {
 					{ color: dynamicColor.fontColor },
 				]}
 			>
-				{this.renderTitle("Fashion Designer Alexis Mabille’s Paris Villa")}
-				{this.renderDate("By Odovacar Golzar", "Jan 16,  2018,  3:44 PM")}
-				{/* <Text style={styles.lineSeperator} /> */}
-				<Line style={styles.lineSeperator} />
+				{this.renderTitle(title)}
+				{this.renderDate(author, date)}
+				{(articleTemplate === "1" || articleTemplate === "2") && (
+					<Line style={styles.lineSeperator} />
+				)}
 			</View>
 		);
 	}
 }
+export default withNavigation(ArticleDisplaytitle);
+
 const styles = StyleSheet.create({
 	container: {
 		width: "100%",
 		height: "100%",
-		alignItems: "center",
-		flex: 1,
-		// marginBottom: 30,
-	},
-	dateText: {
-		fontSize: Metrics.SMALL_TEXT_SIZE,
-		letterSpacing: 0.3,
-		padding: Metrics.DEFAULT_PADDING,
-		textAlign: "left",
-		alignSelf: "stretch",
-		flexWrap: "wrap",
 		alignItems: "flex-start",
-		flexDirection: "row",
-		justifyContent: "space-between",
-		lineHeight: Metrics.LARGE_LINE_HEIGHT,
+		flex: 1,
+		padding: Metrics.DEFAULT_LIST_PADDING,
 	},
 	titleText: {
 		fontSize: Metrics.EXTRA_LARGE_TEXT_SIZE,
-		padding: Metrics.DEFAULT_PADDING,
+		// padding: Metrics.DEFAULT_PADDING,
 		lineHeight: Metrics.EXTRA_LARGE_LINE_HEIGHT,
-		paddingLeft: 5,
+		fontFamily: "Lato-Bold",
+		// paddingLeft: Metrics.DEFAULT_LIST_PADDING,
 	},
 	lineSeperator: {
-		width: "90%",
+		width: ScalePerctFullWidth(90),
 		height: 1,
 		paddingBottom: Metrics.DEFAULT_PADDING,
 		paddingTop: 0,
 		borderBottomWidth: 1,
 		borderColor: Colors.linePrimary,
-		// marginBottom: 10,
-		// marginTop: Metrics.DEFAULT_PADDING,
 		paddingHorizontal: Metrics.DEFAULT_PADDING,
+	},
+	date: {
+		// paddingLeft: Metrics.DEFAULT_PADDING,
+		fontSize: Metrics.SMALL_TEXT_SIZE,
+		lineHeight: Metrics.LARGE_LINE_HEIGHT,
+		fontFamily: "Lato-Regular",
+	},
+	dot: {
+		paddingLeft: Metrics.DEFAULT_PADDING,
+		paddingRight: Metrics.DEFAULT_PADDING,
+		paddingTop: 2,
 	},
 });

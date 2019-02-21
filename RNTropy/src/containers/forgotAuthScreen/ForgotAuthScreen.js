@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -97,21 +97,24 @@ class ForgotAuthScreen extends PureComponent<Props> {
 				marginTop: ScalePerctFullHeight(8),
 				marginBottom: ScalePerctFullHeight(4),
 			}}
-			showLoader={this.state.showLoader}
-			onPress={this.handleLoginEvent}
+			disabled={this.state.showLoader}
+			onPress={!this.state.showLoader ? this.handleLoginEvent : null}
 			button={Images.loginButton}
-			imageStyle={{
-				width: ScalePerctFullWidth(100),
-				height: 100,
-			}}
+			imageStyle={styles.imageStyle}
 			top={11}
 		/>
 	);
 
 	render() {
+		const { showLoader } = this.state;
 		return (
 			<AuthBackground>
 				<KeyboardAwareScrollView>
+					{showLoader ? (
+						<View style={styles.indicator}>
+							<ActivityIndicator size="small" color="white" />
+						</View>
+					) : null}
 					<View
 						style={{
 							width: ScalePerctFullWidth(100),
@@ -178,6 +181,20 @@ const mobileStyles = StyleSheet.create({
 		paddingHorizontal: ScalePerctFullWidth(9),
 		alignItems: "center",
 	},
+	indicator: {
+		position: "absolute",
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "#00000080",
+	},
+	imageStyle: {
+		width: ScalePerctFullWidth(100),
+		height: 100,
+	},
 });
 
 const tabStyles = StyleSheet.create({
@@ -204,6 +221,20 @@ const tabStyles = StyleSheet.create({
 	paddingHorizontal: {
 		paddingHorizontal: ScalePerctFullWidth(35),
 		alignItems: "center",
+	},
+	indicator: {
+		position: "absolute",
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "#00000080",
+	},
+	imageStyle: {
+		width: ScalePerctFullWidth(45),
+		height: 100,
 	},
 });
 

@@ -55,6 +55,7 @@ export default class ArticleListItem extends PureComponent<Props> {
 	}
 
 	renderItem = (type: string, data: any, settings: any, height: number) => {
+		const { onPressBookmark } = this.props;
 		if (type === "logo") {
 			return (
 				<ArticleListLogo
@@ -92,6 +93,7 @@ export default class ArticleListItem extends PureComponent<Props> {
 					isCenter={settings.isCenter}
 					time={data.time}
 					isBookMarked={data.isBookMarked}
+					onBookMarkToggle={onPressBookmark}
 				/>
 			);
 		}
@@ -121,6 +123,7 @@ export default class ArticleListItem extends PureComponent<Props> {
 	render() {
 		const { order, data, settings, onPress } = this.props;
 		const { height } = this.state;
+		// console.log("storyImage", data.title);
 		return (
 			<Touchable onPress={() => onPress()}>
 				<View style={styles.container}>
@@ -138,8 +141,8 @@ ArticleListItem.defaultProps = {
 
 const styles = StyleSheet.create({
 	container: {
-		borderBottomColor: Colors.bgPrimaryLight,
-		borderBottomWidth: 1,
+		// borderBottomColor: Colors.bgPrimaryLight,
+		// borderBottomWidth: 1,
 		flex: 1,
 		alignSelf: "center",
 	},
@@ -147,6 +150,6 @@ const styles = StyleSheet.create({
 		width: ScalePerctFullWidth(100) - Metrics.DEFAULT_LIST_PADDING * 2,
 		alignSelf: "center",
 		borderBottomWidth: 1,
-		borderColor: Colors.linePrimary,
+		borderColor: Colors.linePrimaryFull,
 	},
 });

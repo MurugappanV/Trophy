@@ -3,6 +3,7 @@ package com.itpmedia.trove;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ShareApplication,Rea
       return Arrays.<ReactPackage>asList(
         new RNDeviceInfo(),
           new MainReactPackage(),
+            new RNCWebViewPackage(),
             new ReactVideoPackage(),
             new VectorIconsPackage(),
             new SvgPackage(),

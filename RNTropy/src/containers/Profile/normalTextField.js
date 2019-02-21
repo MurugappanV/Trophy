@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { ScalePerctFullWidth, ScalePerctFullHeight, Colors } from "../../asset";
 
-export default function NormalTextField(props: Props) {
+export default function NormalTextField(props: any) {
 	const { label, value } = props;
 	return (
 		<View style={styles.textContainer}>
@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
 		marginTop: ScalePerctFullHeight(2),
 		fontWeight: "bold",
 		height: ScalePerctFullWidth(12),
-		width: ScalePerctFullWidth(26),
+		width: ScalePerctFullWidth(35),
+		marginLeft: 35,
 	},
 	textStatic: {
 		fontWeight: "bold",

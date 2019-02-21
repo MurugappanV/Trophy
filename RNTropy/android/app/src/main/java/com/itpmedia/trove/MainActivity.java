@@ -13,6 +13,7 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.show(this,R.style.AppTheme);  // here
         super.onCreate(savedInstanceState);
+        
     }
 
     /**

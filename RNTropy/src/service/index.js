@@ -1,9 +1,28 @@
 export { StartUp } from "./StartUp";
 export { StartBrandsService } from "./BrandService";
-export { SignUpApi, LoginApi, ResendApi, ResetPasswordApi } from "./Authentication";
+export {
+	SignUpApi,
+	LoginApi,
+	ResendApi,
+	ResetPasswordApi,
+	FetchPreferenceApi,
+} from "./Authentication";
 export { BrandsPreferenceAPI } from "./Brands";
 export { TopicsPreferenceAPI } from "./Topics";
-export { MyTroveApi } from "./Articles";
+export { ShowBoookmarkApi, ManageBoookmarkApi } from "./BookmarkService";
+export { MyTroveApi, TopicsArticleApi, BrandsArticleApi } from "./Articles";
 export { ArticleDisplayApi } from "./ArticleDisplay";
-export { ShowBoookmarkApi } from "./BookmarkService";
-export { ShowHistorykApi } from "./History";
+export { ShowHistoryApi } from "./History";
+export { AuthorDetails } from "./Author";
+export { ProfilePicUpload, ChangePasswordAPI, updatenameAPI } from "./Profile";
+export { VideoHomeAPI } from "./Video";
+export { PodcastListApi, PodcastChaptorApi, PodcastViewListApi, Subscribe } from "./Podcast";
+export { SearchApi } from "./Search";
+export {
+	CancelSubscriptionApi,
+	MagazineDetailApi,
+	MagazineIssueApi,
+	SaveSubscriptionApi,
+	SubscribedMagazinesApi,
+	PreviousIssueApi,
+} from "./Magazine";

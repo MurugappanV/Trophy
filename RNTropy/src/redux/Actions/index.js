@@ -4,6 +4,7 @@ import * as BrandsActions from "./Brands";
 import * as MyTroveActions from "./MyTrove";
 import * as ArticleDisplayActions from "./ArticleDisplay";
 import * as StartUpActions from "./StartUp";
+import * as SetPodcastList from "./PodcastList";
 
 const Actions = Object.assign(
 	{},
@@ -12,6 +13,7 @@ const Actions = Object.assign(
 	BrandsActions,
 	MyTroveActions,
 	StartUpActions,
+	SetPodcastList,
 	ArticleDisplayActions,
-
+);
 export default Actions;

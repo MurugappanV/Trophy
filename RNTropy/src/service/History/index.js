@@ -1,1 +1,1 @@
-export { default as ShowHistorykApi } from "./HistoryService";
+export { default as ShowHistoryApi } from "./HistoryService";

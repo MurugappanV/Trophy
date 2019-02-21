@@ -5,6 +5,7 @@ import {
 	Text,
 	TouchableOpacity,
 	Keyboard,
+	ActivityIndicator,
 	KeyboardAvoidingView,
 	ScrollView,
 } from "react-native";
@@ -80,13 +81,14 @@ export default class SignUpUI extends PureComponent<Props> {
 					marginTop: ScalePerctFullHeight(4),
 					marginBottom: ScalePerctFullHeight(4),
 				}}
-				showLoader={showLoader}
-				onPress={() => handleSignUp(name, email, password, deviceId, checked)}
+				disabled={showLoader}
+				onPress={
+					!showLoader
+						? () => handleSignUp(name, email, password, deviceId, checked)
+						: null
+				}
 				button={Images.loginButton}
-				imageStyle={{
-					width: ScalePerctFullWidth(100),
-					height: 100,
-				}}
+				imageStyle={styleUI.imageStyle}
 				top={11}
 			/>
 		);
@@ -170,10 +172,15 @@ export default class SignUpUI extends PureComponent<Props> {
 	);
 
 	render() {
-		const { handleReturnToSignIn } = this.props;
+		const { handleReturnToSignIn, showLoader } = this.props;
 		return (
 			<AuthBackground>
 				<KeyboardAwareScrollView>
+					{showLoader ? (
+						<View style={styleUI.indicator}>
+							<ActivityIndicator size="small" color="white" />
+						</View>
+					) : null}
 					<View
 						style={{
 							width: ScalePerctFullWidth(100),
@@ -254,6 +261,20 @@ const styles = StyleSheet.create({
 		paddingHorizontal: ScalePerctFullWidth(9),
 		alignItems: "center",
 	},
+	indicator: {
+		position: "absolute",
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "#00000080",
+	},
+	imageStyle: {
+		width: ScalePerctFullWidth(100),
+		height: 100,
+	},
 });
 
 const tabStyles = StyleSheet.create({
@@ -305,6 +326,20 @@ const tabStyles = StyleSheet.create({
 	paddingHorizontal: {
 		paddingHorizontal: ScalePerctFullWidth(35),
 		alignItems: "center",
+	},
+	imageStyle: {
+		width: ScalePerctFullWidth(45),
+		height: 100,
+	},
+	indicator: {
+		position: "absolute",
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "#00000080",
 	},
 });
 

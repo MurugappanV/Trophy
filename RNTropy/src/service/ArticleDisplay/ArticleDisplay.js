@@ -1,7 +1,7 @@
 import { ItpAxiosInstance } from "../axios";
 
 const ArticleDisplayApi = (articleId, onSuccess, onFailure, onError) => {
-	const url = "ws/article-details/16456~aviation_en";
+	const url = `ws/article-details/${articleId}`;
 	ItpAxiosInstance.get(url)
 		.then((response: any) => {
 			if (response.status === 200) {

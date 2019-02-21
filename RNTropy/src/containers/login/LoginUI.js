@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import SvgUri from "react-native-svg-uri";
 import {
@@ -77,8 +77,9 @@ export default class LoginUI extends PureComponent<Props> {
 					marginTop: ScalePerctFullHeight(8),
 					marginBottom: ScalePerctFullHeight(4),
 				}}
-				showLoader={showLoader}
-				onPress={() => handleLogin(email, password, this.clearText)}
+				disabled={showLoader}
+				//showLoader={showLoader}
+				onPress={!showLoader ? () => handleLogin(email, password, this.clearText) : null}
 				button={Images.loginButton}
 				imageStyle={{
 					width: ScalePerctFullWidth(100),
@@ -90,10 +91,15 @@ export default class LoginUI extends PureComponent<Props> {
 	};
 
 	render() {
-		const { handleSignUp } = this.props;
+		const { handleSignUp, showLoader } = this.props;
 		return (
 			<AuthBackground>
 				<KeyboardAwareScrollView>
+					{showLoader ? (
+						<View style={styles.indicator}>
+							<ActivityIndicator size="small" color="white" />
+						</View>
+					) : null}
 					<View
 						style={{
 							width: ScalePerctFullWidth(100),
@@ -144,5 +150,15 @@ const styles = StyleSheet.create({
 	formStyle: {
 		alignSelf: "stretch",
 		paddingHorizontal: ScalePerctFullWidth(9),
+	},
+	indicator: {
+		position: "absolute",
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "#00000080",
 	},
 });

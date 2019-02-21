@@ -79,10 +79,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
-<array>
-  <string>whatsapp</string>
-  <string>mailto</string>
-</array>
+	<array>
+		<string>whatsapp</string>
+		<string>mailto</string>
+	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

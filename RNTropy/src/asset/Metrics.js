@@ -11,6 +11,7 @@ const VV_SMALL_TEXT_SIZE = !isTablet ? 10 : 12;
 const V_SMALL_TEXT_SIZE = !isTablet ? 11 : 13;
 const SMALL_TEXT_SIZE = !isTablet ? 12 : 14;
 const MEDIUM_TEXT_SIZE = !isTablet ? 14 : 16;
+const EXTRA_MEDIUM_TEXT = !isTablet ? 16 : 18;
 const EXTRA_MEDIUM_TEXT_SIZE = !isTablet ? 15 : 17;
 const LARGE_TEXT_SIZE = !isTablet ? 20 : 22;
 const EXTRA_LARGE_TEXT_SIZE = !isTablet ? 22 : 24;
@@ -47,6 +48,7 @@ const Metrics = {
 	VV_SMALL_TEXT_SIZE,
 	V_SMALL_TEXT_SIZE,
 	EXTRA_MEDIUM_TEXT_SIZE,
+	EXTRA_MEDIUM_TEXT,
 
 	SMOOTH_CORNER,
 	SMALL_RADIUS,

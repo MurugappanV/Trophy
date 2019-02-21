@@ -45,6 +45,7 @@ class HomeMenuNav extends PureComponent<Props> {
 					},
 					labelStyle: {
 						fontSize: Metrics.MEDIUM_TEXT_SIZE,
+						fontFamily: "Lato-Regular",
 					},
 					scrollEnabled: true,
 					upperCaseLabel: false,

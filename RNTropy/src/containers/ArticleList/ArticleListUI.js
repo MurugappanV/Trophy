@@ -17,7 +17,7 @@ type Props = {
 
 export default function ArticleListUI(props: Props) {
 	const { data, onItemPress, loading, refresh } = props;
-	console.log("article data to render ", data);
+	// console.log("article data to render ", data);
 	return (
 		<SectionList
 			sections={data}
@@ -32,7 +32,7 @@ export default function ArticleListUI(props: Props) {
 				if (section.title === Constants.articleListSections.editorial) {
 					return (
 						<ArticleEditorial
-							onPress={onItemPress}
+							onPress={() => onItemPress(item.nid, item.site)}
 							key={index.toString()}
 							order={TemplateConfig.articleTemplates[item.template || 2]}
 							settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
@@ -43,7 +43,7 @@ export default function ArticleListUI(props: Props) {
 				if (section.title === Constants.articleListSections.podcast) {
 					return (
 						<ArticlePodcast
-							onPress={onItemPress}
+							onPress={() => onItemPress(item.nid, item.site)}
 							key={index.toString()}
 							order={TemplateConfig.articleTemplates[item.template || 2]}
 							settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
@@ -54,7 +54,7 @@ export default function ArticleListUI(props: Props) {
 				if (section.title === Constants.articleListSections.videos) {
 					return (
 						<ArticleVideo
-							onPress={onItemPress}
+							onPress={() => onItemPress(item.nid, item.site)}
 							key={index.toString()}
 							order={TemplateConfig.articleTemplates[item.template || 2]}
 							settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
@@ -65,7 +65,7 @@ export default function ArticleListUI(props: Props) {
 				if (item.content_type === "video") {
 					return (
 						<Article
-							onPress={onItemPress}
+							onPress={() => onItemPress(item.nid, item.site)}
 							key={index.toString()}
 							order={TemplateConfig.articleTemplates[13]}
 							settings={TemplateConfig.articleTemplateSettings[13]}
@@ -75,7 +75,7 @@ export default function ArticleListUI(props: Props) {
 				}
 				return (
 					<Article
-						onPress={onItemPress}
+						onPress={() => onItemPress(item.nid, item.site)}
 						key={index.toString()}
 						order={TemplateConfig.articleTemplates[item.template || 2]}
 						settings={TemplateConfig.articleTemplateSettings[item.template || 2]}
@@ -87,7 +87,11 @@ export default function ArticleListUI(props: Props) {
 				if (title !== Constants.articleListSections.empty) {
 					return (
 						<Text
-							style={{ fontWeight: "bold", padding: Metrics.DEFAULT_LIST_PADDING }}
+							style={{
+								padding: Metrics.DEFAULT_LIST_PADDING,
+								fontFamily: "Merriweather-Bold",
+								color: Colors.bgSecondaryVarient,
+							}}
 						>
 							{title}
 						</Text>

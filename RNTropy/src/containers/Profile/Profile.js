@@ -1,12 +1,30 @@
 import React, { Component } from "react";
-import { View, ScrollView, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Image, TouchableOpacity, StyleSheet, ToastAndroid } from "react-native";
+import SvgUri from "react-native-svg-uri";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ImagePicker from "react-native-image-picker";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ProfilePageHeader from "./ProfilePageHeader";
+import { ProfilePicUpload, ChangePasswordAPI, updatenameAPI } from "../../service";
 import InputTextField from "./InputTextField";
 import NormalTextField from "./normalTextField";
-import { ScalePerctFullWidth, ScalePerctFullHeight, Colors, Images } from "../../asset";
+import { ScalePerctFullWidth, ScalePerctFullHeight, Colors, passwordValidator } from "../../asset";
+
+const userPic = `<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="18px" viewBox="0 0 16 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Home-page" transform="translate(-333.000000, -33.000000)" stroke="#000000" stroke-width="1.8">
+            <g id="Group-25" transform="translate(0.000000, 1.000000)">
+                <g id="Group-17" transform="translate(0.000000, 19.000000)">
+                    <g id="user" transform="translate(334.000000, 14.000000)">
+                        <path d="M14,16 L14,14.2222222 C14,12.2585431 12.4329966,10.6666667 10.5,10.6666667 L3.5,10.6666667 C1.56700338,10.6666667 0,12.2585431 0,14.2222222 L0,16" id="Shape"></path>
+                        <ellipse id="Oval" cx="7" cy="3.55555556" rx="3.5" ry="3.55555556"></ellipse>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>`;
 
 class Profile extends Component {
 	constructor(props) {
@@ -30,8 +48,9 @@ class Profile extends Component {
 				if (res.didCancel) {
 					console.log("User cancelled!");
 				} else if (res.error) {
-					console.log("Error", res.error);
+					alert("Error occured in Profile pic upload. Please try again later.");
 				} else {
+					ProfilePicUpload("1", res.uri, res.fileName, res.type, res.path);
 					this.setState({
 						pickedImage: { uri: res.uri },
 					});
@@ -40,8 +59,33 @@ class Profile extends Component {
 		);
 	};
 
+	renderDefaultImage = () => {
+		return (
+			<SvgUri
+				height={ScalePerctFullWidth(16)}
+				width={ScalePerctFullWidth(16)}
+				svgXmlData={userPic}
+			/>
+		);
+	};
+
 	onSave = () => {
-		this.setState({ isChanged: false });
+		const { profileName, currentPassword, newPassword, confirmPassword } = this.state;
+		if (!currentPassword && !newPassword && !confirmPassword && profileName) {
+			updatenameAPI("1", profileName);
+			this.setState({ isChanged: false });
+		} else if (!currentPassword || !newPassword || !confirmPassword) {
+			alert("Please fill all the required fields.");
+		} else if (newPassword !== confirmPassword) {
+			alert("New password and confirm password should be same.");
+		} else if (!passwordValidator(newPassword)) {
+			alert(
+				"Enter a valid password with minimum 6 characters, one special character and one number",
+			);
+		} else {
+			ChangePasswordAPI("1", currentPassword, newPassword, profileName);
+			this.setState({ isChanged: false, newPassword: "", confirmPassword: "" });
+		}
 	};
 
 	render() {
@@ -64,6 +108,7 @@ class Profile extends Component {
 					onSave={this.onSave}
 				/>
 				<KeyboardAwareScrollView>
+					{/* <View style={styles.image}>{this.renderDefaultImage()}</View> */}
 					<Image style={styles.image} source={this.state.pickedImage} />
 					<TouchableOpacity style={styles.uploadIcon} onPress={this.pickImageHandler}>
 						<Icon name="camera" size={25} color={Colors.bgPrimaryDark} />
@@ -117,6 +162,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	image: {
+		justifyContent: "center",
+		alignItems: "center",
 		marginLeft: ScalePerctFullWidth(35),
 		height: ScalePerctFullWidth(30),
 		width: ScalePerctFullWidth(30),

@@ -1,5 +1,7 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Text, KeyboardAvoidingView } from "react-native";
+import { View, StyleSheet, Text, KeyboardAvoidingView, ActivityIndicator } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 import SvgUri from "react-native-svg-uri";
 import {
 	Colors,
@@ -87,9 +89,14 @@ export default class LoginTabletUI extends PureComponent<Props> {
 			<Button
 				title={Strings.authentication.LOGIN}
 				buttonStyle={styles.buttonStyle}
-				showLoader={showLoader}
-				onPress={() => handleLogin(email, password)}
+				disabled={showLoader}
+				onPress={!showLoader ? () => handleLogin(email, password) : null}
 				button={Images.loginButton}
+				imageStyle={{
+					width: ScalePerctFullWidth(45),
+					height: 100,
+				}}
+				top={11}
 			/>
 		);
 	};
@@ -134,36 +141,47 @@ export default class LoginTabletUI extends PureComponent<Props> {
 	);
 
 	render() {
-		const { handleSignUp } = this.props;
+		const { handleSignUp, showLoader } = this.props;
 		return (
 			<AuthBackground>
-				<View
-					style={{
-						flex: 1,
-						margin: ScalePerctFullHeight(20),
-						alignItems: "center",
-						//paddingTop: ScalePerctFullHeight(1),
-					}}
-				>
-					<SvgUri
-						width={ScalePerctFullWidth(19)}
-						height={ScalePerctFullHeight(3)}
-						svgXmlData={logo}
-					/>
-				</View>
-				<KeyboardAvoidingView behaviour="padding" style={styles.formStyle}>
-					{this.handleForm()}
-				</KeyboardAvoidingView>
+				<KeyboardAwareScrollView>
+					{showLoader ? (
+						<View style={styles.indicator}>
+							<ActivityIndicator size="small" color="white" />
+						</View>
+					) : null}
+					<View
+						style={{
+							width: ScalePerctFullWidth(100),
+							height: ScalePerctFullHeight(100),
+							alignItems: "center",
+						}}
+					>
+						<View
+							style={{
+								flex: 1,
+								margin: ScalePerctFullHeight(20),
+								alignItems: "center",
+							}}
+						>
+							<SvgUri
+								width={ScalePerctFullWidth(19)}
+								height={ScalePerctFullHeight(2)}
+								svgXmlData={logo}
+							/>
+						</View>
+						<View style={styles.formStyle}>{this.handleForm()}</View>
+						{this.renderButton()}
+						<TextButton
+							textStyle={styles.createAccountText}
+							onPress={handleSignUp}
+							title={Strings.authentication.CREATE_AN_ACCOUNT}
+						/>
 
-				{this.renderButton()}
-				<TextButton
-					textStyle={styles.createAccountText}
-					onPress={handleSignUp}
-					title={Strings.authentication.CREATE_AN_ACCOUNT}
-				/>
-
-				{this.renderSeparator()}
-				{this.renderSocialLogin()}
+						{this.renderSeparator()}
+						{this.renderSocialLogin()}
+					</View>
+				</KeyboardAwareScrollView>
 			</AuthBackground>
 		);
 	}
@@ -188,7 +206,7 @@ const styles = StyleSheet.create({
 	},
 	buttonStyle: {
 		marginTop: ScalePerctFullHeight(6.6),
-		marginBottom: ScalePerctFullHeight(1.9),
+		marginBottom: ScalePerctFullHeight(4),
 	},
 	separator: {
 		borderBottomColor: Colors.bgPrimaryLight,
@@ -222,4 +240,14 @@ const styles = StyleSheet.create({
 		justifyContent: "space-around",
 	},
 	icon: { paddingHorizontal: Metrics.DEFAULT_LIST_PADDING },
+	indicator: {
+		position: "absolute",
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "#00000080",
+	},
 });

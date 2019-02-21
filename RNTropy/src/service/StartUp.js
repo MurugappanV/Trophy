@@ -10,7 +10,7 @@ export class StartUp {
 	}
 
 	onSuccess = (response, props) => {
-		console.log("On success: ", response);
+		// console.log("On success: ", response);
 		props.setAllTopics(response);
 	};
 

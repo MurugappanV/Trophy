@@ -1,0 +1,86 @@
+{
+	"adme_en": {
+		"podcasts": [
+			{
+				"title": "Saudi's Neom and Red Sea gigaprojects advance - 4",
+				"field_image": "",
+				"field_lead_text": "Saudi&#039;s Neom and Red Sea gigaprojects advance - 3",
+				"field_magazine_brand": "3",
+				"field_total_duration": "10m2s",
+				"nid": "15",
+				"created": "3 days 19 hours ago",
+				"brand_key": "adme_en"
+			}
+		],
+		"logo": "http://trove-drupal.itp.com/sites/default/files/logo/2019-01/vectorpaint.svg",
+		"brand_id": "3"
+	},
+	"arabian_business": {
+		"podcasts": [
+			{
+				"title": "Saudi's Neom and Red Sea gigaprojects advance - 3",
+				"field_image": "http://trove-drupal.itp.com/sites/default/files/2019-02/1259531_1.jpg",
+				"field_lead_text": "Saudi&#039;s Neom and Red Sea gigaprojects advance - 3",
+				"field_magazine_brand": "1",
+				"field_total_duration": "25:30",
+				"nid": "11",
+				"created": "3 days 22 hours ago",
+				"brand_key": "arabian_business"
+			},
+			{
+				"title": "Saudi's Neom and Red Sea gigaprojects advance - 2",
+				"field_image": "http://trove-drupal.itp.com/sites/default/files/2019-02/1250220_1_large.jpg",
+				"field_lead_text": "Mott MacDonald Middle East&#039;s managing director, Chris Seymour, joins Construction Week Viewpoint to explain why the private sector should welcome more participation from the government on smart city planning.<br />\r\n<br />\r\nIn a wide-ranging podcast interview, he also revealed that the engineering consultancy had won a contract to work on the Kuwait Ring Road package.<br />\r\n<br />\r\nListen to the full podcast as Seymour tells host Oscar Rousseau why the government has a big role to play in creating an integrated approach for the planning of smart cities.",
+				"field_magazine_brand": "1",
+				"field_total_duration": "10m2s",
+				"nid": "10",
+				"created": "3 days 22 hours ago",
+				"brand_key": "arabian_business"
+			},
+			{
+				"title": "Saudi's Neom and Red Sea gigaprojects advance",
+				"field_image": "",
+				"field_lead_text": "Saudi gigaprojects took a step forward in January after the masterplan for the Red Sea Project was approved, and news emerged that Neom construction would begin in Q1 2019.<br />\r\n<br />\r\nBoth are undoubtedly big stories about the most dynamic construction market in the Middle East today, but how significant are the developments for Saudi&#039;s ongoing transformation?<br />\r\n<br />\r\nListen to this nine-minute podcast episode as Oscar Rousseau, deputy editor, and Jack Ball, senior reporter, discuss why the milestones matter.",
+				"field_magazine_brand": "1",
+				"field_total_duration": "9:45",
+				"nid": "4",
+				"created": "2 weeks 5 days ago",
+				"brand_key": "arabian_business"
+			}
+		],
+		"logo": "http://trove-drupal.itp.com/sites/default/files/logo/2019-01/ab_clr.svg",
+		"brand_id": "1"
+	},
+	// "activation_en": {
+	// 	"podcasts": [
+	// 		{
+	// 			"title": "Saudi's Neom and Red Sea gigaprojects advance - 4",
+	// 			"field_image": "",
+	// 			"field_lead_text": "Saudi&#039;s Neom and Red Sea gigaprojects advance - 3",
+	// 			"field_magazine_brand": "3",
+	// 			"field_total_duration": "10m2s",
+	// 			"nid": "15",
+	// 			"created": "3 days 19 hours ago",
+	// 			"brand_key": "adme_en"
+	// 		}
+	// 	],
+	// 	"logo": "http://trove-drupal.itp.com/sites/default/files/logo/2019-01/vectorpaint.svg",
+	// 	"brand_id": "9"
+	// }
+	"aviation_en": {
+		"podcasts": [
+			{
+				"title": "Is the Gulf ready for the smart city future?",
+				"field_image": "http://trove-drupal.itp.com/sites/default/files/2019-01/hq.jpg",
+				"field_lead_text": "Saudi&#039;s Neom and Red Sea gigaprojects advance - 3",
+				"field_magazine_brand": "9",
+				"field_total_duration": "25:30",
+				"nid": "5",
+				"created": "2 weeks 5 days ago",
+				"brand_key": "aviation_en"
+			}
+		],
+		"logo": "http://trove-drupal.itp.com/sites/default/files/logo/2019-01/vectorpaint.svg",
+		"brand_id": "9"
+	}
+}

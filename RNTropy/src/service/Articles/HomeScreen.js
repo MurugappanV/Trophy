@@ -7,7 +7,7 @@ const MyTroveApi = (topic_id, brand, onSuccess, onFailure, onError) => {
 		.then((response: any) => {
 			if (response.status === 200) {
 				// null or empty
-				console.log("Got my trove response:", response);
+				console.log("Got my trove response:", topic_id, brand, response);
 				onSuccess(response.data);
 			} else {
 				onFailure("Can't fetch topics");

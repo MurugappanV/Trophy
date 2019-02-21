@@ -66,14 +66,13 @@ class AuthLoadContainer extends PureComponent<Props> {
 					actionLabel={"Skip"}
 					style={styles.header}
 				/> */}
-				{/* <WebView
+				<WebView
 					source={{
 						uri:
 							"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/501298839",
 					}}
 					style={{ height: 300, width: ScalePerctFullWidth(100) }}
-				/> */}
-				<Text>{"Under Construction"}</Text>
+				/>
 			</View>
 		);
 	}

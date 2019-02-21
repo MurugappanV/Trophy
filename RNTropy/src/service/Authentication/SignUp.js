@@ -12,10 +12,11 @@ function SignUpApi(name, email, password, deviceId, onSuccess, onFailure, onErro
 		device_id: deviceId,
 	})
 		.then((response: any) => {
-			if (response.data.status === "Success" || response.data.status === "1") {
+			console.log("reg", response);
+			if (response.data.status === "Success") {
 				onSuccess(response.data.message);
 			} else {
-				onFailure(response.data.message);
+				onFailure(response.data);
 			}
 		})
 		.catch((error: any) => {

@@ -40,8 +40,6 @@ ArticleListLogo.defaultProps = {
 
 const styles = StyleSheet.create({
 	container: {
-		borderBottomColor: Colors.bgPrimaryLight,
-		borderBottomWidth: 1,
 		flexDirection: "row",
 		padding: Metrics.DEFAULT_LIST_PADDING,
 		width: ScalePerctFullWidth(100),
@@ -54,7 +52,6 @@ const styles = StyleSheet.create({
 	imageOne: {
 		height: ScalePerctFullWidth(8),
 		width: ScalePerctFullWidth(40),
-		backgroundColor: Colors.bgSecondaryLight,
 	},
 	followImage: {
 		height: ScalePerctFullWidth(8),

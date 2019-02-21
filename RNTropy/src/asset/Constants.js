@@ -39,7 +39,7 @@ export const Constants = {
 	menuSections: {
 		defaultSection: [
 			{
-				name: "My trove",
+				name: "My Trove",
 				tid: "0",
 				field_image: "",
 			},
@@ -53,7 +53,7 @@ export const Constants = {
 		videos: "Latest videos",
 	},
 	errorMessages: {
-		checkNetwork: "Network error",
+		checkNetwork: "Network Error",
 		network: "Please check your internet connection and try again",
 		general: "Some error occured, Please try again later",
 	},
@@ -77,6 +77,9 @@ export const Constants = {
 	],
 	drawerMiddleData: { routeName: "ProfileDrawerScreen", title: "Profile" },
 	drawerLogoutData: { routeName: "Logout", title: "Logout" },
+	articleDisplay: {
+		blackCircle: "\u25CF",
+	},
 };
 
 export const TemplateConfig = {

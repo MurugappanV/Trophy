@@ -32,7 +32,7 @@ const renderActionbtn = (onAction: Function, imageUrl: string, navigation: any, 
 				onAction ||
 				(() => {
 					onSave();
-					alert("Your details are updated successfully");
+					//alert("Your details are updated successfully");
 				})
 			}
 			style={styles.actionPicContainer}

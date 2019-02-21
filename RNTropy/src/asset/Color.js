@@ -4,6 +4,7 @@ const WHITE = "rgb(255, 255, 255)"; // text, bg
 const TRANSPARENT = "rgba(0, 0, 0, 0.3)";
 const BLACK = "rgb(0,0,0)"; // text , bg
 const GREY = "rgba(216,216,216,0.2)"; // line
+const GREY100 = "rgb(216,216,216)"; // line
 const BLACK2 = "rgb(18,29,55)"; // text , curosel-dot
 const BLACK3 = "rgb(29,29,29)"; // background
 const GREY2 = "rgb(112,113,114)"; // text
@@ -25,6 +26,9 @@ const yellow = "#feee00";
 const GREY11 = "rgb(219, 228, 242)";
 const WHITE_OPACITY = "rgba(255,255,255,.5)";
 const BLACK5 = "rgb(27,27,27)"; // text , bg
+const GRAY12 = "rgb(229,229,229)";
+const BLACK6 = "rgb(18,29,55)";
+const GRAY13 = "rgb(219,228,242)";
 
 const Colors = {
 	bgPrimaryDark: BLACK,
@@ -58,9 +62,15 @@ const Colors = {
 	bgLightBlack: LIGHTBLACK,
 	textHeading: BLACK4,
 
-	//border color
+	// border color
 	borderlight: GREY10,
 	borderSeparator: GREY11,
+
+	// searchHeader
+	searchHeader: GRAY12,
+	searchIcon: BLACK6,
+	borderLine: GRAY13,
+	linePrimaryFull: GREY100,
 };
 
 export default Colors;

@@ -21,20 +21,20 @@ export default class Button extends PureComponent<Props> {
 			button,
 			imageStyle,
 			top,
+			disabled,
+			left,
+			width,
 		} = this.props;
 
 		return (
 			<TouchableOpacity
-				onPress={!showLoader ? onPress : null}
-				style={[styles.container, buttonStyle && buttonStyle]}
+				onPress={onPress}
+				disabled={disabled}
+				style={[styles.container, buttonStyle && buttonStyle, width && { width: width }]}
 			>
 				<Image source={button} style={imageStyle} resizeMode="stretch" />
 				<View style={[styles.innerContainer, top && { top: top }]}>
-					{!showLoader ? (
-						<Text style={styles.text}>{title}</Text>
-					) : (
-						<ActivityIndicator animating={showLoader} size="small" color="white" />
-					)}
+					<Text style={styles.text}>{title}</Text>
 				</View>
 			</TouchableOpacity>
 		);

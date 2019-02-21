@@ -8,7 +8,7 @@ export const myTrove = createReducer(initialMyTrove, {
 	[Types.myTrove.SET_MY_TROVE](state, action) {
 		return {
 			...state,
-			[action.data.tid]: manipulateMyTrove(action.data.list),
+			[action.data.tid]: manipulateMyTrove(action.data.tid, action.data.list),
 		};
 	},
 	[Types.myTrove.CLEAR_MY_TROVE](state, action) {
@@ -18,9 +18,14 @@ export const myTrove = createReducer(initialMyTrove, {
 	},
 });
 
-const manipulateMyTrove = (list: any) => {
+const manipulateMyTrove = (tid: number, list: any) => {
 	const myTroveArray = [];
-	if (list) {
+	if (tid != 0) {
+		myTroveArray.push({
+			title: Constants.articleListSections.empty,
+			data: list,
+		});
+	} else if (list) {
 		if (list.stories_list != null && list.stories_list.length > 0) {
 			myTroveArray.push({
 				title: Constants.articleListSections.topStories,

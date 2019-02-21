@@ -15,8 +15,14 @@ export default function AuthorInfo(props: Props) {
 		<View>
 			<Text style={styles.authorName}>{authorName}</Text>
 			<View style={styles.storyContainer}>
-				<Text style={styles.story}>{storyCount} Stories</Text>
-				<Text style={styles.followers}>{followers} Followers</Text>
+				<View style={styles.textContainer}>
+					<Text style={styles.story}>{storyCount} </Text>
+					<Text style={styles.statisField}> Stories</Text>
+				</View>
+				<View style={styles.textContainer}>
+					<Text style={styles.followers}>{followers} </Text>
+					<Text style={styles.statisField}> Followers</Text>
+				</View>
 			</View>
 		</View>
 	);
@@ -29,8 +35,12 @@ AuthorInfo.defaultProps = {
 };
 
 const styles = StyleSheet.create({
+	textContainer: {
+		flexDirection: "row",
+	},
 	authorName: {
 		fontSize: 20,
+		//alignSelf: "center",
 		marginLeft: ScalePerctFullWidth(7),
 		marginTop: ScalePerctFullHeight(4),
 		fontWeight: "bold",
@@ -42,10 +52,16 @@ const styles = StyleSheet.create({
 	story: {
 		marginLeft: ScalePerctFullWidth(7),
 		marginTop: ScalePerctFullHeight(2),
+		fontWeight: "bold",
 		color: Colors.bgPrimaryBlack,
 	},
 	followers: {
+		fontWeight: "bold",
 		marginLeft: ScalePerctFullWidth(3),
+		marginTop: ScalePerctFullHeight(2),
+		color: Colors.bgPrimaryBlack,
+	},
+	statisField: {
 		marginTop: ScalePerctFullHeight(2),
 		color: Colors.bgPrimaryBlack,
 	},

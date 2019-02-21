@@ -9,8 +9,8 @@ import { Actions } from "../../redux";
 
 type Props = {
 	navigation: any,
-	topics: array,
-	selectedList: array,
+	topics: any,
+	selectedList: any,
 	isNotStartUp?: boolean,
 };
 
@@ -18,11 +18,11 @@ class Topics extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			preferenceLoading: false,
 			imageUrl: "https://facebook.github.io/react-native/docs/assets/favicon.png",
 		};
-		console.log("topics const ", props);
 		this.magnageTopics(props.topics, props.user, props.setMenuTopicsAction);
-		// new StartUp(props);
+		//new StartUp(props);
 	}
 
 	componentDidMount() {
@@ -36,7 +36,7 @@ class Topics extends Component {
 		if (user) {
 			const alreadySelected = new Set(user["topics"].split("|"));
 			const selectedTopics = [];
-			topics.forEach(item => {
+			topics.forEach((item: any) => {
 				if (alreadySelected.has(item.tid)) {
 					selectedTopics.push(item);
 				}
@@ -48,39 +48,43 @@ class Topics extends Component {
 
 	onSelected = (followTrack: array) => {
 		const { setMenuTopicsAction, navigation, user, selectedTopics } = this.props;
+		this.setState({ preferenceLoading: true });
 		setMenuTopicsAction(followTrack);
+
 		user &&
 			TopicsPreferenceAPI(
 				user.id,
-				followTrack,
+				getTopicString(followTrack),
 				this.onSuccess,
 				this.onFailure,
 				this.onError,
 			);
 	};
 
-	onSuccess = (response: any) => {
-		const { navigation, isNotStartUp } = this.props;
+	onSuccess = (response: any, selectedTopics: string) => {
+		const { navigation, isNotStartUp, setUserTopicAction } = this.props;
+		this.setState({ preferenceLoading: false });
+		setUserTopicAction(selectedTopics);
 		navigation.navigate(isNotStartUp ? "BrandsStackScreen" : "BrandsAuthScreen");
-		console.log("OnSuccess of Preference Topics: ", response);
 	};
 
 	onFailure = (response: any) => {
-		console.log("OnFailure of Preference Topics: ", response);
+		alert("Filed to save your preferences.");
 	};
 
 	onError = (error: any) => {
-		console.log("OnError of Preference Topics: ", error);
+		alert("Please check your internet connection. ");
 	};
 
 	render() {
 		const { topics, selectedTopics, navigation, isNotStartUp } = this.props;
+		const { isLoading, preferenceLoading } = this.state;
 		const isBack = isNotStartUp;
-		console.log("topics navigation", navigation);
-		// console.log("Selected Topics inside render: ", selectedTopics);
-		// console.log("User id details in Topics: ", user);
 		return (
 			<FollowList
+				preferenceLoading={preferenceLoading}
+				loading={false}
+				isLoading={isLoading}
 				data={topics}
 				isBack={isBack}
 				navigation={navigation}
@@ -90,6 +94,21 @@ class Topics extends Component {
 			/>
 		);
 	}
+}
+
+function getTopicString(selectedTopics) {
+	//console.log(selectedBrands);
+	let topics;
+	selectedTopics.forEach((item, index) => {
+		if (index === 0) {
+			topics = item.tid;
+		} else {
+			topics = topics + "|" + item.tid;
+		}
+	});
+	//let topicValue = topics.slice(0, -1);
+	//console.log("topicValue: ", topicValue);
+	return topics;
 }
 
 Topics.defaultProps = {

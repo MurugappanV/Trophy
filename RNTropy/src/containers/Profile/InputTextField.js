@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import { ScalePerctFullWidth, ScalePerctFullHeight, Colors, Icon, Images } from "../../asset";
 
-export default function InputTextField(props: Props) {
+export default function InputTextField(props: any) {
 	const { label, values, onChange, placeholder, isProfile } = props;
 	return (
 		<View style={styles.textContainer}>
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
 		marginTop: ScalePerctFullHeight(2),
 		fontWeight: "bold",
 		height: ScalePerctFullWidth(12),
-		width: ScalePerctFullWidth(26),
+		width: ScalePerctFullWidth(35),
+		marginLeft: 35,
 	},
 	separator: {
 		color: Colors.bgPrimaryDark,

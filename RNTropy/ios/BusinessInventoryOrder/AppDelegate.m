@@ -16,11 +16,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
-
+  
   #ifdef DEBUG
-    jsCodeLocation = [NSURL URLWithString:@"http://192.168.43.114:8082/index.bundle?platform=ios&dev=true"];
-  // #ifdef DEBUG
-  //   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+    jsCodeLocation = [NSURL URLWithString:@"http://10.10.35.105:8082/index.bundle?platform=ios&dev=true"];
+//   #ifdef DEBUG
+//     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   #else
     jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   #endif

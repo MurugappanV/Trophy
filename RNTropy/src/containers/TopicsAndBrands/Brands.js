@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { View, Text, Image, Dimensions, StyleSheet } from "react-native";
-import { FollowList } from "../../components";
-import { connect } from "react-redux";
-import { StartBrandsService, BrandsPreferenceAPI } from "../../service";
 import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { FollowList } from "../../components";
+import { StartBrandsService, BrandsPreferenceAPI } from "../../service";
 import { Actions } from "../../redux";
 
 type Props = {
 	navigation: any,
-	brands: array,
-	selectedBrands: array,
+	brands: any,
+	selectedBrands: any,
 };
 
 class Brands extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			preferenceLoading: false,
 			imageUrl: "https://facebook.github.io/react-native/docs/assets/favicon.png",
 		};
 		this.magnageBrands(this.props.brands);
@@ -32,17 +33,26 @@ class Brands extends Component {
 			}
 		});
 		setSelectedBrands(selectedBrands);
-		console.log("Selected Brands in topics after login", selectedBrands);
 	};
 
 	onSelected = (brands: array) => {
 		const { setSelectedBrands, user } = this.props;
+		this.setState({ preferenceLoading: true });
 		setSelectedBrands(brands);
-		BrandsPreferenceAPI(user.id, brands, this.onSuccess, this.onFailure, this.onError);
+
+		BrandsPreferenceAPI(
+			user.id,
+			getBrandString(brands),
+			this.onSuccess,
+			this.onFailure,
+			this.onError,
+		);
 	};
 
-	onSuccess = (response: any) => {
-		const { navigation } = this.props;
+	onSuccess = (response: any, selectedBrands: string) => {
+		const { navigation, setUserBrandAction } = this.props;
+		this.setState({ preferenceLoading: false });
+		setUserBrandAction(selectedBrands);
 		navigation.navigate("HomeDrawerScreen");
 		console.log("OnSuccess of Preference Brands: ", response);
 	};
@@ -57,9 +67,10 @@ class Brands extends Component {
 
 	render() {
 		const { brands, selectedBrands, navigation, user } = this.props;
-		console.log("Selected Brands in Brands: ", selectedBrands);
+		const { preferenceLoading } = this.state;
 		return (
 			<FollowList
+				preferenceLoading={preferenceLoading}
 				isBrand
 				data={brands}
 				onSelected={this.onSelected}
@@ -70,11 +81,24 @@ class Brands extends Component {
 	}
 }
 
+function getBrandString(selectedBrands) {
+	//console.log(selectedBrands);
+	let brands = "";
+	if (!selectedBrands) return brands;
+	selectedBrands.forEach((item, index) => {
+		if (index === 0) {
+			brands = item.field_site_key;
+		} else {
+			brands = brands + "|" + item.field_site_key;
+		}
+	});
+	return brands;
+}
+
 const mapStateToProps = state => ({
 	brands: state.allBrands,
 	selectedBrands: state.selectedBrands,
 	user: state.user,
-	// select top
 });
 
 function mapDispatchToProps(dispatch) {
@@ -85,26 +109,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps,
 )(Brands);
-
-/*
-	const data = [
-			{
-				title: "AD Middle East",
-				field_image:
-					"http://trove-drupal.itp.com/sites/default/files/logo/2019-01/vectorpaint.svg",
-				field_site_key: "adme_en",
-				nid: "3",
-				field_square_logo:
-					"http://trove-drupal.itp.com/sites/default/files/2019-01/AD.png",
-			},
-			{
-				title: "Arabian Business",
-				field_image:
-					"http://trove-drupal.itp.com/sites/default/files/logo/2019-01/ab_clr.svg",
-				field_site_key: "arabian_business",
-				nid: "1",
-				field_square_logo:
-					"http://trove-drupal.itp.com/sites/default/files/2019-01/Arabian%20business.png",
-			},
-		];
-*/

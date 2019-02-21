@@ -39,7 +39,7 @@ export default function TopcisCard(props: Props) {
 	field_image = field_image ? field_image : "https://www.the-star.co.ke/sites/default/files/styles/new_full_content/public/articles/2018/06/03/1481290.jpg?itok=tr_Wexxs"
 	console.log("render card isTopic: ", isTopic);
 	return (
-		<TouchableOpacity onPress={onPress}>
+		<TouchableOpacity onPress={onPress} activeOpacity={1.0}>
 			{isTopic ? (<ImageBackground
 				source={{
 					uri: field_image,
@@ -181,7 +181,7 @@ const tabStyles = StyleSheet.create({
 		color: Colors.bgPrimaryLight,
 	},
 	following: {
-	
+		justifyContent: "center",
 		color: Colors.bgPrimaryDark,
 		alignSelf: "center",
 	},
@@ -209,7 +209,6 @@ const normalStyles = StyleSheet.create({
 	emptyView: {
 		flex: 1,
 	},
-
 	brandContainer: {
 		backgroundColor: Colors.bgPrimaryDark,
 	},
